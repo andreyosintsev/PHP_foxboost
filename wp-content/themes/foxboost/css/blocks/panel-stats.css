@@ -1,0 +1,32 @@
+.panel-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+
+    padding: 20px;
+}
+
+.panel-stats_card {
+    width: calc(33% - 27px);
+}
+
+@media screen and (max-width: 1440px) {
+    .panel-stats {
+        padding: 0 16px;
+    }
+
+    .panel-stats_card {
+        width: calc(33% - 15px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .panel-stats {
+        padding: 0 10px;
+    }
+
+    .panel-stats_card {
+        width: calc(33% - 3px);
+    }
+}

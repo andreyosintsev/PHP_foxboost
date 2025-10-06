@@ -1,44 +1,59 @@
-/*
-    ПРОЕКТ "ROSTEST-CERTIFY.RU"
-    ИМПОРТ ШРИФТОВ
-
-    Последняя версия: 20.10.2024
-
-    UPD: перенесено в папку Common, общую для всех блоков и верстки
-*/
-
-/*Montserrat Medium*/
+/*Light 300*/
 @font-face {
-    font-family: 'Montserrat';
-    font-weight: 500;
-    src: url("../../fonts/Montserrat-Medium.otf") format("truetype");
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../../fonts/Inter-Light.woff2') format('woff2'),
+        url("../../fonts/Inter-Light.otf") format("opentype");
     font-display: swap;
 }
-/*Montserrat SemiBold*/
+
+/*Regular 400*/
 @font-face {
-    font-family: 'Montserrat';
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/Inter-Regular.woff2') format('woff2'),
+        url("../../fonts/Inter-Regular.otf") format("opentype");
+    font-display: swap;
+}
+
+/*SemiBold 600*/
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
-    src: url("../../fonts/Montserrat-SemiBold.otf") format("truetype");
+    src: url('../../fonts/Inter-SemiBold.woff2') format('woff2'),
+        url("../../fonts/Inter-SemiBold.otf") format("opentype");
     font-display: swap;
 }
-/*Montserrat Bold*/
+
+/*Bold 700*/
 @font-face {
-    font-family: 'Montserrat';
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 700;
-    src: url("../../fonts/Montserrat-Bold.otf") format("truetype");
+    src: url('../../fonts/Inter-Bold.woff2') format('woff2'),
+        url("../../fonts/Inter-Bold.otf") format("opentype");
     font-display: swap;
 }
-/*Montserrat ExtraBold*/
+
+/*ExtraBold 800*/
 @font-face {
-    font-family: 'Montserrat';
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 800;
-    src: url("../../fonts/Montserrat-ExtraBold.otf") format("truetype");
+    src: url('../../fonts/Inter-ExtraBold.woff2') format('woff2'),
+        url("../../fonts/Inter-ExtraBold.otf") format("opentype");
     font-display: swap;
 }
-/*Montserrat Black*/
+
+/*BlackItalic 900*/
 @font-face {
-    font-family: 'Montserrat';
+    font-family: 'Inter';
+    font-style: italic;
     font-weight: 900;
-    src: url("../../fonts/Montserrat-Black.otf") format("truetype");
+    src: url('../../fonts/Inter-BlackItalic.woff2') format('woff2'),
+        url("../../fonts/Inter-BlackItalic.otf") format("opentype");
     font-display: swap;
 }

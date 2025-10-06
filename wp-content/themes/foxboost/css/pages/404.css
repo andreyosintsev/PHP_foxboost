@@ -1,183 +1,113 @@
+html {
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    text-rendering: optimizeLegibility;
+    touch-action: manipulation;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html::-webkit-scrollbar {
+    width: 8px;
+    height: 8px
+}
+
 body {
-    color: var(--text-color-main, #0C1227);
+    color: var(--text-color-main, #000000);
     font-family: var(--text-family, sans-serif);
+    font-size: 20px;
+    font-weight: var(--text-weight-main, 400);
+
+    line-height: var(--text-line-height, 150%);
+
+    background-color: var(--background-color-main, #FFFFFF);
 }
 
-h1 {
-    margin: 0 0 10px;
-}
-
-.no-scroll {
-    overflow: hidden;
-}
-
-.wrapper {
-    max-width: 1440px;
-    margin: 0 auto;
-
-    background-color: var(--white, #FFFFFF);
-}
-
-.overlay {
+.page404 {
     position: fixed;
-    display: none;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page404__content {
+    text-align: center;
+}
+
+.page404__logo {
     width: 100%;
-    height: 100%;
-
-    background-color: rgba(0, 0, 0, 0.6);
-
-    z-index: 10;
+    max-width: 780px;
+    margin-bottom: 50px;
 }
 
-.overlay_visible {
-    display: block;
+.page404__title {
+    margin-bottom: 50px;
+
+    font-size: 30px;
+
+    line-height: 30px;
+
+    text-transform: none;
 }
 
-.main {
-    font-size: 13px;
-    font-weight: 500;
+.page404__text {
+    margin: 0;
+    margin-bottom: 30px;
 
-    line-height: 16px;
+    color: var(--gray, #DDDDDD);
 }
 
-.main p {
-    margin-top: 0;
-    margin-bottom: 13px;
+.page404__link {
+    font-size: 20px;
+    font-weight: var(--text-weight-semibold, 600);
 }
 
-.main p:last-child {
-    margin-bottom: 0;
-}
+@media screen and (max-width: 1440px) {
+    .page404__logo {
+        max-width: 510px;
 
-.hero {
-    display: flex;
-
-    padding: 184px 80px 100px;
-
-    background-color: var(--page-bg, #FBFCFD);
-}
-
-.hero__content {
-    width: 100%;
-}
-
-.hero__breadcrumbs {
-    margin-bottom: 10px;
-}
-
-.hero__title {
-    font-family: var(--text-family, sans-serif);
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 54px;
-
-    margin-bottom: 52px;
-}
-
-.main {
-    display: flex;
-    flex-direction: row;
-    align-items: start;
-    padding: 0 80px 60px;
-    gap: 0 40px;
-
-    background-color: var(--page-bg, #FBFCFD);
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    justify-items: flex-start;
-    gap: 60px 0;
-}
-
-.content__title {
-    margin-bottom: 8px !important;
-}
-
-.content__ad {
-    width: 100%;
-    max-width: 920px;
-
-    border-radius: var(--border-radius-xlarge, 20px);
-}
-
-.certificates__title {
-    margin-bottom: 16px !important;
-}
-
-.certificates__content {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.certificates__nav {
-    padding-top: 16px;
-}
-
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-items: flex-start;
-    gap: 12px 0;
-    width: 320px;
-    flex-shrink: 0;
-}
-
-.sidebar__ad {
-    border-radius: var(--border-radius-xlarge, 20px);
-}
-
-@media (max-width: 960px) {
-    .hero {
-        display: block;
-        padding: 132px 16px 60px;
-    }
-
-    .hero__title {
         margin-bottom: 40px;
     }
 
-    .hero__image {
-        display: none;
+    .page404__title {
+        margin-bottom: 40px;
+
+        font-size: 24px;
     }
 
-    .content {
-        margin-bottom: 60px;
+    .page404__text {
+        margin-bottom: 30px;
+
+        font-size: 16px;
     }
 
-    .main {
-        display: block;
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
-    .certificates__nav {
-        display: flex;
-        justify-content: center;
-    }
-
-    .sidebar {
-        width: 100%;
-    }
-
-    .nav-bottom {
-        padding-left: 16px;
-        padding-right: 16px;
+    .page404__link {
+        font-size: 16px;
     }
 }
 
-@media (max-width: 480px) {
-    .hero__title {
-        font-size: 32px;
+@media screen and (max-width: 768px) {
+    .page404__logo {
+        max-width: 298px;
 
-        line-height: 39px;
+        margin-bottom: 20px;
     }
 
-    .hero__subtitle {
-        margin-bottom: 40px;
+    .page404__title {
+        margin-bottom: 20px;
+
+        font-size: 18px;
+
+        line-height: 18px;
+    }
+
+    .page404__text {
+        font-size: 14px;
     }
 }

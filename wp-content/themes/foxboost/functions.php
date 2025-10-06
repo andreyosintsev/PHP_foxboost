@@ -79,40 +79,6 @@ function premiumstyle_scripts_styles()
 add_action( 'wp_enqueue_scripts', 'premiumstyle_scripts_styles' );
 
 /**
- * Creates a formatted title for the website.
- *
- */
-//function premiumstyle_wp_title( $title, $sep )
-//{
-//	global $paged, $page;
-//
-//	// Skip the title for RSS feed.
-//	if ( is_feed() )
-//	{
-//		return $title;
-//	}
-//
-//	// Add the site name.
-//	$title .= get_bloginfo( 'name' );
-//
-//	// Add the site description for the home/front page.
-//	$site_description = get_bloginfo( 'description', 'display' );
-//	if ( $site_description && ( is_home() || is_front_page() ) )
-//	{
-//		$title = "$title $sep $site_description";
-//	}
-//
-//	// Add a page number if necessary.
-//	if ( $paged >= 2 || $page >= 2 )
-//	{
-//		$title = "$title $sep " . sprintf( __( 'Page %s', 'gopiplustheme' ), max( $paged, $page ) );
-//	}
-//
-//	return $title;
-//}
-//add_filter( 'wp_title', 'premiumstyle_wp_title', 10, 2 );
-
-/**
  * Sets up the WordPress core custom header arguments and settings.
  *
  */
@@ -703,7 +669,7 @@ function headTitle($title, $sep) {
                 ),256) . ' | ' . $blogName;
     }
     if (is_home()) {
-        return 'Сертификаты соответствия скачать бесплатно - rostest-certify.ru';
+        return 'Foxboost - будь в числе первых обладателей новинок';
     }
     if (is_search()) {
         $s = $_GET['s'];

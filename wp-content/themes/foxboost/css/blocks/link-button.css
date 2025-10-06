@@ -1,0 +1,96 @@
+.link-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    color: var(--button-normal-color, #FFFFFF);
+    font-family: var(--text-family, sans-serif);
+    font-size: 16px;
+    font-weight: var(--font-weight-bold, 700);
+
+    line-height: 18px;
+
+    text-align: center;
+    text-decoration: none;
+
+    background-color: var(--button-normal-background-color, #403080);
+
+    border-radius: var(--border-radius, 10px);
+
+    outline: none;
+}
+
+.link-button:visited {
+    color: var(--button-normal-color, #FFFFFF);
+    background-color: var(--button-normal-background-color, #403080);
+
+    text-decoration: none;
+}
+
+.link-button:hover {
+    background-color: var(--button-normal-background-color_hover, #9B8FCC);
+
+    text-decoration: none;
+}
+
+.link-button:active {
+    background-color: var(--button-normal-background-color_hover, #9B8FCC);
+
+    text-decoration: none;
+}
+
+.link-button:focus {
+    background-color: var(--button-normal-background-color_hover, #9B8FCC);
+
+    text-decoration: none;
+}
+
+.link-button_disabled {
+    color: var(--button-normal-color_disabled, #666666);
+    background-color: #CCCCCC;
+
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.link-button_disabled:visited {
+    color: var(--button-normal-color_disabled, #666666);
+    background-color: #CCCCCC;
+
+    pointer-events: none;
+}
+
+.link-button_disabled:hover {
+    color: var(--button-normal-color_disabled, #666666);
+    background-color: #CCCCCC;
+
+    pointer-events: none;
+}
+
+.link-button_disabled:active {
+    color: var(--button-normal-color_disabled, #666666);
+    background-color: #CCCCCC;
+
+    pointer-events: none;
+}
+
+.link-button_disabled:focus {
+    color: var(--button-normal-color_disabled, #666666);
+    background-color: #CCCCCC;
+
+    pointer-events: none;
+}
+
+@media screen and (max-width: 1440px) {
+    .link-button {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .link-button {
+        border-radius: 5px;
+    }
+}

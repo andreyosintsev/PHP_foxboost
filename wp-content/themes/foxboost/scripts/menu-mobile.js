@@ -1,65 +1,53 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const body = document.querySelector('body');
-    const menuMobile = document.querySelector('.menu-mobile');
-    const menuButton = document.querySelector('.menu-mobile-search-button__button');
-    const overlay = document.querySelector('.overlay');
+document.addEventListener("DOMContentLoaded", () => {
+    const menuMobile = document.querySelector(".menu-mobile");
 
-    if (!checkDOM([menuMobile, menuButton, overlay])) {
-        console.error('Ошибка DOM, элемент не найден');
-        return;
-    }
-
-
-    // if (!menuMobile) {
-    //     console.error('DOM: мобильное меню не найдено');
-    //     return;
-    // }
-
-    // if (!menuButton) {
-    //     console.error('DOM: кнопка мобильного меню не найдена');
-    //     return;
-    // }
-
-    // if (!overlay) {
-    //     console.error('DOM: оверлей не найден');
-    // }
-
-    menuButton.addEventListener('click', () => {
-        menuMobile.classList.toggle('menu-mobile_visible');
-        overlay.classList.toggle('overlay_visible');
-        body.classList.toggle('no-scroll');
-    })
-
-    if (overlay) {
-        overlay.addEventListener('click', e => {
-            e.stopPropagation();
-            closeMenu(menuMobile, overlay, body);
-        })
-    }
-
-    document.addEventListener('keydown', e => {
-        if (e.key === "Escape") {
-            closeMenu(menuMobile, overlay, body);
-        }
-    })
-})
-
-function closeMenu(menuMobile, overlay, body) {
     if (!menuMobile) {
-        console.error('DOM: мобильное меню не найдено');
-        return;
+        return console.warn('DOM: element ".menu-mobile" not found');
     }
-    menuMobile.classList.remove('menu-mobile_visible');
-    overlay.classList.remove('overlay_visible');
-    body.classList.remove('no-scroll');
-}
 
-function checkDOM(...elements) {
-    let isOk = true;
+    const menuMobileButton = document.querySelector(".button-menu-mobile");
 
-    elements.forEach(element => {
-        if (!element) isOk = false;
-    })
+    if (!menuMobileButton) {
+        return console.warn('DOM: element ".button-menu-mobile" not found');
+    }
 
-    return isOk;
-}
+    const overlay = document.querySelector(".overlay");
+
+    const body = document.querySelector("body");
+
+    menuMobileButton.addEventListener("click", () => {
+        if (menuMobile.classList.contains("invisible")) {
+            showMenuMobile();
+        } else {
+            hideMenuMobile();
+        }
+    });
+
+    overlay.addEventListener("click", (e) => {
+        if (!menuMobileButton.contains(e.target) && !menuMobile.contains(e.target)) {
+            hideMenuMobile();
+        }
+    });
+
+    // window.addEventListener("resize", () => {
+    //     hideMenuMobile();
+    // });
+
+    menuLinks = menuMobile.querySelectorAll(".menu-mobile__item-link");
+
+    menuLinks.forEach((link) => link.addEventListener("click", hideMenuMobile));
+
+    function showMenuMobile() {
+        menuMobileButton.classList.add("button-menu-mobile_active");
+        menuMobile.classList.remove("invisible");
+        if (overlay) overlay.classList.remove("hidden");
+        body.classList.add("noscroll");
+    }
+
+    function hideMenuMobile() {
+        menuMobileButton.classList.remove("button-menu-mobile_active");
+        menuMobile.classList.add("invisible");
+        if (overlay) overlay.classList.add("hidden");
+        body.classList.remove("noscroll");
+    }
+});

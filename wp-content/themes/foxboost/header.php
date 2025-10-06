@@ -27,14 +27,13 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name='yandex-verification' content='5034b468f638d5d4'>
-	<meta name="yandex-verification" content="b0dd183a09ff4e68">
 
 	<!--OpenGraph-->
 	<meta property="og:site_name" content="<?php bloginfo('name'); ?>">
     <meta property="og:logo" content="<?php echo $template_url; ?>/images/logo.svg" />
 
-	<?php if (is_single()) {?>
+    <!--OpenGraph для single пока не используется
+	<?php if (is_single() && false) {?>
 	    <?php
 	        $og_number        	= getCertNumber($post->ID);
 	        $og_product      	= getCertProduct($post->ID);
@@ -54,12 +53,15 @@
     <!--/OpenGraph-->
 
 
+    <!--Foxboost - будь в числе первых обладателей новинок-->
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $site_url; ?>/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $site_url; ?>/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo $site_url; ?>/favicon-16x16.png">
     <link rel="manifest" href="<?php echo $site_url; ?>/site.webmanifest">
 
+
+    <?php if (false): ?>
     <!--Новые стили-->
 
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/common/normalize.css">
@@ -242,49 +244,36 @@
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/404.css">
 
     <?php } ?>
-
     <!--/Новые стили-->
+    <?php endif; ?>
 
     <!--Cтили и скрипты шаблона-->
 	<?php wp_head(); ?>
     <!--/Cтили и скрипты шаблона-->
 
-    <!--Старые скрипты-->
-	<?php if (is_page('addnew')) { ?>
-		<script type="text/javascript" src="<?php echo $template_url; ?>/js/addswitch.js"></script>
-		<script type="text/javascript" src="<?php echo $template_url; ?>/js/check.js"></script>
-	    <script type="text/javascript" src="<?php echo $site_url ?>/tesseract/tesseract.js"></script>
-	    <script type="text/javascript" src="<?php echo $template_url; ?>/js/ocr.js"></script>
-	<?php } ?>
+    <?php if (false): ?>
+        <!--Новые скрипты (пока отключено на время разработки)-->
+        <script src="<?php echo $template_url; ?>/scripts/lib/jquery-3.6.0.min.js"></script>
+        <script src="<?php echo $template_url; ?>/scripts/menu-mobile.js"></script>
 
-    <!--/Старые скрипты-->
-
-    <!--Новые скрипты-->
-    <script src="<?php echo $template_url; ?>/scripts/lib/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo $template_url; ?>/scripts/menu-mobile.js"></script>
-
-    <?php if (is_page('naiti-sertifikat-po-vidu-produktsii')) { ?>
-        <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/products-list.js"></script>
-    <?php } ?>
-    <?php if (is_page('organy-po-sertifikacii')) { ?>
-        <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/agencies-table.js"></script>
-    <?php } ?>
-    <?php if (is_page('add')) { ?>
-        <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/add.js"></script>
-        <script type="text/javascript" src="<?php echo $site_url;?>/tesseract/tesseract.js"></script>
-        <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/ocr.js"></script>
-    <?php } ?>
-    <?php if (is_single()) { ?>
-        <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/register.js"></script>
-        <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/modal.js"></script>
-        <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/disable-right-button.js"></script>
-    <?php } ?>
-    <!--/Новые скрипты-->
-
-	<!--Yandex.RTB -->
-    <script>window.yaContextCb=window.yaContextCb||[]</script>
-    <script src="https://yandex.ru/ads/system/context.js" async></script>
-    <!--/Yandex.RTB -->
+        <?php if (is_page('naiti-sertifikat-po-vidu-produktsii')) { ?>
+            <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/products-list.js"></script>
+        <?php } ?>
+        <?php if (is_page('organy-po-sertifikacii')) { ?>
+            <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/agencies-table.js"></script>
+        <?php } ?>
+        <?php if (is_page('add')) { ?>
+            <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/add.js"></script>
+            <script type="text/javascript" src="<?php echo $site_url;?>/tesseract/tesseract.js"></script>
+            <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/ocr.js"></script>
+        <?php } ?>
+        <?php if (is_single()) { ?>
+            <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/register.js"></script>
+            <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/modal.js"></script>
+            <script type="text/javascript" src="<?php echo $template_url; ?>/scripts/disable-right-button.js"></script>
+        <?php } ?>
+        <!--/Новые скрипты-->
+    <?php endif; ?>
 </head>
 <body>
 <div class="overlay"></div>

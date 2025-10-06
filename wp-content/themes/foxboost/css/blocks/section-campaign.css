@@ -1,0 +1,22 @@
+.section-campaign {
+
+    color: var(--gray, #666666);
+    font-family: var(--text-family, sans-serif);
+}
+
+.section-campaign__title {
+    padding: 20px 0;
+
+    font-size: 20px;
+    font-weight: var(--text-weight-bold, 700);
+
+    line-height: 24px;
+}
+
+.section-campaign__number {
+    font-weight: var(--text-weight-normal, 400);
+}
+
+@media screen and (max-width: 1440px) {}
+
+@media screen and (max-width: 480px) {}

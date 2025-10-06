@@ -1,0 +1,81 @@
+.link {
+    color: var(--link-normal-color, #403080);
+    font-weight: var(--text-weight-main, 400);
+
+    text-decoration: none;
+
+    outline: none;
+}
+
+.link_disabled {
+    color: var(--link-normal-color_disabled, #666666);
+
+    pointer-events: none;
+
+    cursor: not-allowed;
+}
+
+.link:visited {
+    color: var(--link-normal-color, #403080);
+}
+
+.link:hover {
+    color: var(--link-normal-color_hover, #9B8FCC);
+
+    text-decoration: underline;
+}
+
+.link:active {
+    color: var(--link-normal-color_hover, #9B8FCC);
+
+    text-decoration: underline;
+}
+
+.link:focus {
+    color: var(--link-normal-color_hover, #9B8FCC);
+
+    text-decoration: underline;
+}
+
+
+.link_light {
+    color: var(--link-light-color, #FFFFFF);
+}
+
+.link_light:visited {
+    color: var(--link-light-color, #FFFFFF);
+}
+
+.link_light:hover {
+    color: var(--link-light-color_hover, #FFFFFF);
+}
+
+.link_light:active {
+    color: var(--link-light-color_hover, #FFFFFF);
+}
+
+.link_light:focus {
+    color: var(--link-light-color_hover, #FFFFFF);
+}
+
+
+.link_special {
+    color: var(--link-special-color, #000000);
+    font-weight: var(--text-weight-bold, 700);
+}
+
+.link_special:visited {
+    color: var(--link-special-color, #000000);
+}
+
+.link_special:hover {
+    color: var(--link-special-color_hover, #000000);
+}
+
+.link_special:active {
+    color: var(--link-special-color_hover, #000000);
+}
+
+.link_special:focus {
+    color: var(--link-special-color_hover, #000000);
+}

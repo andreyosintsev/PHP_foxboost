@@ -6,7 +6,7 @@
 
 ### Ссылки на фрагменты проекта:
 
-- **Папка с темой**: [/wp-content/themes/premium-style](wp-content/themes/foxboost)
+- **Папка с темой**: [/wp-content/themes/foxboost](wp-content/themes/foxboost)
 
 ### Функциональные особенности:
 

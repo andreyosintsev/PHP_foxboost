@@ -1,0 +1,22 @@
+.wrapper {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+@media screen and (max-width: 1440px) {
+    .wrapper {
+        padding: 0 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        padding: 0 10px;
+    }
+
+    .hero .wrapper {
+        padding: 0;
+    }
+}

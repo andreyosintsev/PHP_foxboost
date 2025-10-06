@@ -1,0 +1,69 @@
+.card-stats {
+    display: block;
+    padding: 10px 5px 14px;
+
+    font-family: var(--text-family, sans-serif);
+
+    text-align: center;
+
+    background-color: var(--white, #FFFFFF);
+
+    border-color: var(--border-color, #D9D9D9);
+    border-radius: var(--border-radius, 10px);
+
+    box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+.card-stats__value {
+    font-size: 60px;
+    font-weight: var(--text-weight-extrabold, 800);
+
+    line-height: 60px;
+}
+
+.card-stats__value_blue {
+    color: #403082;
+}
+
+.card-stats__value_purple {
+    color: #80295B;
+}
+
+.card-stats__value_red {
+    color: #E31D23;
+}
+
+.card-stats__description {
+    color: var(--gray, #666666);
+    font-size: 20px;
+    font-weight: var(--text-weight-extrabold, 800);
+
+    line-height: 26px;
+}
+
+@media screen and (max-width: 1440px) {
+    .card-stats__description {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-stats {
+        padding: 5px;
+
+        border-radius: var(--border-radius_mobile, 5px);
+    }
+
+    .card-stats__value {
+        font-size: 30px;
+
+        line-height: 30px;
+    }
+
+    .card-stats__description {
+        font-size: 12px;
+        font-weight: var(--text-weight-semibold, 600);
+
+        line-height: 12px;
+    }
+}

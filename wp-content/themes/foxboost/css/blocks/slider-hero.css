@@ -1,0 +1,43 @@
+.slider-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.slider-hero_fixed {
+    overflow: hidden;
+}
+
+.slider-hero__card {
+    width: 100%;
+    height: auto;
+
+    border-radius: var(--border-radius, 10px);
+
+    overflow: hidden;
+}
+
+.slider-hero_fixed .slider-hero__card {
+    height: 440px;
+}
+
+.slider-hero__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    /* фиксированная высота, задаешь сам */
+    object-fit: cover;
+    /* сохраняет пропорции, обрезая лишнее */
+    object-position: center;
+}
+
+@media screen and (max-width: 768px) {
+    .slider-hero__card {
+        border-radius: 5px;
+    }
+}

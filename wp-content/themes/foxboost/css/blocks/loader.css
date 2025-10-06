@@ -1,0 +1,19 @@
+.loader {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 100px;
+    height: 100px;
+
+    background: url('../images/loader.svg') no-repeat;
+    background-size: contain;
+
+    z-index: 2000;
+}
+
+.hidden {
+    display: none !important;
+}
