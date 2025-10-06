@@ -1,0 +1,3 @@
+db: u0650462_foxboost
+user: u0650462_fbuser
+pass: qE1fD3uF9qrK6hK1

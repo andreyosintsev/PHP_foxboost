@@ -1,0 +1,81 @@
+.footer {
+    display: block;
+    padding: 24px 0 12px 0;
+
+    color: var(--text-color-main, #0C1227);
+    font-family: var(--text-family, sans-serif);
+    font-size: 11px;
+    font-weight: 500;
+
+    line-height: 13px;
+
+    background-color: var(--white, #FFFFFF);
+
+    overflow: hidden;
+}
+
+.footer__disclamer-counter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 80px 0;
+}
+
+.footer__disclamer p {
+    margin: 0 24px 6px 0;
+}
+
+.footer__disclamer p:last-child {
+    margin-top: 8px;
+    margin-bottom: 0;
+
+    color: var(--black-light, #4F5463);
+    font-size: 10px;
+    font-weight: 500;
+
+    line-height: 12px;
+}
+
+.footer__counter {
+    flex-shrink: 0;
+    width: 88px;
+    height: 31px;
+
+    background-color: var(--gray-light, #E7E7E7);
+
+    border-radius: var(--border-radius-smaller, 6px);
+}
+
+.footer__counter img {
+    border-radius: inherit;
+}
+
+@media (max-width: 1312px) {
+    .footer {
+        padding: 16px 16px 12px;
+    }
+}
+
+@media (max-width: 960px) {
+    .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .footer__disclamer-counter {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer__disclamer-counter {
+        display: block;
+    }
+
+    .footer__disclamer {
+        margin-bottom: 12px;
+    }
+}

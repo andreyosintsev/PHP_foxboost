@@ -1,0 +1,44 @@
+/*
+    ПРОЕКТ "ROSTEST-CERTIFY.RU"
+    ИМПОРТ ШРИФТОВ
+
+    Последняя версия: 20.10.2024
+
+    UPD: перенесено в папку Common, общую для всех блоков и верстки
+*/
+
+/*Montserrat Medium*/
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    src: url("../../fonts/Montserrat-Medium.otf") format("truetype");
+    font-display: swap;
+}
+/*Montserrat SemiBold*/
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    src: url("../../fonts/Montserrat-SemiBold.otf") format("truetype");
+    font-display: swap;
+}
+/*Montserrat Bold*/
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    src: url("../../fonts/Montserrat-Bold.otf") format("truetype");
+    font-display: swap;
+}
+/*Montserrat ExtraBold*/
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 800;
+    src: url("../../fonts/Montserrat-ExtraBold.otf") format("truetype");
+    font-display: swap;
+}
+/*Montserrat Black*/
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 900;
+    src: url("../../fonts/Montserrat-Black.otf") format("truetype");
+    font-display: swap;
+}

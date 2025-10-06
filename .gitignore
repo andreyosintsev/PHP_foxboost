@@ -1,0 +1,11 @@
+.idea
+wp-admin
+wp-content/cache
+wp-content/languages
+wp-content/upgrade
+wp-content/uploads
+wp-content/wflogs
+wp-includes
+wp-config*.php
+robots.txt
+.htaccess

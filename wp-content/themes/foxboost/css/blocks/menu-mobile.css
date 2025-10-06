@@ -1,0 +1,59 @@
+.menu-mobile {
+    display: none;
+
+    position: fixed;
+    width: 288px;
+    top: 0px;
+    right: 16px;
+
+    margin-top: 16px;
+    padding: 16px;
+
+    font-family: var(--text-family, sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 16px;
+
+    background-color: var(--white, #FFFFFF);
+
+    border-radius: var(--border-radius-large, 16px);
+
+    box-shadow: 0px 0px 10px rgba(4, 13, 42, 0.1);
+
+    overflow: hidden;
+
+    z-index: 100;
+}
+
+.menu-mobile_visible {
+    display: block;
+}
+
+.menu-mobile__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    text-align: center;
+}
+
+.menu-mobile__item {
+    padding-bottom: 12px;
+}
+
+.menu-mobile__item:last-child {
+    padding-bottom: 0;
+}
+
+.menu-mobile__link {
+    color: var(--link-black-color, #0C1227);
+
+    text-decoration: none;
+}
+
+.menu-mobile__link:hover {
+    color: var(---link-black-color_hover, #2F448A);
+
+    text-decoration: none;
+}

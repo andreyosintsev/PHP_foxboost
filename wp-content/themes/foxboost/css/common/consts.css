@@ -1,0 +1,108 @@
+/*
+    ПРОЕКТ "ROSTEST-CERTIFY.RU"
+    ШРИФТОВЫЕ И ЦВЕТОВЫЕ КОНСТАНТЫ
+
+    Последняя версия: 19.01.2025
+
+    UPD:
+        Добавлен цвет --active для действующих сертификатов и активации пользователей
+*/
+
+@import url("./fonts.css");
+
+:root {
+
+/*
+    Основная палитра
+*/
+    --blue:                     #2F448A;
+    --blue-light:               #5969A1; /* blue + opacity 80% */
+    
+    --black:                    #0C1227;
+    --black-light:              #4F5463; /* black + opacity 72% */
+    
+    --gray-dark:                #505463;
+    --gray-darklight:           #535867;
+    --gray-darker:              #9EA0A9; /* form label */
+    --gray:                     #A3A3A3;
+    --gray-light:               #E7E7E7; /* table border, focus outline, ad-gray */
+
+    --white:                    #FFFFFF;
+        
+    --off-white:                #F9F9FB;
+    --page-bg:                  #FBFCFD;
+
+    --error:                    #FF6666; /* form error */
+    --active:                   #41C968; /* valid certificate or activate user link */
+
+/*
+    Шрифты
+*/
+
+    --text-family:             Montserrat, arial, sans-serif;
+
+    --text-color-main:         var(--black);
+    --text-color-second:       var(--blue);
+    --text-color-sub:          var(--gray-darklight);
+    --text-color-search:       var(--black);
+    --text-color-placeholder:  #6776A9;
+
+/*
+    Рамки
+*/
+
+    --border-radius-xsmall:     4px;
+    --border-radius-smaller:    6px;
+    --border-radius-small:      8px;
+    --border-radius:            12px;
+    --border-radius-large:      16px;
+    --border-radius-xlarge:     20px;
+
+/*
+    Меню
+*/
+    --menu-item:                var(--text-color-second);
+
+/*
+    Ссылки
+*/
+    --link-normal-color:                var(--blue);
+    --link-normal-color_hover:          var(--blue-light);
+    --link-normal-color_disabled:       var(--gray);
+
+    --link-black-color:                 var(--black);
+    --link-black-color_hover:           var(--blue);
+    --link-black-color_disabled:        var(--gray);
+
+    --link-gray-color:                  var(--gray-dark);
+    --link-gray-color_hover:            var(--gray-darklight);
+    --link-gray-color_disabled:         var(--gray);
+
+/*
+    Кнопки
+*/
+
+    --button-normal-background:         var(--blue);
+    --button-normal-color:              var(--white);
+    --button-normal-border:             var(--blue);
+
+    --button-normal-background_hover:   var(--blue-light);
+    --button-normal-color_hover:        var(--white);
+    --button-normal-border_hover:       var(--blue-light);
+
+    --button-normal-background_disabled:var(--gray-light);
+    --button-normal-color_disabled:     var(--gray);
+    --button-normal-border_disabled:    var(--gray-light);
+
+    --button-outlined-background:       var(--white);
+    --button-outlined-color:            var(--blue);
+    --button-outlined-border:           var(--blue);
+
+    --button-outlined-background_hover: var(--white);
+    --button-outlined-color_hover:      var(--blue-light);
+    --button-outlined-border_hover:     var(--blue-light);
+
+    --button-outlined-background_disabled: var(--white);
+    --button-outlined-color_disabled:      var(--gray);
+    --button-outlined-border_disabled:     var(--gray);
+}

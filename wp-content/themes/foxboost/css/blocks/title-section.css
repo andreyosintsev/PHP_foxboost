@@ -1,0 +1,23 @@
+.title-section {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    color: var(--text-color-second, #2F448A);
+    font-size: 24px;
+    font-family: var(--text-family, sans-serif);
+    font-weight: 700;
+
+    line-height: 29px;
+
+    overflow: hidden;
+}
+
+@media (max-width: 480px) {
+    .title-section {
+        font-size: 20px;
+        font-weight: 700;
+
+        line-height: 24px;
+    }
+}
