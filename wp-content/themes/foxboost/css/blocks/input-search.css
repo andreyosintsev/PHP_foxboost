@@ -16,6 +16,10 @@
     height: 24px;
 }
 
+.input-search__form {
+    height: 100%;
+}
+
 .input-search__input {
     height: 100%;
     padding-left: 50px;
