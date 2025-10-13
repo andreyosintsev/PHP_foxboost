@@ -5,7 +5,7 @@
     padding: 0;
 
     color: var(--black, #000000);
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
     font-size: 20px;
     font-weight: var(--font-weight-main, 400);
 
@@ -23,14 +23,15 @@
 }
 
 .contacts__input {
-    margin-bottom: 14px;
+    margin: 14px 0 5px;
 }
 
 .contacts__textarea {
-    margin-bottom: 20px;
+    margin: 14px 0 5px;
 }
 
 .contacts__button {
+    margin: 20px 0 5px;
     padding: 13px 44px;
 }
 
@@ -78,10 +79,10 @@
     }
 
     .contacts__input {
-        margin-bottom: 12px;
+        margin: 10px 0 3px;
     }
 
     .contacts__textarea {
-        margin-bottom: 14px;
+        margin: 10px 0 3px;
     }
 }

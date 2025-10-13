@@ -6,7 +6,7 @@
     max-width: 330px;
 
     color: var(--gray, #666666);
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
 
     background-color: var(--white, #FFFFFF);
 
@@ -27,10 +27,47 @@
     position: relative;
 }
 
+.card-foxboost__link:hover {
+    text-decoration: underline;
+}
+
 .card-foxboost__image {
     position: relative;
     width: 100%;
     padding-top: 250px;
+}
+
+.card-foxboost__image-overlay {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.7);
+
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease-in-out;
+}
+
+.card-foxboost__image:hover .card-foxboost__image-overlay {
+    opacity: 1;
+}
+
+.card-foxboost__image-caption {
+    display: inline-block;
+
+    color: var(--white, #FFFFFF);
+    font-size: 18px;
+    font-weight: var(--text-weight-semibold, 600);
 }
 
 .card-foxboost__img {
@@ -46,7 +83,7 @@
     width: 90px;
     height: 92px;
 
-    background: url(../images/featured.png) no-repeat center;
+    background: url(../../images/card-foxboost/featured.png) no-repeat center;
     background-size: 90px 92px;
 }
 
@@ -54,7 +91,7 @@
     width: 90px;
     height: 92px;
 
-    background: url(../images/recommended.png) no-repeat center;
+    background: url(../../images/card-foxboost/recommended.png) no-repeat center;
     background-size: 90px 92px;
 }
 
@@ -80,14 +117,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    background: url(../images/clock.svg) no-repeat left center;
+    background: url(../../images/card-foxboost/clock.svg) no-repeat left center;
     background-size: 16px;
 }
 
 .card-foxboost__views {
     padding-left: 22px;
 
-    background: url(../images/views.svg) no-repeat left center;
+    background: url(../../images/card-foxboost/views.svg) no-repeat left center;
     background-size: 20px;
 }
 
@@ -156,12 +193,12 @@
     width: 20px;
     height: 20px;
 
-    background: url(../images/star.svg) no-repeat center;
+    background: url(../../images/card-foxboost/star.svg) no-repeat center;
     background-size: 20px;
 }
 
 .card-foxboost__star_gray {
-    background: url(../images/star_gray.svg) no-repeat center;
+    background: url(../../images/card-foxboost/star_gray.svg) no-repeat center;
 }
 
 .card-foxboost__average {
@@ -250,6 +287,10 @@
     .card-foxboost {
         max-width: 340px;
     }
+
+    .card-foxboost__image-caption {
+        font-size: 16px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -271,6 +312,10 @@
         padding-top: 100px;
     }
 
+    .card-foxboost__image-caption {
+        font-size: 14px;
+    }
+
     .card-foxboost__img {
         width: 100px;
         height: 100px;
@@ -281,7 +326,12 @@
 
     .card-foxboost__stats {
         grid-area: stats;
+        justify-content: flex-start;
         padding: 10px 10px 0;
+    }
+
+    .card-foxboost__togo-apps {
+        width: auto;
     }
 
     .card-foxboost__title {

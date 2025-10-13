@@ -447,13 +447,13 @@ function premiumstyle_display()
  * @param $encoding - кодировка
  * @return string - результирующая строка с удалёнными пробелами в начале и конце
  */
-function mb_trim(string $string, $character_mask = " \t\n\r\0\x0B", $encoding = 'UTF-8'): string {
-    // Убираем пробелы слева
-    $left_trimmed = mb_substr($string, mb_strpos($string, mb_ereg_replace('^[' . $character_mask . ']+', '', $string, $encoding)), mb_strlen($string, $encoding), $encoding);
-
-    // Убираем пробелы справа
-    return mb_substr($left_trimmed, 0, mb_strlen($left_trimmed, $encoding), $encoding);
-}
+//function mb_trim(string $string, $character_mask = " \t\n\r\0\x0B", $encoding = 'UTF-8'): string {
+//    // Убираем пробелы слева
+//    $left_trimmed = mb_substr($string, mb_strpos($string, mb_ereg_replace('^[' . $character_mask . ']+', '', $string, $encoding)), mb_strlen($string, $encoding), $encoding);
+//
+//    // Убираем пробелы справа
+//    return mb_substr($left_trimmed, 0, mb_strlen($left_trimmed, $encoding), $encoding);
+//}
 ?>
 <?php
 /**
@@ -2599,7 +2599,7 @@ function getAllAgenciesCities($start = 0, $num = null) {
  * @param int $num - общее количество элементов массива
  * @return array|mixed - результат поиска в виде массива ссылок
  */
-function getAllAgenciesLinks(int $start = 0, int $num = null) {
+function getAllAgenciesLinks(int $start = 0, ?int $num = null) {
     global $wpdb;
 
     /*Получим все возможные значения пар regnum => link*/
@@ -2692,6 +2692,27 @@ function declination(int $number, array $titles) {
     return $titles[$cases[min($number % 10, 5)]];
 }
 ?>
+<?php
+/**
+ * Функция получения разницы в днях между текущей датой и заданной
+ *
+ * @param string $dateString - заданная дата в формате yyyymmdd
+  * @return int - результат разница в количестве дней
+ */
+function daysToGo(string $dateString)
+{
+
+    $timestamp = strtotime($dateString);
+    $today = strtotime(date('Y-m-d'));
+
+    $diffSeconds = $timestamp - $today;
+    $diffDays = floor($diffSeconds / (60 * 60 * 24));
+
+    return max($diffDays, 0);
+}
+
+?>
+
 <?php
 /**
  * Функция для нормализации номера сертификата или декларации соответствия,
@@ -3311,3 +3332,4 @@ function getAdContent(string $fileUrl = ''): string {
 
     return  @file_get_contents($fileUrl) ?: '';
 }
+?>

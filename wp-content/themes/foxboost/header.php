@@ -1,4 +1,4 @@
-<!--rostest-->
+<!--foxboost-->
 <?php
 /**
  * header.php
@@ -104,198 +104,16 @@
     <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/overlay.css" />
     <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/loader.css" />
     <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/popup.css" />
+    <link rel="stylesheet" href="<?php echo $template_url;?>/css/utils/kk-star-ratings.css" />
 
     <!--Постраничные стили-->
     <?php if (is_home()) { ?>
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/index.css" />
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/utils/metaslider.css" />
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/utils/contact-form-7.css" />
+
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/home.css" />
     <?php } ?>
 
-
-    <?php if (false): ?>
-    <!--Новые стили-->
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/common/normalize.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/common/consts.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/menu-main.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/menu-mobile.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/button.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/search-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/flag.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/sidebar-stats.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/sidebar-countries.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/sidebar-certificates.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/footer.css">
-
-    <?php if (is_home()) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-more.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/manufacturers-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/agencies-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/norms-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/home.css">
-
-    <?php } ?>
-    <?php if (is_category() || is_tag()) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-more.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/manufacturers-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/agencies-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/norms-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/archive.css">
-
-    <?php } ?>
-    <?php if (is_page('naiti-sertifikat-po-nomeru')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/naiti-sertifikat-po-nomeru.css">
-
-    <?php } ?>
-    <?php if (is_page('naiti-sertifikat-po-vidu-produktsii')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/products-list.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/naiti-sertifikat-po-vidu-produktsii.css">
-
-    <?php } ?>
-    <?php if (is_page('kompanii')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/manufacturers-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/manufacturers-data.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/kompanii.css">
-
-    <?php } ?>
-    <?php if (is_page('reestr-sertifikatov')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-table.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/reestr-sertifikatov.css">
-
-    <?php } ?>
-    <?php if (is_page('organy-po-sertifikacii')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/agencies-table.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/agencies-data.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-table.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/organy-po-sertifikacii.css">
-
-    <?php } ?>
-    <?php if (is_page('gosty')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/norms-data.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/norms-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/gosty.css">
-
-    <?php } ?>
-    <?php if (is_page('o-sajte')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/norms-data.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/norms-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/o-sajte.css">
-
-    <?php } ?>
-    <?php if (is_page('debug')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/debug.css">
-
-    <?php } ?>
-    <?php if (is_page('policy')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/policy.css">
-
-    <?php } ?>
-    <?php if (is_page('panel')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-table.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/panel.css">
-
-    <?php } ?>
-    <?php if (is_page('task')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-table.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/task.css">
-
-    <?php } ?>
-    <?php if (is_page('add')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/add.css">
-
-    <?php } ?>
-    <?php if (is_page('certificate-added')) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/certificate-added.css">
-
-    <?php } ?>
-    <?php if (is_single()) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/specs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/tags.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-more.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/preloader.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/modal.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/single.css">
-
-    <?php } ?>
-    <?php if (is_search()) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/products-list.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/search.css">
-
-    <?php } ?>
-    <?php if (is_404()) { ?>
-
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/breadcrumbs.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-section.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/certificates-item.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/wp-page-numbers.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/title-more.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/404.css">
-
-    <?php } ?>
-    <!--/Новые стили-->
-    <?php endif; ?>
 
     <!--Cтили и скрипты шаблона-->
 	<?php wp_head(); ?>
@@ -305,9 +123,9 @@
     <script src="<?php echo $template_url; ?>/scripts/util/jquery-3.7.1.min.js"></script>
     <script src="<?php echo $template_url; ?>/scripts/util/owl.carousel.min.js"></script>
     <script src="<?php echo $template_url; ?>/scripts/menu-mobile.js"></script>
-    <script src="<?php echo $template_url; ?>/scripts/back-to-top.js"></script>
     <script src="<?php echo $template_url; ?>/scripts/popup.js" type="module"></script>
     <script src="<?php echo $template_url; ?>/scripts/popup-subscribe.js" type="module"></script>
+    <script src="<?php echo $template_url; ?>/scripts/foxboost-views.js" type="module"></script>
 
     <!--Постраничные скрипты-->
     <?php if (is_home()) { ?>
@@ -333,7 +151,6 @@
             $search_string = empty($search_name)
                 ? "Поиск по названию"
                 : $search_name;
-            echo '<!-- SEARCH STRING: ' .$search_string. '-->';
             ?>
             <div class="input-search header__search">
                 <form class="input-search__form" action="<?php echo $site_url; ?>/search" method="get">
@@ -361,6 +178,8 @@
             ?>
             <ul class="menu-main__items">
                 <?php foreach($categories as $category) {
+                    if ($category->term_id === 1) continue;
+                    if ($category->count == 0) continue;
                     $link = get_category_link($category->term_id);
                     $class_current = ($category->term_id === $current_cat_id) ? ' menu-main__item_current' : '';
 
@@ -389,17 +208,20 @@
             <?php
             if ( ! empty( $categories ) ) {
                  foreach($categories as $category) {
-                        $link = get_category_link($category->term_id);
-                        $class_current = ($category->term_id === $current_cat_id) ? ' menu-mobile__link_strong' : '';
+                     if ($category->term_id === 1) continue;
+                     if ($category->count == 0) continue;
 
-                        echo '<li class="menu-mobile__item"' . $class_current. '>
-                                    <a class="link menu-mobile__link"' . $class_current. '
-                                        href="' .esc_url( $link ). '" 
-                                        title="' . esc_html( $category->name ) . '" 
-                                        aria-label="' . esc_html( $category->name ) . '">' .
-                                        esc_html( $category->name ).'
-                                    </a>
-                             </li>';
+                    $link = get_category_link($category->term_id);
+                    $class_current = ($category->term_id === $current_cat_id) ? ' menu-mobile__link_strong' : '';
+
+                    echo '<li class="menu-mobile__item"' . $class_current. '>
+                                <a class="link menu-mobile__link"' . $class_current. '
+                                    href="' .esc_url( $link ). '" 
+                                    title="' . esc_html( $category->name ) . '" 
+                                    aria-label="' . esc_html( $category->name ) . '">' .
+                                    esc_html( $category->name ).'
+                                </a>
+                         </li>';
                     }
             } ?>
             <li class="menu-mobile__item">
@@ -413,4 +235,3 @@
             </li>
         </ul>
     </div>
-</div>

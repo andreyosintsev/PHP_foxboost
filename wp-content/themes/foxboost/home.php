@@ -14,163 +14,177 @@
     $site_url       = site_url();
     $template_url   = get_template_directory_uri();
 
-    $search_num = $_GET['param'] ?? '';
+    $search_name = $_GET['search'] ?? '';
     $isAuth         = isset($_SESSION['auth']);
 ?>
 <?php get_header(); ?>
 <div class="wrapper">
-    <div class="hero">
-        <div class="hero__content">
-            <h1 class="hero__title">
-                Сертификаты соответствия
-            </h1>
-            <h2 class="hero__subtitle">
-                Сертификаты ГОСТ Р, ТС и декларации соответствия
-            </h2>
-            <div class="search-item">
-                <div class="search-item__title">
-                    Поиск сертификата по названию продукции:
-                </div>
-                <form class="search-item__form" method="get">
-                    <div class="search-item__magnifier-input">
-                        <div class="search-item__magnifier"></div>
-                        <input class="search-item__input" type="text" name="s" id="s" placeholder="Например, средства индивидуальной защиты">
-                    </div>
-                    <button class="button search-item__button" type="submit">Поиск</button>
-                </form>
-            </div>
+    <div class="motto">Будь в числе первых обладателей новинок</div>
+    <div class="panel-stats">
+        <div class="panel-stats_card card-stats">
+            <?php
+                $count_foxboosts = wp_count_posts('foxboost');
+                $foxboosts_published = $count_foxboosts->publish;
+            ?>
+            <div class="card-stats__value card-stats__value_blue"><?php echo $foxboosts_published; ?></div>
+            <div class="card-stats__description"><?php echo declination($foxboosts_published, ['Фоксбуст', 'Фоксбуста', 'Фоксбустов']);?> уже на сайте</div>
         </div>
-        <div class="hero__image">
-            <img src="<?php echo $template_url;?>/images/header.png" alt="Сертификаты соответствия">
+        <div class="panel-stats_card card-stats">
+            <?php
+                $count_brands = wp_count_posts('brand');
+                $brands_published = $count_brands->publish;
+            ?>
+            <div class="card-stats__value card-stats__value_purple"><?php echo $brands_published; ?></div>
+            <div class="card-stats__description"><?php echo declination($brands_published, ['Бренд ждёт', 'Бренда ждут', 'Брендов ждут']);?> вас</div>
+        </div>
+        <div class="panel-stats_card card-stats">
+            <div class="card-stats__value card-stats__value_red">&gt;50</div>
+            <div class="card-stats__description">Довольных покупателей</div>
         </div>
     </div>
-    <main class="main">
-        <div class="content">
-            <?php if (!$isAuth) { ?>
-                <div class="content__ad">
-                    <?php echo getAdContent('home.ad'); ?>
-                </div>
-            <?php } ?>
-            <section class="certificates">
-                <div class="title-more certificates__title">
-                    <a href="<?php echo $site_url ?>/reestr-sertifikatov/" class="title-more__link" title="Реестр сертификатов и деклараций соответствия">
-                        <h2 class="title-more__title">
-                            Сертификаты на продукцию
-                        </h2>
-                        <div class="title-more__more">
-                            См.&nbsp;все
-                        </div>
-                    </a>
-                </div>
-                <div class="certificates__content">
-                    <?php
-                        global $query_string;
-                        $posts_list = get_posts($query_string.'&numberposts=3&order=DSC&orderby=date');
+    <div class="section-logo">
+        <?php
 
-                        foreach ($posts_list as $post) {
-                            setup_postdata($post);
-                            get_template_part('partials/certificates-item', null, ['postId' => $post->ID]);
-                        }
-                    ?>
-                </div>
-            </section>
-            <section class="manufacturers">
-                <div class="title-more manufacturers__title">
-                    <a href="<?php echo $site_url ?>/kompanii/" class="title-more__link" title="Поиск по изготовителю">
-                        <h2 class="title-more__title">
-                            Изготовители
-                        </h2>
-                        <div class="title-more__more">
-                            См.&nbsp;все
-                        </div>
-                    </a>
-                </div>
-                <div class="manufacturers__content">
-                    <?php
-                        $manufacturers = getAllManufacturers(6);
-                        foreach ($manufacturers as $manufacturer => $freq) {
-                            $manufacturerLink = getManufacturerLink($manufacturer);
-                            $manufacturerLogo = getManufacturerLogo($manufacturer);
-                            $manufacturerDesc = getManufacturerFull($manufacturer);
-                    ?>
-                        <div class="manufacturers-item">
-                            <a class="manufacturers-item__link" href="<?php echo $manufacturerLink; ?>" title="Сертификаты <?php echo replaceQuotes($manufacturer); ?>">
-                                <div class="manufacturers-item__thumb-title">
-                                    <div class="manufacturers-item__thumb">
-                                        <img src="<?php echo $site_url; ?>/logos/<?php echo $manufacturerLogo; ?>" alt="Сертификаты <?php echo replaceQuotes($manufacturer); ?>">
-                                    </div>
-                                    <div class="manufacturers-item__title">
-                                        <?php echo $manufacturer; ?>
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="manufacturers-item__description">
-                                Изготовитель: <?php echo $manufacturerDesc; ?>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </section>
-            <section class="agencies">
-                <div class="title-more agencies__title">
-                    <a href="<?php echo $site_url ?>/organy-po-sertifikacii/" class="title-more__link" title="Органы по сертификации">
-                        <h2 class="title-more__title">
-                            Органы по сертификации
-                        </h2>
-                        <div class="title-more__more">
-                            См.&nbsp;все
-                        </div>
-                    </a>
-                </div>
-                <div class="agencies__content">
-                    <?php
-                    $agencies = getAllAgencies(4);
-                    foreach ($agencies as $agency => $freq) {
-                        $agencyLink = getAgencyLink($agency);
-                        $agencyDesc = getAgencyFull($agency);
-                    ?>
-                        <div class="agencies-item">
-                            <a class="agencies-item__link" href="<?php echo $agencyLink; ?>" title="Ceртификаты, выданные <?php echo replaceQuotes($agency); ?>">
-                                <div class="agencies-item__title">
-                                    <?php echo $agency; ?>
-                                </div>
-                            </a>
-                            <div class="agencies-item__description">
-                                <?php echo $agencyDesc; ?>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </section>
-            <section class="norms">
-                <div class="title-more norms__title">
-                    <a href="<?php echo $site_url ?>/gosty/" class="title-more__link" title="ГОСТы и ТР на материалы, товары, продукцию и услуги">
-                        <h2 class="title-more__title">
-                            ГОСТы и ТР
-                        </h2>
-                        <div class="title-more__more">
-                            См.&nbsp;все
-                        </div>
-                    </a>
-                </div>
-                <div class="norms__content">
-                    <?php
-                        $norms = getAllNorms(4);
-                        foreach ($norms as $norm) {
-                            get_template_part( 'partials/norms-item', null, ['norm' => $norm] );
-                        }
-                    ?>
-                </div>
-            </section>
-            <?php if (/* !$isAuth */ false) { ?>
-                <div class="content__ad">
-                    <?php echo getAdContent(''); ?>
-                </div>
+            $brands = get_posts([
+                'post_type'      => 'brand',
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'orderby'        => 'title',
+                'order'          => 'ASC',
+            ]);
+
+            if ( ! empty( $brands ) ) {
+                ?>
+                <ul class="section-logo__items">
+                    <?php foreach($brands as $brand) {
+                        $name = get_the_title($brand->ID);
+                        $image = get_field('image', $brand->ID, false);
+                        $image_url = wp_get_attachment_url($image);
+
+                        echo '<li class="logo section-logo__item">
+                                <a class="logo__link" href="archive.html">
+                                    <img class="logo__image" src="'. $image_url .'" alt="Компания '. $name .'" title="Фоксбусты '. $name .'"/>
+                                </a>
+                              </li>';
+                    }?>
+                </ul>
             <?php } ?>
-        </div>
-        <aside class="sidebar">
-            <?php get_sidebar(); ?>
-        </aside>
-    </main>
+    </div>
+    <div class="slider-hero">
+        <?php echo do_shortcode('[metaslider id="59"]'); ?>
+    </div>
 </div>
+<main class="main">
+    <div class="wrapper">
+        <section class="section">
+            <h2 class="title">Популярные фоксбусты</h2>
+            <div class="section-foxboost">
+                <?php
+                    $args = array(
+                        'post_type'      => 'foxboost',
+                        'posts_per_page' => 4,
+                        'meta_key'       => 'views',
+                        'orderby'        => array(
+                            'meta_value_num' => 'DESC',
+                            'date' => 'DESC'
+                        )
+                    );
+
+                    $query = new WP_Query($args);
+
+                    while ($query->have_posts()) : $query->the_post();
+                        get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
+                    endwhile;
+                    wp_reset_postdata();
+                ?>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="title">Новые фоксбусты</h2>
+            <div class="section-foxboost">
+                <?php
+                $args = array(
+                    'post_type'      => 'foxboost',
+                    'posts_per_page' => 4,
+                    'orderby'        => 'date',
+                    'order'          => 'DESC'
+                );
+
+                $query = new WP_Query($args);
+
+                while ($query->have_posts()) : $query->the_post();
+                    get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="title">Скоро завершатся</h2>
+            <div class="section-foxboost">
+                <?php
+                $args = array(
+                    'post_type'      => 'foxboost',
+                    'posts_per_page' => 4,
+                    'meta_key'       => 'datetogo',
+                    'meta_value'     => date('Y-m-d'),
+                    'meta_compare'   => '>=',
+                    'orderby'        => 'meta_value',
+                    'order'          => 'ASC',
+                    'meta_type'      => 'DATE'
+                );
+
+                $query = new WP_Query($args);
+
+                while ($query->have_posts()) : $query->the_post();
+                    get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="title">Амбассадоры и инфлюенсеры</h2>
+            <div class="section-ambassador">
+                <?php
+                $args = array(
+                    'post_type'      => 'ambassador',
+                    'posts_per_page' => -1,
+                    'orderby'        => 'date',
+                    'order'          => 'ASC'
+                );
+
+                $query = new WP_Query($args);
+                $first = true;
+
+                while ($query->have_posts()) : $query->the_post();
+                    get_template_part('partials/card-ambassador', null, ['post_id' => get_the_ID(), 'double' => $first]);
+                    $first = false;
+                endwhile;
+                wp_reset_postdata();
+                ?>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="title">Контакты</h2>
+            <div class="contacts">
+                <div class="contacts__address">
+                    <p class="contacts__p">г. Москва, Волгоградскиий проспект, 47</p>
+                    <p class="contacts__p">foxboost.ru</p>
+                    <p class="contacts__p">info@foxboost.ru</p>
+                    <p class="contacts__p">+7 (495) 259-58-78</p>
+                    <p class="contacts__p">+7 (495) 259-58-13</p>
+                </div>
+                <div class="contacts__span"></div>
+                <div class="contacts__feedback">
+                    <p class="contacts__p">
+                        Если у вас есть вопросы или предложения, мы будем рады их обсудить. Оставьте свои контакты, и мы свяжемся с
+                        вами!
+                    </p>
+                    <?php echo do_shortcode('[contact-form-7 id="1c4a8fe" title="Обратная связь в контактах"]'); ?>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
 <?php get_footer(); ?>

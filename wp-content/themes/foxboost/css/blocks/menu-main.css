@@ -5,8 +5,9 @@
 .menu-main__items {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: clamp(16px, calc(3.6vw - 16px), 40px);
     margin: 0;
     padding: 0;
 

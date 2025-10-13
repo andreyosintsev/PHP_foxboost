@@ -5,112 +5,164 @@
  * The template for displaying the footer. Contains footer
  * content and the closing of the html elements.
  *
- * @link        http://rostest-certify.ru/
+ * @link        http://foxboost.ru/
  *
  * @author      Andrei Osintsev
- * @copyright   Copyright (c) 2024 asosintsev@yandex.ru
+ * @copyright   Copyright (c) 2025 asosintsev@yandex.ru
  */
 ?>
 <?php
     $site_url       = site_url();
     $template_url   = get_template_directory_uri();
 
-    $search_num = $_GET['param'] ?? '';
+    $categories = get_categories( array(
+        'taxonomy'     => 'category',
+        'hide_empty'   => false,
+        'parent'       => 0,
+        'orderby'      => 'name',
+        'order'        => 'ASC',
+    ) );
 ?>
 <footer class="footer">
-    <div class="nav-bottom">
-        <div class="logo">
-            <a class="logo__link" href="<?php echo $site_url; ?>" title="<?php bloginfo('name');?>">
-                <img class="logo__image" src="<?php echo $template_url; ?>/images/logo.svg" alt="<?php echo $site_url ?>">
-            </a>
-        </div>
-        <?php
-        $search_string = empty($search_num)
-            ? "Поиск по номеру сертификата"
-            : $search_num;
-        ?>
-        <form class="search" action="<?php echo $site_url; ?>/naiti-sertifikat-po-nomeru" method="get">
-            <input class="search__input" name="param" placeholder="<?php echo $search_string; ?>">
-            <button class="search__magnifier" type="submit"></button>
-        </form>
-        <nav class="menu-main">
-            <ul class="menu-main__items">
-                <li class="menu-main__item">
-                    <a href="<?php echo $site_url ?>/naiti-sertifikat-po-nomeru/" title="Найти сертификат по номеру">
-                        Поиск по номеру
-                    </a>
-                </li>
-                <li class="menu-main__item">
-                    <a href="<?php echo $site_url ?>/naiti-sertifikat-po-vidu-produktsii/" title="Найти сертификат по виду продукции">
-                        Продукция
-                    </a>
-                </li>
-                <li class="menu-main__item">
-                    <a href="<?php echo $site_url ?>/kompanii/" title="Найти сертификат по изготовителю">
-                        Изготовители
-                    </a>
-                </li>
-                <li class="menu-main__item">
-                    <a href="<?php echo $site_url ?>/reestr-sertifikatov/" title="Реестр сертификатов и деклараций соответствия">
-                        Реестр сертификатов
-                    </a>
-                </li>
-                <li class="menu-main__item">
-                    <a href="<?php echo $site_url ?>/organy-po-sertifikacii/" title="Органы по сертификации">
-                        Органы
-                    </a>
-                </li>
-                <li class="menu-main__item">
-                    <a href="<?php echo $site_url ?>/gosty/" title="ГОСТы на материалы, товары, продукцию и услуги">
-                        ГОСТы
-                    </a>
-                </li>
-                <li class="menu-main__item">
-                    <a href="<?php echo $site_url ?>/o-sajte/" title="О сайте">
-                        О сайте
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class="footer__disclamer-counter">
-        <div class="footer__disclamer">
-            <p>На сайте представлены сертификаты соответствия ГОСТ Р и Таможенного союза, а также Декларации соответствия Таможенного союза на различные материалы, товары, продукцию и услуги.</p>
-            <p>Скачать сертификаты соответствия на продукцию и декларации можно в высоком разрешении. Информация представлена в виде изображений оригинальных документов и их копий. Вместе с изображениями представлена текстовая информация, содержащаяся в сертификатах.</p>
-            <p>Сертификаты соответствия &copy; 2013-<?php echo date('Y'); ?>. Информация представлена только для ознакомительного использования.</p>
-        </div>
-        <div class="footer__counter">
-            <!-- Yandex.Metrika informer -->
-            <a href="https://metrika.yandex.ru/stat/?id=32820367&amp;from=informer"
-               target="_blank" rel="nofollow">
-                <img src="https://informer.yandex.ru/informer/32820367/3_0_FFFFFFFF_F2F2F2FF_0_pageviews"
-                     style="width:88px; height:31px; border:0;"
-                     alt="Яндекс.Метрика"
-                     title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)"
-                     class="ym-advanced-informer"
-                     data-cid="32820367"
-                     data-lang="ru">
-            </a>
-            <!-- /Yandex.Metrika informer -->
+    <div class="wrapper footer__wrapper">
+        <div class="footer__content">
+            <div class="logo footer__logo">
+                <a class="logo__link" href="index.html" tabindex="-1">
+                    <img src="<?php echo $template_url; ?>/images/logo-text.webp" alt="Компания" class="logo__image" title="На главную страницу" />
+                </a>
+            </div>
+            <div class="footer__menu">
+                <div class="footer__menu-column">
+                    <div class="footer__menu-title">Фоксбусты</div>
 
-            <!-- Yandex.Metrika counter -->
-            <script type="text/javascript" >
-                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+                    <?php
+                        if ( ! empty( $categories ) ) {
+                        ?>
+                        <ul class="footer__menu-items">
+                            <?php foreach($categories as $category) {
+                                if ($category->term_id === 1) continue;
+                                $link = get_category_link($category->term_id);
 
-                ym(32820367, "init", {
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                });
-            </script>
-            <noscript><div><img src="https://mc.yandex.ru/watch/32820367" style="position:absolute; left:-9999px;" alt=""></div></noscript>
-            <!-- /Yandex.Metrika counter -->
+                                echo '<li class="footer__menu-item">
+                                <a class="link link_light"
+                                    href="' .esc_url( $link ). '" 
+                                    title="' . esc_html( $category->name ) . '" 
+                                    aria-label="' . esc_html( $category->name ) . '">' .
+                                    esc_html( $category->name ).'
+                                </a>
+                         </li>';
+                        }?>
+                        </ul>
+                    <?php } ?>
+                </div>
+                <div class="footer__menu-column">
+                    <div class="footer__menu-title">Поддержка</div>
+                    <ul class="footer__menu-items">
+                        <li class="footer__menu-item">
+                            <a class="link link_light" href="#" title="О сайте Foxboost.ru">Как это работает</a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="link link_light" href="mailto:foxboost@mail.ru" title="Написать нам e-mail">
+                                foxboost@mail.ru
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer__legal">
+            <div class="footer__copyright">&copy; ООО &ldquo;ФОКСГЕЙМЕР&rdquo;, 2025</div>
+            <div class="footer__disclamer">
+                Посещая сайт foxboost.ru, вы предоставляете согласие на обработку данных о посещении вами сайта foxboost.ru, сбор
+                которых автоматически осуществляется на условиях 
+                <a class="link footer__link link_light" href="#" title="Ознакомиться с политикой конфиденциальности">
+                    Политика конфиденциальности
+                </a>
+                .
+            </div>
         </div>
     </div>
 </footer>
+<div class="loader hidden"></div>
+<div class="popup hidden" id="popup-order">
+    <h2 class="title popup__title">Оставить заявку</h2>
+    <p class="popup__product">Кресло FoxGear model X</p>
+    <p class="popup__text">
+        Оставьте заявку на этот фоксбуст.
+        <br />
+        Вы получите уведомление на указанный e-mail о начале продаж.
+    </p>
+    <form class="form popup__form">
+        <input class="input popup__input" name="name" placeholder="Ваше имя" />
+        <input class="input popup__input" name="email" placeholder="E-mail" />
+        <input class="input popup__input" name="tel" placeholder="Телефон" />
+        <input class="input popup__input" name="promocode" placeholder="Промокод (при наличии)" />
+        <input type="hidden" name="product" />
+        <input class="button popup__button" type="submit" value="Создать заявку" />
+        <div class="popup__offer">
+            Нажимая кнопку Отправить вы соглашаетесь с условиями
+            <a class="link popup__link" href="#" title="Текст публичной оферты" target="_blank">Пользовательского соглашения</a>
+            и даёте разрешение направлять вам информационную рассылку на указанный выше e-mail. Вы всегда сможете от нее отписаться.
+        </div>
+    </form>
+    <div class="popup__close"></div>
+</div>
+<div class="popup hidden" id="popup-success">
+    <h2 class="title popup__title">Заявка оформлена</h2>
+    <p class="popup__text">
+        Поздравляем!
+        <br />
+        <br />
+        Вы подписались на информационную рассылку. При поступлении в продажу данного товара вы получите уведомление на указанный
+        вами e-mail.
+        <br />
+        <br />
+        Благодарим за проявленный интерес!
+    </p>
+    <input class="button popup__button button_close" type="button" value="Закрыть" />
+    <div class="popup__close"></div>
+</div>
+<div class="popup hidden" id="popup-failed">
+    <h2 class="title popup__title">Заявка не отправлена</h2>
+    <p class="popup__text">
+        К сожалению, вашу заявку отправить не удалось.
+        <br />
+        <br />
+        Но мы знаем о проблеме, и совсем скоро её устраним. Попробуйте ещё раз отправить обращение позже.
+        <br />
+        <br />
+        Просим прощения за доставленные неудобства.
+    </p>
+    <input class="button popup__button button_close" type="button" value="Закрыть" />
+    <div class="popup__close"></div>
+</div>
+<div class="popup hidden" id="popup-unsubscribe">
+    <h2 class="title popup__title">Отписка от рассылки</h2>
+    <p class="popup__text">
+        Вы успешно отписались от информационной рассылки.Теперь вы не будете получать уведомления о новых товарах, поступивших в
+        продажу.
+        <br />
+        <br />
+        Чтобы вновь получать уведомления создайте заявку на заинтересовавший вас товар.
+    </p>
+    <input class="button popup__button button_close" type="button" value="Закрыть" />
+    <div class="popup__close"></div>
+</div>
+<div class="popup hidden" id="popup-feedback">
+    <h2 class="title popup__title">Успешно отправлено</h2>
+    <p class="popup__text">
+        Ваш вопрос или предложение успешно отправлено.
+        <br />
+        <br />
+        После ознакомления при необходимости администратор проекта свяжется с вами по указанным вами контактным данным.
+        <br />
+        <br />
+        Благодарим за проявленный интерес!
+    </p>
+    <input class="button popup__button button_close" type="button" value="Закрыть" />
+    <div class="popup__close"></div>
+</div>
+<div class="overlay hidden"></div>
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -6,7 +6,7 @@ $(document).ready(function () {
         if ($(window).width() <= 1440 && $(window).width() >= 480 && !ambassadorsInitialized) {
             $ambassadors.addClass("owl-carousel owl-theme").owlCarousel({
                 items: 1.5,
-                loop: true,
+                loop: false,
                 nav: false,
                 dots: false,
                 autoplay: false,

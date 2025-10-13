@@ -1,0 +1,9 @@
+.kksr-legend {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 1440px) {
+    .kksr-legend {
+        font-size: 12px;
+    }
+}

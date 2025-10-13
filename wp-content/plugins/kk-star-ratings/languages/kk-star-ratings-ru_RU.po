@@ -1,0 +1,379 @@
+# Copyright (C) 2023 Kamal Khan
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: kk Star Ratings 5.4.6\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/kk-star-ratings\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-10-21T18:51:33+00:00\n"
+"PO-Revision-Date: 2025-10-12 15:00+0400\n"
+"X-Generator: Poedit 2.0.7\n"
+"X-Domain: kk-star-ratings\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru_RU\n"
+
+#. Plugin Name of the plugin
+msgid "kk Star Ratings"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/kamalkhan/kk-star-ratings"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Allow blog visitors to involve and interact more effectively with your "
+"website by rating posts."
+msgstr ""
+"Позвольте посетителям более эффективно участвовать в работе вебсайта путём "
+"голосования."
+
+#. Author of the plugin
+msgid "Kamal Khan"
+msgstr "Kamal Khan"
+
+#. Author URI of the plugin
+msgid "http://bhittani.com"
+msgstr "http://bhittani.com"
+
+#: src/core/actions/admin/index.php:57
+msgid "You can only save the options via the admin."
+msgstr "Настройки можно сохранять только через админку."
+
+#: src/core/actions/admin/index.php:88
+msgid "There were some errors while saving the options."
+msgstr "При сохранении настроек возникли ошибки."
+
+#: src/core/filters/admin/tabs.php:22
+msgctxt "Label"
+msgid "General"
+msgstr "Общие"
+
+#: src/core/filters/admin/tabs.php:23
+msgctxt "Label"
+msgid "Appearance"
+msgstr "Внешний вид"
+
+#: src/core/filters/admin/tabs.php:24
+msgctxt "Label"
+msgid "Rich Snippets"
+msgstr "Сниппеты"
+
+#: src/core/filters/validate.php:31
+msgid "The ratings are readonly."
+msgstr "Рейтинги только для чтения."
+
+#: src/core/filters/validate.php:39
+msgid "Not allowed at the moment."
+msgstr "Сейчас недоступно."
+
+#: src/core/filters/validate.php:47
+msgid "You can not cast a vote in archives."
+msgstr "Вы не можете создавать голосования в архивах."
+
+#: src/core/filters/validate.php:53
+msgid "You need to be authenticated to cast a vote."
+msgstr "Для создания голосования необходимо войти."
+
+#: src/core/filters/validate.php:61
+msgid "You have already casted your vote."
+msgstr "Вы уже создали своё голосование."
+
+#: src/core/functions/response.php:47
+msgid "vote"
+msgid_plural "votes"
+msgstr[0] "оценка"
+msgstr[1] "оценки"
+msgstr[2] "оценок"
+
+#: src/core/views/admin/index.php:19
+msgid "Options saved."
+msgstr "Настройки сохранены."
+
+#: src/core/views/admin/tabs/appearance.php:15
+msgctxt "Label"
+msgid "Top Left"
+msgstr "Слева сверху"
+
+#: src/core/views/admin/tabs/appearance.php:16
+msgctxt "Label"
+msgid "Top Center"
+msgstr "По центру сверху"
+
+#: src/core/views/admin/tabs/appearance.php:17
+msgctxt "Label"
+msgid "Top Right"
+msgstr "Справа сверху"
+
+#: src/core/views/admin/tabs/appearance.php:18
+msgctxt "Label"
+msgid "Bottom Left"
+msgstr "Слева снизу"
+
+#: src/core/views/admin/tabs/appearance.php:19
+msgctxt "Label"
+msgid "Bottom Center"
+msgstr "По центру снизу"
+
+#: src/core/views/admin/tabs/appearance.php:20
+msgctxt "Label"
+msgid "Bottom Right"
+msgstr "Справа снизу"
+
+#: src/core/views/admin/tabs/appearance.php:30
+msgctxt "Label"
+msgid "Greeting"
+msgstr "Приветствие"
+
+#: src/core/views/admin/tabs/appearance.php:38
+msgid "Text that will be displayed when no votes have been casted."
+msgstr "Текст, отображаемый в отсутствие оценок."
+
+#: src/core/views/admin/tabs/appearance.php:40
+#: src/core/views/admin/tabs/appearance.php:61
+#: src/core/views/admin/tabs/rich-snippets.php:43
+msgid "The following variables are available:"
+msgstr "Доступны следующие переменные:"
+
+#: src/core/views/admin/tabs/appearance.php:42
+msgid "%s Post Type"
+msgstr "%s тип записи"
+
+#: src/core/views/admin/tabs/appearance.php:51
+msgctxt "Label"
+msgid "Legend"
+msgstr "Легенда"
+
+#: src/core/views/admin/tabs/appearance.php:59
+msgid "Text that will be displayed when votes have been casted."
+msgstr "Текст, отображаемы при наличии оценок."
+
+#: src/core/views/admin/tabs/appearance.php:63
+msgid "%s Average ratings"
+msgstr "%s Средний рейтинг"
+
+#: src/core/views/admin/tabs/appearance.php:65
+msgid "%s Number of votes casted"
+msgstr "%s Количество оставленных оценок"
+
+#: src/core/views/admin/tabs/appearance.php:67
+msgid "%s Total amount of stars"
+msgstr "%s Общее количество звёзд"
+
+#: src/core/views/admin/tabs/appearance.php:69
+msgid "%s Votes"
+msgstr "%s Оценок"
+
+#: src/core/views/admin/tabs/appearance.php:78
+msgctxt "Label"
+msgid "Stars"
+msgstr "Звёзды"
+
+#: src/core/views/admin/tabs/appearance.php:86
+msgid "Total number of stars."
+msgstr "Общее количество звёзд."
+
+#: src/core/views/admin/tabs/appearance.php:95
+msgctxt "Label"
+msgid "Gap"
+msgstr "Зазор"
+
+#: src/core/views/admin/tabs/appearance.php:103
+msgid "Gap between the stars."
+msgstr "Зазор между звёздами."
+
+#: src/core/views/admin/tabs/appearance.php:112
+msgctxt "Label"
+msgid "Size"
+msgstr "Размер"
+
+#: src/core/views/admin/tabs/appearance.php:120
+msgid "Size of a single star."
+msgstr "Размер одной звезды."
+
+#: src/core/views/admin/tabs/appearance.php:128
+msgctxt "Label"
+msgid "Default Position"
+msgstr "Положение по умолчанию"
+
+#: src/core/views/admin/tabs/appearance.php:140
+msgid "Choose the default position for the auto-embedded star ratings."
+msgstr "Выберите положение по умолчанию автоматически встраиваемого рейтинга."
+
+#: src/core/views/admin/tabs/general.php:36
+msgctxt "Label"
+msgid "Home"
+msgstr "Главная"
+
+#: src/core/views/admin/tabs/general.php:37
+msgctxt "Label"
+msgid "Archives"
+msgstr "Архивы"
+
+#: src/core/views/admin/tabs/general.php:41
+msgctxt "Label"
+msgid "Allow voting in archives"
+msgstr "Разрешить голосование в архивах"
+
+#: src/core/views/admin/tabs/general.php:42
+msgctxt "Label"
+msgid "Allow guests to vote"
+msgstr "Разрешить голосование гостям"
+
+#: src/core/views/admin/tabs/general.php:43
+msgctxt "Label"
+msgid "Unique votes (based on IP Address)"
+msgstr "Уникальные голоса (по IP-адресу)"
+
+#: src/core/views/admin/tabs/general.php:45
+msgctxt "Label"
+msgid "Lookup IP addresses in alternative headers"
+msgstr "Поиск IP-адресов в альтернативных заголовках"
+
+#: src/core/views/admin/tabs/general.php:49
+msgid ""
+"This could result into manipulation of the ratings, bypassing IP protection"
+msgstr "Пропуск защиты по IP может способствовать манипуляциям с оценками"
+
+#: src/core/views/admin/tabs/general.php:61
+#: src/core/views/admin/tabs/rich-snippets.php:17
+msgctxt "Label"
+msgid "Status"
+msgstr "Статус"
+
+#: src/core/views/admin/tabs/general.php:66
+msgctxt "Label"
+msgid "Active"
+msgstr "Активировать"
+
+#: src/core/views/admin/tabs/general.php:69
+msgid "Globally activate/deactivate the star ratings."
+msgstr "Глобально активирует/деактивирует рейтинги."
+
+#: src/core/views/admin/tabs/general.php:77
+msgctxt "Label"
+msgid "Strategies"
+msgstr "Стратегии"
+
+#: src/core/views/admin/tabs/general.php:131
+msgid "Select the voting strategies."
+msgstr "Выбор стратегий голосования."
+
+#: src/core/views/admin/tabs/general.php:139
+msgctxt "Label"
+msgid "Locations"
+msgstr "Места"
+
+#: src/core/views/admin/tabs/general.php:151
+msgid ""
+"Star ratings will be auto-embedded for the selected locations. You may still "
+"manually allow star ratings for unselected/other locations. E.g. Using %s in "
+"your theme/template file(s)."
+msgstr ""
+"Рейтинги будут автоматически встроены в выбранных местах. Также можно "
+"вручную помещать рейтинги в невыбранных/прочих местах, например при помощи "
+"%s в файле(ах) вашей темы/шаблона."
+
+#: src/core/views/admin/tabs/general.php:159
+msgctxt "Label"
+msgid "Exclude Categories"
+msgstr "Исключить рубрики"
+
+#: src/core/views/admin/tabs/general.php:171
+msgid ""
+"The posts belonging to the selected categories will not auto-embed the star "
+"ratings. You may still manually show the star ratings. E.g. Using %s in your "
+"theme/template file(s)."
+msgstr ""
+"В записи выбранных рубрик не будут автоматически встраиваться рейтинги. Вы "
+"также можете вручную показать рейтинги, например, используя %s в файле(ах) "
+"вашей темы/шаблона."
+
+#: src/core/views/admin/tabs/rich-snippets.php:22
+msgctxt "Label"
+msgid "Enable"
+msgstr "Включить"
+
+#: src/core/views/admin/tabs/rich-snippets.php:25
+msgid "Enable/disable rich snippets."
+msgstr "Включение/выключение сниппетов."
+
+#: src/core/views/admin/tabs/rich-snippets.php:33
+msgctxt "Label"
+msgid "Content"
+msgstr "Содержимое"
+
+#: src/core/views/admin/tabs/rich-snippets.php:41
+msgid "Provide the ld+json structure."
+msgstr "Предоставить структуру ld+json."
+
+#: src/core/views/admin/tabs/rich-snippets.php:45
+msgctxt "Label"
+msgid "%s Post title"
+msgstr "%s Заголовок записи"
+
+#: src/core/views/admin/tabs/rich-snippets.php:47
+msgctxt "Label"
+msgid "%s Average ratings"
+msgstr "%s Средний рейтинг"
+
+#: src/core/views/admin/tabs/rich-snippets.php:49
+msgctxt "Label"
+msgid "%s Number of votes casted"
+msgstr "%s Number of votes casted"
+
+#: src/core/views/admin/tabs/rich-snippets.php:51
+msgctxt "Label"
+msgid "%s Total amount of stars"
+msgstr "%s Количество оставленных оценок"
+
+#: src/core/views/metabox/content.php:15
+msgctxt "label"
+msgid "Reset Ratings"
+msgstr "Сбросить рейтинг"
+
+#: src/core/views/metabox/content.php:22
+msgctxt "label"
+msgid "Auto Embed"
+msgstr "Автовстраивание"
+
+#: src/core/views/metabox/content.php:28
+msgctxt "label"
+msgid "Global"
+msgstr "Глобально"
+
+#: src/core/views/metabox/content.php:32
+msgctxt "label"
+msgid "Enable"
+msgstr "Включить"
+
+#: src/core/views/metabox/content.php:36
+msgctxt "label"
+msgid "Disable"
+msgstr "Выключить"
+
+#: src/core/wp/actions/wp_ajax_kk-star-ratings.php:32
+msgid "Please try again later."
+msgstr "Попробуйте ещё раз."
+
+#: src/core/wp/actions/wp_ajax_kk-star-ratings.php:50
+#: src/core/wp/actions/wp_ajax_kksr-migrations.php:28
+msgid "This action is forbidden."
+msgstr "Данное действие запрещено."
+
+#: src/core/wp/actions/wp_ajax_kk-star-ratings.php:61
+msgid "A rating can not be accepted at the moment."
+msgstr "В данный момент оценка не может быть принята."
+
+#: src/core/wp/actions/wp_ajax_kk-star-ratings.php:66
+msgid "A rating is required to cast a vote."
+msgstr "Рейтинг требует создания голосования."
+
+#: src/core/wp/actions/wp_ajax_kk-star-ratings.php:70
+msgid "The rating value must be between %1$d and %2$d."
+msgstr "Значение рейтинга должно быть между %1$d и %2$d."

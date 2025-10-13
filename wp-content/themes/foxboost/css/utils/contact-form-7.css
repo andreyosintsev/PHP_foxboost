@@ -1,0 +1,29 @@
+.wpcf7-form p {
+    margin: 0;
+}
+
+.wpcf7-not-valid-tip {
+    margin-bottom: 20px;
+
+    font-size: 16px !important;
+}
+
+.wpcf7-response-output {
+    margin: 0 !important;
+
+    font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    .wpcf7-not-valid-tip {
+        margin-bottom: 10px;
+
+        font-size: 12px !important;
+    }
+
+    .wpcf7-response-output {
+        margin: 0 !important;
+
+        font-size: 12px;
+    }
+}
