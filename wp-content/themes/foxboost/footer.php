@@ -51,7 +51,7 @@
                     <div class="footer__menu-title">Поддержка</div>
                     <ul class="footer__menu-items">
                         <li class="footer__menu-item">
-                            <a class="link link_light" href="#" title="О сайте Foxboost.ru">Как это работает</a>
+                            <a class="link link_light" href="<?php echo $site_url . '/how-it-works'; ?>" title="О сайте Foxboost.ru">Как это работает</a>
                         </li>
                         <li class="footer__menu-item">
                             <a class="link link_light" href="mailto:foxboost@mail.ru" title="Написать нам e-mail">

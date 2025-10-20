@@ -130,6 +130,11 @@
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/404.css" />
     <?php } ?>
 
+    <?php if (is_page('how-it-works')) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/common/typography.css" />
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/how-it-works.css" />
+    <?php } ?>
+
     <?php if (is_page('user-agreement')) { ?>
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/common/typography.css" />
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/user-agreement.css" />
@@ -179,7 +184,7 @@
                 : $search_name;
             ?>
             <div class="input-search header__search">
-                <form class="input-search__form" method="get">
+                <form class="input-search__form" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
                     <input class="input input-search__input" type="text" name="s" id="s" placeholder="<?php echo $search_string; ?>" />
                     <button class="input-search__button" type="submit">
                         <svg class="input-search__icon" viewBox="0 0 25 24">
@@ -191,7 +196,7 @@
                     </button>
                 </form>
             </div>
-            <a href="#" class="link header__about link_special">Как это работает</a>
+            <a href="<?php echo $site_url . '/how-it-works'; ?>" class="link header__about link_special">Как это работает</a>
             <div class="button-menu-mobile">
                 <svg aria-hidden="true" focusable="false" role="presentation" class="button-menu-mobile__icon" viewBox="0 0 25 25">
                     <path class="button-menu-mobile__icon-line1" d="M0 4h28">.</path>
@@ -239,7 +244,7 @@
                     }
             } ?>
             <li class="menu-mobile__item">
-                <a class="link menu-mobile__link menu-mobile__link_strong" href="#" title="О Фоксбусте">Как это работает</a>
+                <a class="link menu-mobile__link menu-mobile__link_strong" href="<?php echo $site_url . '/how-it-works'; ?>" title="О Фоксбусте">Как это работает</a>
             </li>
             <li class="menu-mobile__item">
                 <a class="link menu-mobile__link" href="#" title="Контакты">Контакты</a>

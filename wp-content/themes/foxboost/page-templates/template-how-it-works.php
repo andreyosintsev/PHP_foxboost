@@ -1,11 +1,11 @@
 <?php
 /*
-* Template Name: User Agreement
+* Template Name: How It Works
 *
-* template-agreement.php
+* template-how-it-works.php
 *
 * Template file for policy personal data.
-* /user-agreement
+* /about
 *
 *
 * @author      Andrei Osintsev
@@ -19,7 +19,7 @@
     $page_url            = get_page_uri();
 ?>
 <main class="main">
-    <div class="wrapper wrapper_agreement">
+    <div class="wrapper wrapper_how-it-works">
         <section class="section">
             <?php the_content(); ?>
         </section>
