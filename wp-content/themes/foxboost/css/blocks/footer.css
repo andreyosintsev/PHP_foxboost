@@ -52,6 +52,10 @@
     line-height: 14px;
 }
 
+.footer__menu-item_current .link {
+    font-weight: var(--text-weight-extrabold, 800);
+}
+
 .footer__link {
     text-decoration: underline;
 }

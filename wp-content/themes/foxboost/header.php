@@ -114,6 +114,14 @@
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/home.css" />
     <?php } ?>
 
+    <?php if (is_category() || is_archive()) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/category.css" />
+    <?php } ?>
+
+    <?php if (is_singular('brand')) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/archive.css" />
+    <?php } ?>
+
 
     <!--Cтили и скрипты шаблона-->
 	<?php wp_head(); ?>
@@ -132,6 +140,10 @@
         <script src="<?php echo $template_url; ?>/scripts/slider-hero.js"></script>
         <script src="<?php echo $template_url; ?>/scripts/section-foxboost.js"></script>
         <script src="<?php echo $template_url; ?>/scripts/section-ambassador.js"></script>
+    <?php } ?>
+
+    <?php if (is_category() || is_archive() || is_singular()) { ?>
+        <script src="<?php echo $template_url; ?>/scripts/section-foxboost.js"></script>
     <?php } ?>
     
 </head>
@@ -173,27 +185,13 @@
             </div>
         </div>
         <nav class="menu-main header__menu-main" aria-label="Главное меню">
-            <?php
-                if ( ! empty( $categories ) ) {
+            <?php get_template_part('partials/menu-main',
+                                    null,
+                                    ['menu-items' => 'menu-main__items',
+                                     'menu-item' => 'menu-main__item',
+                                     'menu-item-current' => 'menu-main__item_current',
+                                     'menu-item-link' => 'menu-main__link']);
             ?>
-            <ul class="menu-main__items">
-                <?php foreach($categories as $category) {
-                    if ($category->term_id === 1) continue;
-                    if ($category->count == 0) continue;
-                    $link = get_category_link($category->term_id);
-                    $class_current = ($category->term_id === $current_cat_id) ? ' menu-main__item_current' : '';
-
-                    echo '<li class="menu-main__item"' . $class_current. '>
-                                <a class="menu-main__link" 
-                                    href="' .esc_url( $link ). '" 
-                                    title="' . esc_html( $category->name ) . '" 
-                                    aria-label="' . esc_html( $category->name ) . '">' .
-                                    esc_html( $category->name ).'
-                                </a>
-                         </li>';
-                }?>
-            </ul>
-            <?php } ?>
         </nav>
     </header>
     <div class="menu-mobile invisible">
@@ -212,10 +210,10 @@
                      if ($category->count == 0) continue;
 
                     $link = get_category_link($category->term_id);
-                    $class_current = ($category->term_id === $current_cat_id) ? ' menu-mobile__link_strong' : '';
+                    $class_current = ($category->term_id == $current_cat_id) ? ' menu-mobile__link_strong' : '';
 
                     echo '<li class="menu-mobile__item"' . $class_current. '>
-                                <a class="link menu-mobile__link"' . $class_current. '
+                                <a class="link menu-mobile__link' . $class_current. '"
                                     href="' .esc_url( $link ). '" 
                                     title="' . esc_html( $category->name ) . '" 
                                     aria-label="' . esc_html( $category->name ) . '">' .

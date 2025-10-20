@@ -22,6 +22,8 @@
         'orderby'      => 'name',
         'order'        => 'ASC',
     ) );
+
+    $current_cat_id = get_queried_object_id();
 ?>
 <footer class="footer">
     <div class="wrapper footer__wrapper">
@@ -35,25 +37,15 @@
                 <div class="footer__menu-column">
                     <div class="footer__menu-title">Фоксбусты</div>
 
-                    <?php
-                        if ( ! empty( $categories ) ) {
-                        ?>
-                        <ul class="footer__menu-items">
-                            <?php foreach($categories as $category) {
-                                if ($category->term_id === 1) continue;
-                                $link = get_category_link($category->term_id);
+                    <?php get_template_part('partials/menu-main',
+                        null,
+                        ['menu-items' => 'footer__menu-items',
+                         'menu-item' => 'footer__menu-item',
+                         'menu-item-current' => 'footer__menu-item_current',
+                         'menu-item-link' => 'link link_light'
+                        ]);
+                    ?>
 
-                                echo '<li class="footer__menu-item">
-                                <a class="link link_light"
-                                    href="' .esc_url( $link ). '" 
-                                    title="' . esc_html( $category->name ) . '" 
-                                    aria-label="' . esc_html( $category->name ) . '">' .
-                                    esc_html( $category->name ).'
-                                </a>
-                         </li>';
-                        }?>
-                        </ul>
-                    <?php } ?>
                 </div>
                 <div class="footer__menu-column">
                     <div class="footer__menu-title">Поддержка</div>
@@ -100,7 +92,7 @@
         <input type="hidden" name="product" />
         <input class="button popup__button" type="submit" value="Создать заявку" />
         <div class="popup__offer">
-            Нажимая кнопку Отправить вы соглашаетесь с условиями
+            Нажимая кнопку Создать заявку вы соглашаетесь с условиями
             <a class="link popup__link" href="#" title="Текст публичной оферты" target="_blank">Пользовательского соглашения</a>
             и даёте разрешение направлять вам информационную рассылку на указанный выше e-mail. Вы всегда сможете от нее отписаться.
         </div>

@@ -8,8 +8,9 @@
 .section-logo__items {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: clamp(16px, calc(3.6vw - 16px), 40px);
     width: 100%;
     margin: 0;
     padding: 0;
@@ -32,7 +33,7 @@
 
     .section-logo__item {
         width: 98px;
-        height: 75px;
+        height: auto;
     }
 }
 
@@ -42,7 +43,7 @@
     }
 
     .section-logo__item {
-        width: 50px;
-        height: 38px;
+        width: 75px;
+        height: auto;
     }
 }

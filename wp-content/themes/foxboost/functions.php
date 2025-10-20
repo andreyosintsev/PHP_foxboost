@@ -654,66 +654,20 @@ add_filter('wp_title', 'headTitle', 10, 2 );
 function headTitle($title, $sep) {
     $blogName = get_bloginfo('name');
 
-    if (is_single()) {
-        return 'Скачать сертификат на '. mb_lcfirst(get_the_title()) . ' | ' . $blogName;
-    }
-    if (is_category() || is_tag()) {
-        return 'Скачать сертификаты на '.
-            cutStringToWords(
-                esc_attr(
-                    mb_strtolower(
-                        splitStringByDash(
-                            single_cat_title('',false)
-                        )[1]
-                    )
-                ),256) . ' | ' . $blogName;
-    }
     if (is_home()) {
         return 'Foxboost - будь в числе первых обладателей новинок';
     }
+
+    if (is_category() || is_archive() || is_tag()) {
+        return 'Фоксбусты на '. mb_lcfirst(single_cat_title('',false)) .' | ' . $blogName;
+    }
+
     if (is_search()) {
         $s = $_GET['s'];
         if (empty($s))
-            return 'Найти сертификаты по названию продукции' . ' | ' . $blogName;
+            return 'Найти фоксбусты по названию' . ' | ' . $blogName;
         else
-            return 'Скачать сертификаты на '. mb_lcfirst($s) . ' | ' . $blogName;
-    }
-    if (is_page('naiti-sertifikat-po-vidu-produktsii')) {
-       return "Найти сертификаты соответствия по виду продукции" . ' | ' . $blogName;
-    }
-    if (is_page('kompanii')) {
-        $manufacturer = $_GET['manufacturer'];
-        if (empty($manufacturer))
-            return 'Найти сертификаты по изготовителю' . ' | ' . $blogName;
-        else
-            return 'Скачать сертификаты '. $manufacturer . ' | ' . $blogName;
-    }
-    if (is_page('reestr-sertifikatov')) {
-        return 'Реестр сертификатов и деклараций соответствия' . ' | ' . $blogName;;
-    }
-    if (is_page('organy-po-sertifikacii')) {
-        $agency = $_GET['agency'];
-        if (empty($agency))
-            return 'Реестр органов по сертификации' . ' | ' . $blogName;
-        else
-            return 'Скачать сертификаты выданные '. $agency . ' | ' . $blogName;
-    }
-    if (is_page('gosty')) {
-        $norm = $_GET['norm'];
-        if (empty($norm))
-            return 'ГОСТы на материалы, товары, продукцию и услуги' . ' | ' . $blogName;
-        else
-            return 'Скачать бесплатно '. $norm . ' | ' . $blogName;
-    }
-    if (is_page('naiti-sertifikat-po-nomeru')) {
-        $param = $_GET['param'];
-        if (empty($param))
-            return 'Найти сертификат соответствия по номеру' . ' | ' . $blogName;
-        else
-            return 'Скачать сертификаты с № '. $param . ' | ' . $blogName;
-    }
-    if (is_page('o-sajte')) {
-        return 'О сайте' . ' | ' . $blogName;
+            return 'Фоксбусты на '. mb_lcfirst($s) . ' | ' . $blogName;
     }
 
     return $title . $blogName;
