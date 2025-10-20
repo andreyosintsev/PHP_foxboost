@@ -126,6 +126,11 @@
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/404.css" />
     <?php } ?>
 
+    <?php if (is_page('user-agreement')) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/common/typography.css" />
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/user-agreement.css" />
+    <?php } ?>
+
 
     <!--Cтили и скрипты шаблона-->
 	<?php wp_head(); ?>

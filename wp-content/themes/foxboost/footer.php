@@ -93,7 +93,7 @@
         <input class="button popup__button" type="submit" value="Создать заявку" />
         <div class="popup__offer">
             Нажимая кнопку Создать заявку вы соглашаетесь с условиями
-            <a class="link popup__link" href="#" title="Текст публичной оферты" target="_blank">Пользовательского соглашения</a>
+            <a class="link popup__link" href="<?php echo $site_url . '/user-agreement'; ?>" title="Текст Пользовательского соглашения" target="_blank">Пользовательского соглашения</a>
             и даёте разрешение направлять вам информационную рассылку на указанный выше e-mail. Вы всегда сможете от нее отписаться.
         </div>
     </form>
