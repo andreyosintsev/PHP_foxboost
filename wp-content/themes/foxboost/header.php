@@ -122,6 +122,10 @@
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/archive.css" />
     <?php } ?>
 
+    <?php if (is_404()) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/404.css" />
+    <?php } ?>
+
 
     <!--Cтили и скрипты шаблона-->
 	<?php wp_head(); ?>
@@ -148,6 +152,7 @@
     
 </head>
 <body>
+<?php if (is_404()) return; ?>
 <div class="hero">
     <header class="header">
         <div class="header__top">
