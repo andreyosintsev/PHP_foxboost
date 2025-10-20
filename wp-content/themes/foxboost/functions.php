@@ -493,14 +493,6 @@ function headTitle($title, $sep) {
  */
 add_action("wp_head", "headMetaDescription", 1);
 function headMetaDescription() {
-    global $post;
-	if( is_single() ) {
-		$og_number        	= getCertNumber($post->ID);
-        $og_product      	= str_replace(array("\""), "", getCertProduct($post->ID));
-        $og_product         = mb_substr($og_product, 0, 107 - mb_strlen($og_number));
-
-        echo '<meta name="description" content="Сертификат соответствия № '.$og_number.' на '. $og_product.'..." />'."\r\n";
-	}
 	if( is_category() or is_tag()) {
 		echo '<meta name="description" content="Скачать сертификаты соответствия на ' . cutStringToWords(
                 esc_attr(
@@ -591,6 +583,20 @@ function searchSafe($search = ''): string {
 ?>
 <?php
 /**
+ * Функция логгирования количества строк в поиске
+ *
+ * @param $searchWords - массив со словами для поиска
+ * @param $logFile - ресурс лог-файла
+ * @return void
+ */
+function logTotalSearchWords($searchWords, $logFile) {
+    writeLog('SEARCH: Words to search: ', $logFile);
+    foreach ($searchWords as $word) writelog($word, $logFile);
+    writeLog('SEARCH: Total search words: '.count($searchWords), $logFile);
+};
+?>
+<?php
+/**
  * Функция поиска с сохранением в wp_search только существительных из поискового запроса
  *
  * @param string $search - строка с названием продукции или услуги для поиска
@@ -598,12 +604,17 @@ function searchSafe($search = ''): string {
  */
 function searchByTitle(string $search = '') {
 	global $wpdb;
+    $site_url         = site_url();
 
     mb_internal_encoding("UTF-8");
     date_default_timezone_set('Europe/Samara');
 
-//    $logFileName = '/wordpress.local/logs/searchlog/search-'.date("Y_m_d_H-i-s").'.txt';
-    $logFileName = 'logs/searchlogs/search-'.date("Y_m_d_H-i-s").'.txt';
+    $logDir = ABSPATH . '/logs/searchlogs';
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0777, true);
+    }
+
+    $logFileName = $logDir . '/search-'.date("Y_m_d_H-i-s").'.txt';
     $logFile = fopen($logFileName, "w");
 
 	//Создание лог-файла поиска
@@ -648,95 +659,16 @@ function searchByTitle(string $search = '') {
 
 	//Удалим все стоп-слова
     writeLog('', $logFile);
-    writeLog('SEARCH: STAGE 2: Removing stop-words: ', $logFile);
+    writeLog('SEARCH: STAGE 2: Not neeeded. Skipping: ', $logFile);
 
-	$stopWords = [ '№еаэс', '№росс', 'pocc', 'ru.', 'еас', 'декларация', 'названию', 'паспорт', 'сертификат', 'сертификата', 'скачать', 'соответствия' ];
-
-    writeLog('SEARCH: STOP-WORDS: '. implode(', ', $stopWords), $logFile);
-
-    $searchWords = array_values(array_filter($searchWords, function($word) use ($stopWords, $logFile) {
-        if (in_array($word, $stopWords)) {
-            writeLog('SEARCH: Word removed (stop word): '.$word, $logFile);
-            return false;
-        } else {
-            return true;
-        }
-    }));
-
-	logTotalSearchWords($searchWords, $logFile);
-
-    //Если после фильтрации оказалось, что слов не осталось - выходим из функции
-	if (count($searchWords) < 1) {
-		writeLog('SEARCH: NOTHING TO FIND, EXITING...', $logFile);
-        fclose($logFile);
-		return [];
-	}
-
-    writeLog('', $logFile);
-	writeLog('SEARCH: STAGE 3: Saving search freqs to database', $logFile);
-
-	//Логгирование поискового запроса в БД.
-	//Пройдем все слова запроса, отфильтруем прилагательные, и внесем в wp_search сведения только о существительных из запроса
-
-	$endingsSet = array_flip(
-        ['ой', 'ый', 'ий', //муж. р. ед. ч им. п.
-         'го',         //род. п. (здесь и далее сокращено до 2х последних букв, без повторов)
-         'му',         //дат. п.
-         'ым', 'им',   //тв. п.
-         'ом', 'ем',   //пр. п.
-         'ая', 'яя',   //жен. р. ед. ч. им. п.
-         'ой', 'ей',   //род. п.
-         'ую', 'юю',   //вин. п.
-         'ое', 'ее',   //сред. р. ед. ч. им. п.
-         'ые', 'ие',   //множ. ч. им. п.
-         'ых', 'их',   //род. п.
-         'ых'          //тв. п.
-        ]);
-
-	foreach ($searchWords as $word) {
-		//Определимся, не прилагательное ли у нас
-		//Для этого возьмем две последние буквы окончания
-		//И посмотрим, не является ли это окончание прилагательного
-		//-ой -ый -ий -ая -яя -ое -ее -ые -ие
-
-		$ending = mb_substr($word, -2);
-		if (!isset($endingsSet[$ending])) {
-			//$word - существительное.
-			//Найдем его в таблице wp_search
-	
-			$rec = $wpdb->get_row($wpdb->prepare("SELECT ID, search_freq FROM wp_search WHERE search_query = %s", $word));
-
-			if (!(isset($rec))) {
-				//Если такое слово не найдено
-                writeLog('SEARCH: NOT FOUND: '.$word, $logFile);
-
-				//Добавим его
-				$wpdb->insert('wp_search', ['search_query' => $word, 'search_freq' => 1, 'search_date' => date('Y-m-d H:i:s')],
-                    ['%s', '%d', '%s']);
-                writeLog('SEARCH: SEARCH FREQ INIT: ' . $word, $logFile);
-			} else {
-				//Если нашли, увеличиваем частоту
-				$freq = $rec->search_freq + 1;
-				$id = $rec->ID;
-                writeLog('SEARCH: FOUND: ' . $word . ' SEARCH FREQ INCREASED: FREQ: ' . $freq . ' ID: ' . $id, $logFile);
-
-                $wpdb->update('wp_search', ['search_freq' => $freq, 'search_date' => date('Y-m-d H:i:s')], ['ID' => $id],
-                    ['%d', '%s']);
-			}
-		} else {
-            writeLog('B: SEARCH WORD IS ADJECTIVE AND NOT TO BE LOGGED: '.$word, $logFile);
-        }
-	}
-	
-
-	//Конец фильтров
-    writeLog('', $logFile);
+	writeLog('', $logFile);
+	writeLog('SEARCH: STAGE 3: Not neeeded. Skipping: ', $logFile);
 
 	//Берем первое слово, ищем его в таблице постов - выбираем ID и название поста
     writeLog('SEARCH: STAGE 4: Fetching results contain the first word: ', $logFile);
 
 	$word = reset($searchWords);
-	
+
 	//Обрежем слово для поиска словоформ с конца
 	//Если слово 4 символа - не обрезаем, 5 символов - обрезаем 1, 6 символов и более - 2
 
@@ -746,7 +678,7 @@ function searchByTitle(string $search = '') {
     writeLog('SEARCH: WORD: '.$word, $logFile);
 
 	//Выполним поиск по таблице с постами
-	$sql = $wpdb->get_results($wpdb->prepare("SELECT ID, post_title FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = 'post' AND post_title LIKE %s", '%' . $wpdb->esc_like($word) . '%'));
+	$sql = $wpdb->get_results($wpdb->prepare("SELECT ID, post_title FROM $wpdb->posts WHERE post_status = 'publish' AND post_type = 'foxboost' AND post_title LIKE %s", '%' . $wpdb->esc_like($word) . '%'));
 	
 	//Теперь в sql содержится массив объектов, содержащих ID и названия постов, содержащих в названии слово из поиска
 	
@@ -842,7 +774,6 @@ function searchByTitle(string $search = '') {
 		
 		$sql = $sqlFilteredA;
 		$sqlFilteredA = [];
-
 	}
 
     writeLog('', $logFile);
@@ -1116,45 +1047,6 @@ function getHomePostCount(int $postsOnHome = 0): int {
     $count = $count->publish - $postsOnHome;
 
     return $count;
-}
-?>
-<?php
-/**
- * Функция поиска сертификатов по номеру
- *
- * @param string $search - строка с номером сертификата
- * @return array - массив postID найденных сертификатов
- */
-function searchByNum(string $search = '') {
-    if ($search === '') return [];
-
-    global $wpdb;
-
-    //Безопасная передача параметров
-    $search = searchSafe($search);
-    $search = mb_strtoupper($search, 'UTF-8');
-
-    //Ограничим строку поиска 255 символами
-    $search = mb_substr($search, 0, 255);
-
-    //Разобьем на слова по символам кроме цифр
-    $search_words = mb_split("[^0-9]", $search);
-
-    //Отсортируем по длине слов
-    usort($search_words,'sortByLength');
-
-    //Шаблон запроса
-
-    $sql = "SELECT post_id FROM wp_postmeta WHERE meta_key='param1_number'";
-
-    //Добавляем условий из списка с цифрами из запроса с номером
-    foreach($search_words as $word) {
-        if (mb_strlen($word) > 0) {
-            $sql = $sql. " AND meta_value LIKE '%%$word%%'";
-        } else break;
-    }
-
-    return $wpdb->get_col($sql);
 }
 ?>
 <?php

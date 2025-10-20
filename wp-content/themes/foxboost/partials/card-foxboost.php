@@ -12,8 +12,10 @@
     $post_id = $args['post_id'];    //ID записи фоксбуста
     if (empty($post_id)) return;
 
-    $title          = get_the_title($post_id);                   //Название фоксбуста
-    $description    = strip_tags(get_the_content($post_id)) ;    //Описание фоксбуста
+    $post = get_post($post_id);
+
+    $title          = $post->post_title;;                        //Название фоксбуста
+    $description    = strip_tags($post->post_content);           //Описание фоксбуста
 
     $image          = get_field('image', $post_id, false);    //Изображение фоксбуста
     $image_url      = wp_get_attachment_url($image);

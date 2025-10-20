@@ -1,0 +1,58 @@
+2025_10_20_17-54-04 : ===========SEARCH BY TITLE==========
+2025_10_20_17-54-04 : Source search query: клавиатура air
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: STAGE 0: Splitting:
+2025_10_20_17-54-04 : SEARCH: Words to search: 
+2025_10_20_17-54-04 : клавиатура
+2025_10_20_17-54-04 : air
+2025_10_20_17-54-04 : SEARCH: Total search words: 2
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: STAGE 1: Removing short (<3):
+2025_10_20_17-54-04 : SEARCH: Words to search: 
+2025_10_20_17-54-04 : клавиатура
+2025_10_20_17-54-04 : air
+2025_10_20_17-54-04 : SEARCH: Total search words: 2
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: STAGE 2: Not neeeded. Skipping: 
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: STAGE 3: Not neeeded. Skipping: 
+2025_10_20_17-54-04 : SEARCH: STAGE 4: Fetching results contain the first word: 
+2025_10_20_17-54-04 : SEARCH: WORD: клавиату
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: STAGE 5: Removing missing words: 
+2025_10_20_17-54-04 : SEARCH: Before Filtering (4)
+2025_10_20_17-54-04 : 32: клавиатура nuphy air75v3
+2025_10_20_17-54-04 : 85: клавиатура keychron k2 he
+2025_10_20_17-54-04 : 87: клавиатура nuphy halo65 he
+2025_10_20_17-54-04 : 89: клавиатура nuphy air60 he
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: Filtering by Word-starting word
+2025_10_20_17-54-04 : SEARCH: GOOD START: клавиатура nuphy air75v3
+2025_10_20_17-54-04 : SEARCH: GOOD START: клавиатура keychron k2 he
+2025_10_20_17-54-04 : SEARCH: GOOD START: клавиатура nuphy halo65 he
+2025_10_20_17-54-04 : SEARCH: GOOD START: клавиатура nuphy air60 he
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: AFTER Filtering by Word-starting word (4)
+2025_10_20_17-54-04 : 32: клавиатура nuphy air75v3
+2025_10_20_17-54-04 : 85: клавиатура keychron k2 he
+2025_10_20_17-54-04 : 87: клавиатура nuphy halo65 he
+2025_10_20_17-54-04 : 89: клавиатура nuphy air60 he
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: STAGE 6: Filtering by not first word: 
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: WORD: air
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : GOOD: STRPOST: 17 WORD: air : ID:32: клавиатура nuphy air75v3
+2025_10_20_17-54-04 : BAD: клавиатура keychron k2 he WORD: air DOES NOT FOUND
+2025_10_20_17-54-04 : BAD: клавиатура nuphy halo65 he WORD: air DOES NOT FOUND
+2025_10_20_17-54-04 : GOOD: STRPOST: 17 WORD: air : ID:89: клавиатура nuphy air60 he
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH: After Filtering by not first word (2):
+2025_10_20_17-54-04 : 32: клавиатура nuphy air75v3
+2025_10_20_17-54-04 : 89: клавиатура nuphy air60 he
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : SEARCH RESULTS:
+2025_10_20_17-54-04 : ID: 32 FOUND: Клавиатура NuPhy Air75v3
+2025_10_20_17-54-04 : ID: 89 FOUND: Клавиатура NuPhy Air60 HE
+2025_10_20_17-54-04 : 
+2025_10_20_17-54-04 : Exiting SEARCH BY TITLE. FOUND 2 RESULT(S)

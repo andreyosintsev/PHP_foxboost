@@ -1,0 +1,38 @@
+2025_10_20_18-04-11 : ===========SEARCH BY TITLE==========
+2025_10_20_18-04-11 : Source search query: NTray
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: STAGE 0: Splitting:
+2025_10_20_18-04-11 : SEARCH: Words to search: 
+2025_10_20_18-04-11 : ntray
+2025_10_20_18-04-11 : SEARCH: Total search words: 1
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: STAGE 1: Removing short (<3):
+2025_10_20_18-04-11 : SEARCH: Words to search: 
+2025_10_20_18-04-11 : ntray
+2025_10_20_18-04-11 : SEARCH: Total search words: 1
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: STAGE 2: Not neeeded. Skipping: 
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: STAGE 3: Not neeeded. Skipping: 
+2025_10_20_18-04-11 : SEARCH: STAGE 4: Fetching results contain the first word: 
+2025_10_20_18-04-11 : SEARCH: WORD: ntra
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: STAGE 5: Removing missing words: 
+2025_10_20_18-04-11 : SEARCH: Before Filtering (1)
+2025_10_20_18-04-11 : 81: съёмный ноутбучный столик foxgear ntray
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: Filtering by Word-starting word
+2025_10_20_18-04-11 : SEARCH: GOOD START: съёмный ноутбучный столик foxgear ntray
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: AFTER Filtering by Word-starting word (1)
+2025_10_20_18-04-11 : 81: съёмный ноутбучный столик foxgear ntray
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: STAGE 6: Filtering by not first word: 
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH: After Filtering by not first word (1):
+2025_10_20_18-04-11 : 81: съёмный ноутбучный столик foxgear ntray
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : SEARCH RESULTS:
+2025_10_20_18-04-11 : ID: 81 FOUND: Съёмный ноутбучный столик FoxGear NTray
+2025_10_20_18-04-11 : 
+2025_10_20_18-04-11 : Exiting SEARCH BY TITLE. FOUND 1 RESULT(S)
