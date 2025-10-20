@@ -4,10 +4,13 @@
  *
  * The sidebar template file
  *
- * @link        http://rostest-certify.ru/
+ * There no sidebar in current project,
+ * that's why this template file is for using as dummy only.
+ *
+ * @link        https://foxboost.ru/
  *
  * @author      Andrei Osintsev
- * @copyright   Copyright (c) 2024 asosintsev@yandex.ru
+ * @copyright   Copyright (c) 2025 asosintsev@yandex.ru
  */
 ?>
 <?php if ( is_active_sidebar('sidebar') ) :  ?>

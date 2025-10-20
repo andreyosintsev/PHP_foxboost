@@ -5,9 +5,10 @@
  * This file loads the theme functions and definitions.
  *
  * @link        http://www.gopiplus.com/
+ * @link        https://foxboost.ru/
  *
- * @author      www.gopiplus.com
- * @copyright   Copyright (c) 2013 www.gopiplus.com
+ * @author      www.gopiplus.com, Andrei Osintsev
+ * @copyright   Copyright (c) 2013 www.gopiplus.com, 2025 asosintsev@yandex.ru
  */
 
 /**

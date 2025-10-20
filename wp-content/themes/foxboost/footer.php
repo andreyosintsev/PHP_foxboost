@@ -5,7 +5,7 @@
  * The template for displaying the footer. Contains footer
  * content and the closing of the html elements.
  *
- * @link        http://foxboost.ru/
+ * @link        https://foxboost.ru/
  *
  * @author      Andrei Osintsev
  * @copyright   Copyright (c) 2025 asosintsev@yandex.ru

@@ -4,7 +4,7 @@
  *
  * Template file for categories, tags e.t.c.
  *
- * @link        http://foxboost.ru/
+ * @link        https://foxboost.ru/
  *
  * @author      Andrei Osintsev
  * @copyright   Copyright (c) 2025 asosintsev@yandex.ru

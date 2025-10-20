@@ -4,6 +4,7 @@
  *
  * The template for displaying 404 pages (Page Not Found).
  *
+ * @link        https://foxboost.ru
  *
  * @author      Andrei Osintsev
  * @copyright   Copyright (c) 2025 asosintsev@yandex.ru

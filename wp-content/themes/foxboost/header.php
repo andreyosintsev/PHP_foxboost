@@ -5,12 +5,12 @@
  *
  * This file controls the HTML <head> and top graphical markup (including
  * Navigation) for each page in your theme. Displays all of the <head> 
- * section and everything up till <div class="wrapper">
+ * section and everything up till <div class="main">
  *
- * @link        http://rostest-certify.ru/
+ * @link        https://foxboost.ru/
  *
  * @author      Andrei Osintsev
- * @copyright   Copyright (c) 2024 asosintsev@yandex.ru
+ * @copyright   Copyright (c) 2025 asosintsev@yandex.ru
  */
 ?>
 <?php
