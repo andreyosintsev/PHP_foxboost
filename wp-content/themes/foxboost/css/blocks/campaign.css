@@ -20,7 +20,7 @@
     padding: 24px 20px;
 
     font-size: 18px;
-    font-weight: var(--text-weight-bold, 700);
+    font-weight: var(--text-weight-semibold, 600);
 
     line-height: 22px;
 

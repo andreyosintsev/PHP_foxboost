@@ -16,7 +16,7 @@ html::-webkit-scrollbar {
 
 body {
     color: var(--text-color-main, #000000);
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
     font-size: var(--text-size-main, 14px);
     font-weight: var(--text-weight-main, 400);
 
@@ -72,6 +72,23 @@ body {
     margin-left: 20px;
 }
 
+.access-denied {
+    color: var(--red, #E31D23);
+    font-size: 16px;
+
+    text-align: center;
+}
+.access-denied__link {
+    display: inline-block;
+    margin-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    color: var(--white, #FFFFFF);
+
+    text-decoration: none;
+}
+
 @media screen and (max-width: 1440px) {
     .section-logo {
         margin-bottom: 0;
@@ -110,5 +127,9 @@ body {
     .panel__search {
         margin: 10px 0 0 0;
         max-width: 100%
+    }
+
+    .access-denied {
+        font-size: var(--text-size-main, 14px);
     }
 }

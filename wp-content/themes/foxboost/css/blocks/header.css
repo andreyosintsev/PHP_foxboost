@@ -9,7 +9,7 @@
 
     background-color: var(--background-color-panel, #FAFBFC);
 
-    z-index: 500;
+    z-index: 50;
 }
 
 .header::after {

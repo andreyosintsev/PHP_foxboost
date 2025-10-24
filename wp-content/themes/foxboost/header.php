@@ -140,6 +140,13 @@
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/user-agreement.css" />
     <?php } ?>
 
+    <?php if (is_page('panel')) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel.css" />
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel-search.css" />
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/section-campaign.css" />
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/campaign.css" />
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/campaigns.css" />
+    <?php } ?>
 
     <!--Cтили и скрипты шаблона-->
 	<?php wp_head(); ?>
@@ -163,6 +170,11 @@
     <?php if (is_category() || is_archive() || is_singular() || is_search()) { ?>
         <script src="<?php echo $template_url; ?>/scripts/section-foxboost.js"></script>
     <?php } ?>
+
+    <?php if (is_page('panel')) { ?>
+        <script src="<?php echo $template_url; ?>/scripts/campaigns.js"></script>
+        <script src="<?php echo $template_url; ?>/scripts/panel-filter.js"></script>
+    <?php } ?>
     
 </head>
 <body>
@@ -185,12 +197,11 @@
             ?>
             <div class="input-search header__search">
                 <form class="input-search__form" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                    <input class="input input-search__input" type="text" name="s" id="s" placeholder="<?php echo $search_string; ?>" />
+                    <input class="input input-search__input" type="search" enterkeyhing="search" name="s" id="s" placeholder="<?php echo $search_string; ?>" />
                     <button class="input-search__button" type="submit">
                         <svg class="input-search__icon" viewBox="0 0 25 24">
                             <path
                                     d="M22.7521 2.22438C21.3175 0.789641 19.4109 0 17.3819 0C15.3534 0 13.4461 0.789832 12.0116 2.22438C9.40658 4.82919 9.09461 8.87102 11.0726 11.8219L10.9319 11.9623C10.5389 12.3559 10.4361 12.9313 10.6232 13.4214L9.20121 14.8432L9.0376 14.68C8.96571 14.6081 8.85072 14.6062 8.77636 14.676L1.37917 21.6334C0.837803 22.175 0.837803 23.056 1.37917 23.5973C1.64175 23.8597 1.98994 24.0044 2.36121 24.0044C2.73172 24.0044 3.0803 23.8597 3.34669 23.5933L10.3007 16.2001C10.3699 16.1261 10.3682 16.0104 10.2967 15.9389L10.1329 15.7753L11.5551 14.3537C11.7126 14.4136 11.8789 14.445 12.0449 14.445C12.396 14.445 12.7471 14.3119 13.014 14.0446L13.153 13.9054C14.3937 14.7406 15.853 15.1897 17.3819 15.1897C19.4109 15.1897 21.3176 14.3995 22.7521 12.9651C25.7135 10.0037 25.7135 5.18539 22.7521 2.22438ZM21.4282 11.6406C20.3473 12.7208 18.9103 13.3163 17.3819 13.3163C15.8534 13.3163 14.4163 12.7208 13.3359 11.6406C11.1049 9.4099 11.1049 5.77958 13.3359 3.54852C14.4163 2.46751 15.8534 1.87275 17.3823 1.87275C18.9107 1.87275 20.3477 2.46751 21.4282 3.54814C23.6594 5.77881 23.6594 9.40914 21.4282 11.6406Z"
-                                    fill="#999999"
                             />
                         </svg>
                     </button>

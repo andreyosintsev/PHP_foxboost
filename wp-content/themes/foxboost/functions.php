@@ -802,99 +802,6 @@ function searchByTitle(string $search = '') {
 }
 ?>
 <?php
-/**
- * Функция возвращает HTML-разметку дерева рубрик с предками и shema-разметкой
- *
- * @param $category - корневая рубрика
- * @param $postId - или ID записи, для которой будет найдена корневая рубрика
- * @return string - HTML-разметка дерева рубрик
- */
-function getCategoryTree($category = null, $postId = null): string {
-	global $post;
-
-    if (!$postId) {
-        $postId = $post->ID;
-    }
-
-	$out = [];
-    $catId = $category ? $category->cat_ID : get_the_category($postId)[0]->cat_ID ;
-
-    $out[] = getCategoryLinkHtml($catId);
-
-	$ancestors = get_ancestors($catId, 'category');
-
-	foreach ($ancestors as $ancestorId) {
-		if (!in_array($ancestorId, [37, 361, 38])) {
-            $out[] = getCategoryLinkHtml($ancestorId);
-		}
-	}
-
-	$out = array_reverse($out);
-	
-	$result = '<div class="certificates-item__category" itemscope itemtype="https://schema.org/BreadcrumbList">';
-	$num = 1;
-	foreach ($out as $outret) {
-		$result .= '<div class="ancestor" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">'
-                . $outret
-                . '<meta itemprop="position" content="'.$num++.'"></a></div>';
-	}
-
-    $result .= "</div>";
-
-	return $result;
-}
-?>
-<?php
-/**
- * Функция получения HTML-разметки для дерева рубрик
- *
- * @param $catId - ID рубрики для ветки дерева
- * @return string - готовая HTML-разметка для рубрики
- */
-function getCategoryLinkHtml($catId): string {
-    $catLink = get_category_link($catId);
-    $catName = get_cat_name($catId);
-    [$catNumber, $catName] = splitStringByDash($catName);
-
-    return '<a itemprop="item" href="' . $catLink . '" title="Сертификаты на продукцию: ' . replaceQuotes($catName) . '">
-            <span class="ancestor__number">'. $catNumber .'</span> - <span class="ancestor__name">'. $catName .'</span>
-            <meta itemprop="name" content="' . cutStringToWords($catName, 30) . '">';
-}
-
-?>
-<?php
-/**
- * Функция получает строковое наименование корневой рубрики записи
- *
- * @param $postId - ID записи
- * @return string - строка с наименованием рубрики
- */
-function getCategoryType($postId = null): string {
-    global $post;
-
-    $postId = $postId ?? $post->ID;
-
-	$cat = get_the_category($postId);
-    if (empty($cat)) return 'ОКП/ТН ВЭД ТС/ОКУН';
-
-	$catId = $cat[0]->cat_ID;
-
-    $categoryMap = [
-        37 => 'ОКП',
-        38 => 'ТН ВЭД ТС',
-        316 => 'ОКУН',
-    ];
-
-    foreach ($categoryMap as $ancestorId => $type) {
-        if (cat_is_ancestor_of($ancestorId, $catId) || is_category($ancestorId)) {
-            return $type;
-        }
-    }
-
-	return 'ОКП/ТН ВЭД ТС/ОКУН';
-}
-?>
-<?php
 if (!function_exists('mb_ucfirst') && extension_loaded('mbstring'))
 {
     /**
@@ -926,55 +833,6 @@ if (!function_exists('mb_lcfirst') && extension_loaded('mbstring'))
             mb_substr($str, 1, mb_strlen($str), $encoding);
         return $str;
     }
-}
-?>
-<?php
-/**
- * Функция извлечения названия из длинной строки внутри самых внешних кавычек,
- * но внутри могут оставаться кавычки, в т.ч. и непарные.
- * Используется для внутренних нужд, например, поиска
- *
- * @param string $manufacturer - наименование изготовителя
- * @return string - строка с результатом функции
- */
-function getCleanName(string $string = ''): string {
-    if ($string === '') return '';
-
-    return getTextInsideQuotes($string);
-}
-?>
-<?php
-/**
- * Функция получения названия без кавычек.
- * Внешние кавычки искусственно дополнены парными.
- * Используется для целей отображения "красивых" названий
- *
- * @param string $string - исходная строка, которую требуется дополнить кавычками
- * @return string - строка с результатом функции
- */
-function getCompletedName($string): string {
-    if (!$string) return '';
-
-    $cleanName = getCleanName($string);
-
-    $quoteTypes = [
-        '\'' => '\'',
-        '"' => '"',
-        '`' => '`',
-        '«' => '»',
-        '“' => '”',
-    ];
-
-    foreach (array_keys($quoteTypes) as $openingQuote) {
-        $pos = mb_strrpos($cleanName, $openingQuote);
-        if ($pos !== false) {
-            // Если открывающая кавычка найдена, добавляем закрывающую
-            $cleanName .= $quoteTypes[$openingQuote];
-            break;
-        }
-    }
-
-    return $cleanName;
 }
 ?>
 <?php
@@ -1034,20 +892,6 @@ function daysToGo(string $dateString)
     return max($diffDays, 0);
 }
 
-?>
-<?php
-/**
- * Функция возвращает количество записей кроме выведенных на главной странице
- *
- * @param $postsOnHome - количество записей на первой странице
- * @return int - количество записей за вычетом записей на первой странице
- */
-function getHomePostCount(int $postsOnHome = 0): int {
-    $count = wp_count_posts();
-    $count = $count->publish - $postsOnHome;
-
-    return $count;
-}
 ?>
 <?php
 /**
@@ -1292,4 +1136,117 @@ function getAdContent(string $fileUrl = ''): string {
 
     return  @file_get_contents($fileUrl) ?: '';
 }
+?>
+<?php
+/**
+ * Функция возвращает общее количество заявок из БД
+ *
+ * @return int - общее количество заявок
+ */
+function getTotalApplications() {
+    return 0;
+}
+?>
+<?php
+/**
+ * Функция возвращает общее количество отправленных уведомлений из БД
+ *
+ * @return int - общее количество отправленных уведомлений
+ */
+function getTotalSentNotifications()
+{
+    return 0;
+}
+?>
+<?php
+/**
+ * Функция возвращает массив заявок из БД
+ *
+ * @param int|null $foxboostId int - номер фоксбуста (совпадает с номером записи фоксбуста в WP)
+ *
+ * @return array[] - массив ассоциированных массивов с заявками
+ */
+function getApplicationsByFoxboostId(?int $foxboostId = null): array {
+    if (empty($foxboostId)) return [];
+
+    return [
+        [
+            'email' => 'ivanov_a@mail.ru',
+            'name' => 'Иванов Андрей',
+            'promocode' => '',
+            'status' => 'sent-no'
+        ],
+        [
+            'email' => 'Solnyshko_s@yandex.ru',
+            'name' => 'Светлана С.',
+            'promocode' => '',
+            'status' => 'sent-no'
+        ],
+        [
+            'email' => 'nashSlonyara@ibm.ru',
+            'name' => 'Слоновский Эдуард Петрович',
+            'promocode' => 'Промокод на 10%',
+            'status' => 'sent-man'
+        ],
+        [
+            'email' => 'ia@mail.ru',
+            'name' => 'Петров Сергей',
+            'promocode' => '',
+            'status' => 'sent-no'
+        ]
+    ];
+}
+?>
+<?php
+/**
+ * Функция возвращает массив фоксбустов по статусам БД
+ *
+ * @param string|null $status - статус фоксбуста:
+ *      active - сбор заявок
+ *      completed - сбор заявок завершен
+ *      archive- в архиве
+ *
+ * @return int[] - массив номеров фоксбуста (совпадает с номером записи фоксбуста в WP)
+ */
+function getFoxboostIdsByStatus(?string $status = null): array {
+    if (empty($status)) return [];
+
+    return [32, 74, 79];
+}
+?>
+<?php
+/**
+ * Функция возвращает название фоксбуста по его ID
+ *
+ * @param int|null $id - ID фоксбуста:
+
+ * @return string - название фоксбуста
+ */
+function getFoxboostNameById(?int $id = null): string
+{
+    if (empty($id)) return '';
+
+    switch ($id) {
+        case 32: return 'Кресло FoxGear NETZ model X';
+        case 74: return 'Клавиатура NuPhy Halo60 HE';
+        case 79: return 'Ноутбучный столик FoxGear NTray';
+    }
+
+    return '';
+}
+?>
+<?php
+add_action('add_meta_boxes', function() {
+    global $post_type;
+
+    if ($post_type === 'brand') {
+        remove_meta_box('categorydiv', 'brand', 'side');
+        remove_meta_box('tagsdiv-post_tag', 'brand', 'side');
+    }
+
+    if ($post_type === 'ambassador') {
+        remove_meta_box('categorydiv', 'ambassador', 'side');
+        remove_meta_box('tagsdiv-post_tag', 'ambassador', 'side');
+    }
+});
 ?>

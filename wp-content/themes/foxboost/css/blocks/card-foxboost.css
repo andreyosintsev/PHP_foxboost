@@ -238,7 +238,7 @@
 
 @media screen and (max-width: 1440px) {
     .card-foxboost {
-        max-width: 300px;
+        max-width: 320px;
     }
 
     .card-foxboost__image {
@@ -283,9 +283,19 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .card-foxboost {
-        max-width: 340px;
+        max-width: 350px;
+    }
+
+    .card-foxboost__image-caption {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .card-foxboost {
+        max-width: 390px;
     }
 
     .card-foxboost__image-caption {

@@ -86,12 +86,12 @@
 @media screen and (max-width: 1440px) {
     .card-ambassador {
         width: auto;
-        max-width: 340px;
+        max-width: 320px;
     }
 
     .card-ambassador_double {
         width: auto;
-        max-width: 340px;
+        max-width: 320px;
     }
 
     .card-ambassador__content {
@@ -105,6 +105,18 @@
         overflow: hidden;
         white-space: wrap;
         text-overflow: ellipsis;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .card-ambassador {
+        max-width: 350px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .card-ambassador {
+        max-width: 390px;
     }
 }
 

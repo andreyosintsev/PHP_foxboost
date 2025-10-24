@@ -30,6 +30,11 @@
     height: 100%;
 }
 
+.input-search__icon path {
+    fill: #999999;
+    transition: fill 0.2s ease-in-out;
+}
+
 .input-search__button:hover .input-search__icon path {
     fill: #000000;
 }

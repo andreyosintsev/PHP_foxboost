@@ -13,11 +13,6 @@
 */
 ?>
 <?php get_header(); ?>
-<?php
-    $site_url            = site_url();
-    $nice_url            = parse_url($site_url, PHP_URL_HOST);
-    $page_url            = get_page_uri();
-?>
 <main class="main">
     <div class="wrapper wrapper_agreement">
         <section class="section">

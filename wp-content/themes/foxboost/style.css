@@ -1,13 +1,12 @@
-/**
- * styles.css
- *
- * The main template file.
- *
- * @link        https://foxboost.ru/
- *
- * @author      Andrei Osintsev
- * @copyright   Copyright (c) 2025 asosintsev@yandex.ru
- *
- * All the content was moved into individual style files of blocks and pages
- * which are located in css folder of current theme.
- */
+/*
+    Theme Name: Foxboost
+    Theme URI: https://foxboost.ru/
+    Author: Andrey S. Osintsev
+    Author URI: https://github.com/andreyosintsev/
+    Description: Лёгкая и быстрая тема WordPress для сайта foxboost.ru. Минималистичный дизайн, акцент на производительность и удобство.
+    Version: 1.0
+    License: GNU General Public License v2 or later
+    License URI: https://www.gnu.org/licenses/gpl-2.0.html
+    Text Domain: foxboost
+    Tags: light, responsive, clean, minimal, custom-logo, acf
+*/
