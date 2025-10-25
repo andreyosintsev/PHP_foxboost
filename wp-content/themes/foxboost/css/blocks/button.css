@@ -3,7 +3,7 @@
     padding: 16px 5px;
 
     color: var(--button-normal-color, #FFFFFF);
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
     font-size: var(--text-size-main, 14px);
     font-weight: var(--text-weight-bold, 700);
 

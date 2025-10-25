@@ -3,9 +3,9 @@
     padding: 40px 0;
 
     color: var(--white, #FFFFFF);
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
     font-size: 12px;
-    font-weight: var(--font-weight-main, 400);
+    font-weight: var(--text-weight-main, 400);
 
     line-height: 16px;
 

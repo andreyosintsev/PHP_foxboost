@@ -16,7 +16,7 @@
 
 .menu-main__link {
     color: var(--black, #000000);
-    font-weight: var(--font-weight-main, 400);
+    font-weight: var(--text-weight-main, 400);
     text-decoration: none;
     outline: none;
     cursor: pointer;

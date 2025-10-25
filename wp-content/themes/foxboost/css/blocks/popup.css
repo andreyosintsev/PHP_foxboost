@@ -8,7 +8,7 @@
     padding: 25px;
 
     color: var(--text-color-main, #000000);
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
 
     background-color: var(--white, #FFFFFF);
 
@@ -57,7 +57,7 @@
     width: 14px;
     height: 14px;
 
-    background-image: url("../images/close.svg");
+    background-image: url("../../images/close.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 14px;
@@ -66,7 +66,7 @@
 }
 
 .popup__close:hover {
-    background-image: url("../images/close_hover.svg");
+    background-image: url("../../images/close_hover.svg");
 }
 
 .popup__form {
@@ -85,13 +85,13 @@
 }
 
 .popup__input_error {
-    color: var(--red, #FF6666);
+    color: var(--red, #E31D23);
 
-    border: 1px solid var(--red, #FF6666);
+    border: 1px solid var(--red, #E31D23);
 }
 
 .popup__input_error::placeholder {
-    color: var(--red, #FF6666);
+    color: var(--red, #E31D23);
 }
 
 .popup__button {

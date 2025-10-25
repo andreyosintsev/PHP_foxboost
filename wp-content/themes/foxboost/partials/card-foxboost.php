@@ -35,7 +35,7 @@
                         class="card-foxboost__img"
                         src="<?php echo $image_url; ?>"
                         alt="<?php echo $title; ?>"
-                />
+                >
             </a>
             <div class="card-foxboost__image-overlay">
                 <p class="card-foxboost__image-caption">Посмотреть фоксбуст</p>

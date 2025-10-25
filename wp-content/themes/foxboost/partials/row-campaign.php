@@ -73,7 +73,7 @@
                 src="<?php echo $template_url; ?>/images/buttons/send.svg"
                 alt="Отправить"
                 title="Отправить вручную"
-                    />
+        >
     </button>
     <button class="button campaign__button button_edit">
         <img
@@ -81,7 +81,7 @@
                 src="<?php echo $template_url; ?>/images/buttons/edit.svg"
                 alt="Редактировать"
                 title="Редактировать"
-                    />
+        >
     </button>
     <button class="button campaign__button button_delete">
         <img
@@ -89,6 +89,6 @@
                 src="<?php echo $template_url; ?>/images/buttons/delete.svg"
                 alt="Удалить"
                 title="Удалить"
-                    />
+        >
     </button>
 </div>

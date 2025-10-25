@@ -484,6 +484,16 @@ function headTitle($title, $sep) {
             return 'Фоксбусты на '. mb_lcfirst($s) . ' | ' . $blogName;
     }
 
+    if (is_page()) {
+        return  the_title(). ' | ' . $blogName;
+    }
+
+    if (is_singular()) {
+        $brand = get_queried_object();
+        $brand_slug = $brand->post_name;
+        return 'Фоксбусты от '. mb_ucfirst($brand_slug) .' | ' . $blogName;
+    }
+
     return $title . $blogName;
 }
 ?>
@@ -493,49 +503,28 @@ function headTitle($title, $sep) {
  */
 add_action("wp_head", "headMetaDescription", 1);
 function headMetaDescription() {
-	if( is_category() or is_tag()) {
-		echo '<meta name="description" content="Скачать сертификаты соответствия на ' . cutStringToWords(
-                esc_attr(
-                        mb_strtolower(
-                                splitStringByDash(
-                                        single_cat_title('',false)
-                                )[1]
-                        )
-                ),
-                256) .'">'."\r\n";
-	}
     if (is_home()) {
-        echo '<meta name="description" content="На этом сайте можно скачать сертификаты ГОСТ Р, ТС и декларации соответствия бесплатно и без регистрации">'."\r\n";
+        echo '<meta name="description" content="Фоксбусты - сайт предложений, которые позволяют подписаться на новые товары и после их доставки получить уведомление для приобретения">'. PHP_EOL;
+        return;
     }
-    if (is_page('naiti-sertifikat-po-vidu-produktsii')) {
-        echo '<meta name="description" content="Сертификаты соответствия по видам продукции">'."\r\n";
-    }
-    if (is_page('naiti-sertifikat-po-nomeru')) {
-        if (empty($_GET['param'])) echo '<meta name="description" content="Сертификаты соответствия по номеру сертификата">'."\r\n";else
-            echo '<meta name="description" content="Скачать сертификаты с номером '.$_GET['param'].'">'."\r\n";
-    }
-    if (is_page('kompanii')) {
-        if (empty($_GET['manufacturer'])) echo '<meta name="description" content="Сертификаты соответствия по организациям-изготовителям">'."\r\n"; else
-            echo '<meta name="description" content="Скачать сертификаты на продукцию '.$_GET['manufacturer'].'">'."\r\n";
-     }
-    if (is_page('reestr-sertifikatov')) {
-        echo '<meta name="description" content="Реестр сертификатов и деклараций соответствия для бесплатного скачивания">'."\r\n";
-    }
-	if (is_page('organy-po-sertifikacii')) {
-	    if (empty($_GET['agency'])) echo '<meta name="description" content="Сертификаты соответствия по органам по сертификации">'."\r\n"; else
-            echo '<meta name="description" content="Скачать сертификаты выданные органом по сертификации '.$_GET['agency'].'">'."\r\n";
-	}
-	if (is_page('gosty')) {
-		if (empty($_GET['norm'])) echo '<meta name="description" content="ГОСТы, технические регламенты и другие нормативы на материалы, товары, продукцию и услуги">'."\r\n"; else
-		echo '<meta name="description" content="Скачать '.$_GET['norm'].' бесплатно и без регистрации">'."\r\n";
-	}
-	if (is_page('o-sajte')) {
-		echo '<meta name="description" content="О сайте, отказ от ответственности и обратная связь">'."\r\n";
+    if (is_category() || is_archive() || is_tag()) {
+		echo '<meta name="description" content="На странице представлены фоксбусты - коммерческие предложения на будущие товары из рубрики '. mb_lcfirst(single_cat_title('',false)) .'">'. PHP_EOL;
+        return;
 	}
 	if (is_search()) {
-		if (empty($_GET['s'])) echo '<meta name="description" content="Поиск сертификатов соответствия на продукцию">'."\r\n"; else
-		echo '<meta name="description" content="Скачать сертификаты соответствия на '. mb_lcfirst($_GET['s']) .'">'."\r\n";
+		if (empty($_GET['s'])) echo '<meta name="description" content="Поиск фоксбустов по наименованию изделия или товара">'. PHP_EOL; else
+		echo '<meta name="description" content="На странице представлены найденные фоксбусты по запросу '. mb_lcfirst($_GET['s']) .'">'. PHP_EOL;
+        return;
 	}
+    if (is_page()) {
+        echo '<meta name="description" content="Страница сайта фоксбустов на тему: '. mb_lcfirst(get_the_title()) .'">'. PHP_EOL;
+        return;
+    }
+    if (is_singular()) {
+        $brand = get_queried_object();
+        $brand_slug = $brand->post_name;
+        echo '<meta name="description" content="На странице представлены фоксбусты от '. mb_ucfirst($brand_slug)  .'">'. PHP_EOL;
+    }
 }
 ?>
 <?php
@@ -802,20 +791,19 @@ function searchByTitle(string $search = '') {
 }
 ?>
 <?php
-if (!function_exists('mb_ucfirst') && extension_loaded('mbstring'))
-{
+if (!function_exists('mb_ucfirst') && extension_loaded('mbstring')) {
     /**
-     * mb_ucfirst - преобразует первый символ в верхний регистр
+     * Функция преобразует первый символ в верхний регистр
      * @param string $str - строка
      * @param string $encoding - кодировка, по-умолчанию UTF-8
      * @return string
      */
-    function mb_ucfirst($str, $encoding='UTF-8')
-    {
+    function mb_ucfirst($str, $encoding='UTF-8') {
         $str = mb_ereg_replace('^[\ ]+', '', $str);
-        $str = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding).
+        if ($str == '') return '';
+
+        return mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding).
                mb_substr($str, 1, mb_strlen($str), $encoding);
-        return $str;
     }
 }
 if (!function_exists('mb_lcfirst') && extension_loaded('mbstring'))
@@ -829,9 +817,10 @@ if (!function_exists('mb_lcfirst') && extension_loaded('mbstring'))
     function mb_lcfirst($str, $encoding='UTF-8')
     {
         $str = mb_ereg_replace('^[\ ]+', '', $str);
-        $str = mb_strtolower(mb_substr($str, 0, 1, $encoding), $encoding).
+        if ($str == '') return '';
+
+        return mb_strtolower(mb_substr($str, 0, 1, $encoding), $encoding).
             mb_substr($str, 1, mb_strlen($str), $encoding);
-        return $str;
     }
 }
 ?>
@@ -1077,7 +1066,7 @@ function calculatePagination($totalItems, $st, $len) {
 function writeLog(string $message, $logFile) {
     if (is_resource($logFile)) {
         date_default_timezone_set('Europe/Samara');
-        fwrite($logFile, date("Y_m_d_H-i-s") . ' : ' . $message . "\r\n");
+        fwrite($logFile, date("Y_m_d_H-i-s") . ' : ' . $message . PHP_EOL);
     }
 }
 ?>
@@ -1236,6 +1225,9 @@ function getFoxboostNameById(?int $id = null): string
 }
 ?>
 <?php
+/**
+ * Функция убирает блок рубрик на страницах управления брендами и амбассадорами в консоли WordPress
+ */
 add_action('add_meta_boxes', function() {
     global $post_type;
 
@@ -1250,3 +1242,22 @@ add_action('add_meta_boxes', function() {
     }
 });
 ?>
+<?php
+/**
+ *  Функция убирает косые черты в самозакрывающихся элементах
+ */
+add_action('wp_loaded', function() {
+    ob_start(function($buffer) {
+        // Убираем / перед > в void-элементах (link, meta, img, input, br, hr)
+        return preg_replace('#<(link|meta|img|input|br|hr)([^>]+)/>#i', '<$1$2>', $buffer);
+    });
+});
+?>
+<?php
+/**
+ * Фильтр отключает тег style type="specutalionrules" на странице
+ */
+add_action( 'init', function() {
+    remove_action( 'wp_head', 'wp_print_speculation_rules' );
+    remove_action( 'wp_footer', 'wp_print_speculation_rules' );
+});

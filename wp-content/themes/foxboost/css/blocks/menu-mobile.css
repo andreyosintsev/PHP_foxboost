@@ -8,7 +8,7 @@
     width: 100%;
     max-width: 255px;
 
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
     font-size: 12px;
     font-weight: var(--text-weight-main, 400);
 

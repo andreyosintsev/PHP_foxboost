@@ -24,7 +24,7 @@
     $add_class     = $double ? 'card-ambassador_double' : '';
 ?>
 <div class="card-ambassador section-ambassador__card <?php echo $add_class; ?>">
-    <img class="card-ambassador__img" src="<?php echo $image_url; ?>" alt="<?php echo $title; ?>" />
+    <img class="card-ambassador__img" src="<?php echo $image_url; ?>" alt="<?php echo $title; ?>">
     <div class="card-ambassador__content">
         <div class="card-ambassador__title"><?php echo $title; ?></div>
         <div class="card-ambassador__description">

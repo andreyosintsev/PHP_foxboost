@@ -83,7 +83,7 @@
     width: 90px;
     height: 92px;
 
-    background: url(../../images/card-foxboost/featured.png) no-repeat center;
+    background: url("../../images/card-foxboost/featured.png") no-repeat center;
     background-size: 90px 92px;
 }
 
@@ -91,7 +91,7 @@
     width: 90px;
     height: 92px;
 
-    background: url(../../images/card-foxboost/recommended.png) no-repeat center;
+    background: url("../../images/card-foxboost/recommended.png") no-repeat center;
     background-size: 90px 92px;
 }
 
@@ -117,14 +117,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    background: url(../../images/card-foxboost/clock.svg) no-repeat left center;
+    background: url("../../images/card-foxboost/clock.svg") no-repeat left center;
     background-size: 16px;
 }
 
 .card-foxboost__views {
     padding-left: 22px;
 
-    background: url(../../images/card-foxboost/views.svg) no-repeat left center;
+    background: url("../../images/card-foxboost/views.svg") no-repeat left center;
     background-size: 20px;
 }
 
@@ -193,12 +193,12 @@
     width: 20px;
     height: 20px;
 
-    background: url(../../images/card-foxboost/star.svg) no-repeat center;
+    background: url("../../images/card-foxboost/star.svg") no-repeat center;
     background-size: 20px;
 }
 
 .card-foxboost__star_gray {
-    background: url(../../images/card-foxboost/star_gray.svg) no-repeat center;
+    background: url("../../images/card-foxboost/star_gray.svg") no-repeat center;
 }
 
 .card-foxboost__average {

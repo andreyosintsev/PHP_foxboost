@@ -1,6 +1,5 @@
 .text__h2 {
-    margin: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px;
 
     font-weight: var(--text-weight-bold, 700);
     font-size: 20px;
@@ -9,8 +8,7 @@
 }
 
 .text__h3 {
-    margin: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px;
 
     font-weight: var(--text-weight-semibold, 600);
     font-size: 18px;
@@ -19,8 +17,7 @@
 }
 
 .text__p {
-    margin: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px;
 
     font-weight: var(--text-weight-main, 400);
     font-size: 16px;

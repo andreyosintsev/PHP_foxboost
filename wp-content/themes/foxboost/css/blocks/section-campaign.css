@@ -2,7 +2,7 @@
     margin-bottom: 20px;
 
     color: var(--gray, #666666);
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
 }
 
 .section-campaign__title {

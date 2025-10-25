@@ -2673,7 +2673,7 @@ if (! class_exists('MetaSliderPlugin')) {
         {
             if (strpos($handle, 'metaslider') !== false && strpos($tag, "property='") === false) {
                 // we're only filtering tags with metaslider in the handle, and links which don't already have a property attribute
-                $tag = str_replace("/>", "property='stylesheet' />", $tag);
+                $tag = str_replace("/>", "property='stylesheet'>", $tag);
             }
 
             return $tag;

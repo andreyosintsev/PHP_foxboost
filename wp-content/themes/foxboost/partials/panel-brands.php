@@ -47,7 +47,7 @@ if ( ! empty( $brands ) ) {
 
             echo '<li class="logo section-logo__item">
                         <a class="logo__link" href="' .get_permalink($brand->ID). '">
-                            <img class="logo__image" src="'. $image_url .'" alt="Компания '. $name .'" title="Фоксбусты от '. $name .'"/>
+                            <img class="logo__image" src="'. $image_url .'" alt="Компания '. $name .'" title="Фоксбусты от '. $name .'">
                         </a>
                   </li>';
         }?>

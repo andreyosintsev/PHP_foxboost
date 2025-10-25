@@ -7,7 +7,7 @@
     height: 500px;
 
     color: var(--white, #FFFFFF);
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
 
     background-color: var(--gray-light, #D9D9D9);
 

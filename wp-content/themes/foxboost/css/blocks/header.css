@@ -5,7 +5,7 @@
     margin: 0 auto;
     padding: 30px 16px 20px;
 
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
 
     background-color: var(--background-color-panel, #FAFBFC);
 

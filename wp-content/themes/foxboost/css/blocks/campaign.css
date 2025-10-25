@@ -4,7 +4,7 @@
 
     padding: 0;
 
-    font-family: var(--text-family, sans-serif);
+    font-family: var(--text-family, sans-serif), sans-serif;
 }
 
 .campaign:last-child {
@@ -54,7 +54,7 @@
 .campaign__status {
     margin-left: 10px;
 
-    font-weight: var(--font-weight-main, 400);
+    font-weight: var(--text-weight-main, 400);
 }
 
 .campaign__status_hidden {
@@ -109,7 +109,7 @@
 
     color: var(--gray, #666666);
     font-size: 14px;
-    font-weight: var(--text-weight-normal, 400);
+    font-weight: var(--text-weight-main, 400);
 }
 
 .campaign__table-cell {
@@ -211,15 +211,15 @@
 }
 
 .promocode_used {
-    color: var(--green, #009F4D);
+    color: var(--green, #1DE33B);
 }
 
 .status_sent {
-    color: var(--green, #009F4D);
+    color: var(--green, #1DE33B);
 }
 
 .status_not-sent {
-    color: var(--red, #FF6666);
+    color: var(--red, #E31D23);
 }
 
 .campaign__display_1200 {

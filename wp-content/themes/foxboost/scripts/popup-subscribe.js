@@ -115,8 +115,8 @@ function checkFormErrors(e) {
 
         formTel.classList.add("popup__input_error");
         formEmail.classList.add("popup__input_error");
-        formTel.placeholder = "Укажите телефон";
-        formEmail.placeholder = "или адрес e-mail";
+        formEmail.placeholder = "Укажите адрес e-mail";
+        formTel.placeholder = "или телефон";
 
         isFormValid = false;
     }

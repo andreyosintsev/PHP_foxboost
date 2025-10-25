@@ -17,6 +17,7 @@
 
     --black: #000000;
     /* main text */
+    --black-light: #3C3C3C;
     --gray-dark: #333333;
     /* section title */
     --gray: #666666;
@@ -38,6 +39,8 @@
     /* rating stars */
     --green: #1DE33B;
     /* form success, blue button hover */
+    --yellow: #FFC700;
+    /* campaign status completed */
 
     /* Шрифты */
 

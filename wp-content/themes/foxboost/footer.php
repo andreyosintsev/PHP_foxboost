@@ -30,7 +30,7 @@
         <div class="footer__content">
             <div class="logo footer__logo">
                 <a class="logo__link" href="index.html" tabindex="-1">
-                    <img src="<?php echo $template_url; ?>/images/logo-text.webp" alt="Компания" class="logo__image" title="На главную страницу" />
+                    <img src="<?php echo $template_url; ?>/images/logo-text.webp" alt="Компания" class="logo__image" title="На главную страницу">
                 </a>
             </div>
             <div class="footer__menu">
@@ -81,16 +81,21 @@
     <p class="popup__product">Кресло FoxGear model X</p>
     <p class="popup__text">
         Оставьте заявку на этот фоксбуст.
-        <br />
+        <br>
         Вы получите уведомление на указанный e-mail о начале продаж.
     </p>
     <form class="form popup__form">
-        <input class="input popup__input" name="name" placeholder="Ваше имя" />
-        <input class="input popup__input" name="email" placeholder="E-mail" />
-        <input class="input popup__input" name="tel" placeholder="Телефон" />
-        <input class="input popup__input" name="promocode" placeholder="Промокод (при наличии)" />
-        <input type="hidden" name="product" />
-        <input class="button popup__button" type="submit" value="Создать заявку" />
+        <input class="input popup__input" name="name" placeholder="Ваше имя">
+        <input class="input popup__input"
+               name="email"
+               placeholder="E-mail"
+               type="email"
+               pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+               title="Введите корректный email">
+        <input class="input popup__input" name="tel" placeholder="Телефон">
+        <input class="input popup__input" name="promocode" placeholder="Промокод (при наличии)">
+        <input type="hidden" name="product">
+        <input class="button popup__button" type="submit" value="Создать заявку">
         <div class="popup__offer">
             Нажимая кнопку Создать заявку вы соглашаетесь с условиями
             <a class="link popup__link" href="<?php echo $site_url . '/user-agreement'; ?>" title="Текст Пользовательского соглашения" target="_blank">Пользовательского соглашения</a>
@@ -103,29 +108,29 @@
     <h2 class="title popup__title">Заявка оформлена</h2>
     <p class="popup__text">
         Поздравляем!
-        <br />
-        <br />
+        <br>
+        <br>
         Вы подписались на информационную рассылку. При поступлении в продажу данного товара вы получите уведомление на указанный
         вами e-mail.
-        <br />
-        <br />
+        <br>
+        <br>
         Благодарим за проявленный интерес!
     </p>
-    <input class="button popup__button button_close" type="button" value="Закрыть" />
+    <input class="button popup__button button_close" type="button" value="Закрыть">
     <div class="popup__close"></div>
 </div>
 <div class="popup hidden" id="popup-failed">
     <h2 class="title popup__title">Заявка не отправлена</h2>
     <p class="popup__text">
         К сожалению, вашу заявку отправить не удалось.
-        <br />
-        <br />
+        <br>
+        <br>
         Но мы знаем о проблеме, и совсем скоро её устраним. Попробуйте ещё раз отправить обращение позже.
-        <br />
-        <br />
+        <br>
+        <br>
         Просим прощения за доставленные неудобства.
     </p>
-    <input class="button popup__button button_close" type="button" value="Закрыть" />
+    <input class="button popup__button button_close" type="button" value="Закрыть">
     <div class="popup__close"></div>
 </div>
 <div class="popup hidden" id="popup-unsubscribe">
@@ -133,25 +138,25 @@
     <p class="popup__text">
         Вы успешно отписались от информационной рассылки.Теперь вы не будете получать уведомления о новых товарах, поступивших в
         продажу.
-        <br />
-        <br />
+        <br>
+        <br>
         Чтобы вновь получать уведомления создайте заявку на заинтересовавший вас товар.
     </p>
-    <input class="button popup__button button_close" type="button" value="Закрыть" />
+    <input class="button popup__button button_close" type="button" value="Закрыть">
     <div class="popup__close"></div>
 </div>
 <div class="popup hidden" id="popup-feedback">
     <h2 class="title popup__title">Успешно отправлено</h2>
     <p class="popup__text">
         Ваш вопрос или предложение успешно отправлено.
-        <br />
-        <br />
+        <br>
+        <br>
         После ознакомления при необходимости администратор проекта свяжется с вами по указанным вами контактным данным.
-        <br />
-        <br />
+        <br>
+        <br>
         Благодарим за проявленный интерес!
     </p>
-    <input class="button popup__button button_close" type="button" value="Закрыть" />
+    <input class="button popup__button button_close" type="button" value="Закрыть">
     <div class="popup__close"></div>
 </div>
 <div class="overlay hidden"></div>
