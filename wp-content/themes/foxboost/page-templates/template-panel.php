@@ -44,14 +44,15 @@
                             <div class="card-stats__description"><?php echo declination($foxboosts_published, ['Фоксбуст', 'Фоксбуста', 'Фоксбустов']);?> на сайте</div>
                         </div>
                         <div class="panel-stats_card card-stats">
-                            <?php $total_applications = getTotalApplications(); ?>
-                            <div class="card-stats__value"><?php echo $total_applications; ?></div>
-                            <div class="card-stats__description"><?php echo declination($total_applications, ['Заявка', 'Заявки', 'Заявок']);?> от пользователей</div>
+                            <?php $subscribers_total = getTotalSubscribers(); ?>
+                            <?php $subscribers_active = getActiveSubscribers(); ?>
+                            <div class="card-stats__value"><?php echo $subscribers_total; ?> (<?php echo $subscribers_active; ?>)</div>
+                            <div class="card-stats__description"><?php echo declination($subscribers_total, ['Пользователь зарегистрирован', 'Пользователя зарегистрировано', 'Пользователей зарегистрировано']);?></div>
                         </div>
                         <div class="panel-stats_card card-stats">
-                            <?php $total_sent_notifications = getTotalSentNotifications(); ?>
-                            <div class="card-stats__value"><?php echo $total_sent_notifications; ?></div>
-                            <div class="card-stats__description"><?php echo declination($total_sent_notifications, ['Уведомление', 'Уведомления', 'Уведомлений']);?> отправлено</div>
+                            <?php $total_applications = getTotalSubscriptions(); ?>
+                            <div class="card-stats__value"><?php echo $total_applications; ?></div>
+                            <div class="card-stats__description"><?php echo declination($total_applications, ['Подписка', 'Подписки', 'Подписок']);?> от пользователей</div>
                         </div>
                     </div>
                 </div>

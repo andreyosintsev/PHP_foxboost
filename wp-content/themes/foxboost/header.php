@@ -142,6 +142,7 @@
     <?php } ?>
 
     <?php if (is_page('panel')) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel-stats.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel-search.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/section-campaign.css">

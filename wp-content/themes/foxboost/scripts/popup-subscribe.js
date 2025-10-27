@@ -4,17 +4,22 @@
 
 console.log("popup-subscribe.js loaded");
 
-import { showPopup, showLoader, hideLoader } from "./popup.js";
+import {hideLoader, showLoader, showPopup} from "./popup.js";
 
 const placeholders = {};
 
 const popupOrder = document.querySelector("#popup-order");
 const popupForm = popupOrder.querySelector(".popup__form");
 
-const popupSuccess = document.querySelector("#popup-success");
+const popupRegistration = document.querySelector("#popup-registration");
+const popupActivation = document.querySelector("#popup-activation");
+const popupSubscribe = document.querySelector("#popup-subscribe");
+const popupUnsubscribe = document.querySelector("#popup-unsubscribe");
 const popupFailed = document.querySelector("#popup-failed");
 
-//Кнопки фоксбустов с надписью Оставить заявку
+console.log(popupSubscribe);
+
+//Кнопки фоксбустов с надписью "Оставить заявку"
 const buttonsSubscribe = document.querySelectorAll(".button_subscribe");
 
 //Отображение попапа с формой и наименованием фоксбуста
@@ -22,6 +27,7 @@ buttonsSubscribe.forEach((button) =>
     button.addEventListener("click", (e) => {
         showPopup(popupOrder);
         setProduct(e.target, popupOrder);
+        setFoxboostId(e.target, popupOrder);
     })
 );
 
@@ -31,6 +37,7 @@ const loader = document.querySelector(".loader");
 function hidePopupAndResetForm() {
     // hidePopups();
     setProduct(undefined, popupOrder);
+    setFoxboostId(undefined, popupOrder);
     resetForm(popupForm);
     clearFormErrors(popupForm);
 }
@@ -47,20 +54,26 @@ popupForm.addEventListener("submit", (e) => {
 
     const popupFormData = new FormData(popupForm);
 
-    fetch("api/sendmail.php", {
+    fetch("api/subscribe.php", {
         method: "POST",
         body: popupFormData,
     })
         .then(checkFetchResponse)
         .then((data) => {
-            console.log("Заявка успешно отправлено", data);
             hidePopupAndResetForm();
-            showPopup(popupSuccess);
+            if (data.type === 'subscribe') {
+                console.log("Пользователь подписался на фоксбуст", data.message);
+                showPopup(popupSubscribe);
+            }
+            if (data.type === 'registration') {
+                console.log("Пользователь зарегистрировался", data.message);
+                showPopup(popupRegistration);
+            }
         })
         .catch((error) => {
             console.error("Не удалось отправить заявку", error);
             hidePopupAndResetForm();
-            showPopup(popupFailed);
+            showPopup(popupFailed, data.message);
         })
         .finally(() => {
             hideLoader();
@@ -89,6 +102,13 @@ function setProduct(button, popup) {
     const product = (button && button.dataset.product) || "Ошибка, фоксбуст не найден";
     inputProduct.value = product;
     popupProduct.textContent = `${product}`;
+}
+
+function setFoxboostId(button, popup) {
+    if (!popup) return console.error("DOM: no element #popup-order found");
+    const inputFoxboostId = popup.querySelector('.popup__form input[name="foxboost_id"]');
+    if (!inputFoxboostId) return console.error("DOM: no element name=foxboost_id found");
+    inputFoxboostId.value = (button && button.dataset.foxboost_id) || "Ошибка, фоксбуст ID не найден";
 }
 
 function checkFormErrors(e) {

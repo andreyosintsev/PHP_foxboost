@@ -39,14 +39,16 @@ function hidePopups() {
     });
 }
 
-export function showPopup(popup) {
+export function showPopup(popup, message) {
     disableBodyScroll();
 
     showOverlay();
     hideLoader();
 
     popups.forEach((popup) => popup.classList.add("hidden"));
-    if (popup) popup.classList.remove("hidden");
+    if (!popup) return console.log(`DOM: no popup ${popup} found`)
+    popup.classList.remove("hidden");
+    if (message) popup.querySelector('.popup__message')?.innerText('message');
 }
 
 const disableBodyScroll = () => body && body.classList.add("noscroll");

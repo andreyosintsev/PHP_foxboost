@@ -85,16 +85,17 @@
         Вы получите уведомление на указанный e-mail о начале продаж.
     </p>
     <form class="form popup__form">
-        <input class="input popup__input" name="name" placeholder="Ваше имя">
+        <input class="input popup__input" name="name" placeholder="Ваше имя*">
         <input class="input popup__input"
                name="email"
-               placeholder="E-mail"
+               placeholder="E-mail*"
                type="email"
                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                title="Введите корректный email">
-        <input class="input popup__input" name="tel" placeholder="Телефон">
+        <input class="input popup__input" name="tel" placeholder="Телефон (необязательно)">
         <input class="input popup__input" name="promocode" placeholder="Промокод (при наличии)">
         <input type="hidden" name="product">
+        <input type="hidden" name="foxboost_id">
         <input class="button popup__button" type="submit" value="Создать заявку">
         <div class="popup__offer">
             Нажимая кнопку Создать заявку вы соглашаетесь с условиями
@@ -104,7 +105,25 @@
     </form>
     <div class="popup__close"></div>
 </div>
-<div class="popup hidden" id="popup-success">
+<div class="popup hidden" id="popup-registration">
+    <h2 class="title popup__title">Пользователь зарегистрирован</h2>
+    <p class="popup__text">
+        Поздравляем!
+        <br>
+        <br>
+        Вы зарегистрировались на сайте.
+        <br>
+        <br>
+        На указанный e-mail было отправлено письмо со ссылкой для завершения регистрации.
+        Пожалуйста, откройте письмо и нажмите на ссылку в письме.
+        <br>
+        <br>
+        Благодарим за регистрацию!
+    </p>
+    <input class="button popup__button button_close" type="button" value="Закрыть">
+    <div class="popup__close"></div>
+</div>
+<div class="popup hidden" id="popup-subscribe">
     <h2 class="title popup__title">Заявка оформлена</h2>
     <p class="popup__text">
         Поздравляем!
@@ -115,6 +134,18 @@
         <br>
         <br>
         Благодарим за проявленный интерес!
+    </p>
+    <input class="button popup__button button_close" type="button" value="Закрыть">
+    <div class="popup__close"></div>
+</div>
+<div class="popup hidden" id="popup-unsubscribe">
+    <h2 class="title popup__title">Отписка от рассылки</h2>
+    <p class="popup__text">
+        Вы успешно отписались от информационной рассылки.Теперь вы не будете получать уведомления о новых товарах, поступивших в
+        продажу.
+        <br>
+        <br>
+        Чтобы вновь получать уведомления создайте заявку на заинтересовавший вас товар.
     </p>
     <input class="button popup__button button_close" type="button" value="Закрыть">
     <div class="popup__close"></div>
@@ -130,18 +161,7 @@
         <br>
         Просим прощения за доставленные неудобства.
     </p>
-    <input class="button popup__button button_close" type="button" value="Закрыть">
-    <div class="popup__close"></div>
-</div>
-<div class="popup hidden" id="popup-unsubscribe">
-    <h2 class="title popup__title">Отписка от рассылки</h2>
-    <p class="popup__text">
-        Вы успешно отписались от информационной рассылки.Теперь вы не будете получать уведомления о новых товарах, поступивших в
-        продажу.
-        <br>
-        <br>
-        Чтобы вновь получать уведомления создайте заявку на заинтересовавший вас товар.
-    </p>
+    <p class="popup__message"></p>
     <input class="button popup__button button_close" type="button" value="Закрыть">
     <div class="popup__close"></div>
 </div>

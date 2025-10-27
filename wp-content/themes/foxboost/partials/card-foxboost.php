@@ -58,7 +58,7 @@
         <div class="card-foxboost__rating">
             <?php echo kk_star_ratings(); ?>
         </div>
-        <div class="button card-foxboost__button button_subscribe" data-product="<?php echo $title; ?>">
+        <div class="button card-foxboost__button button_subscribe" data-product="<?php echo $title; ?>" data-foxboost_id="<?php echo $post_id; ?>">
             Оставить заявку
         </div>
     </div>

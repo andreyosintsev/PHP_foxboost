@@ -598,7 +598,7 @@ function searchByTitle(string $search = '') {
     mb_internal_encoding("UTF-8");
     date_default_timezone_set('Europe/Samara');
 
-    $logDir = ABSPATH . '/logs/searchlogs';
+    $logDir = ABSPATH . '/logs/search';
     if (!is_dir($logDir)) {
         mkdir($logDir, 0777, true);
     }
@@ -1128,23 +1128,41 @@ function getAdContent(string $fileUrl = ''): string {
 ?>
 <?php
 /**
- * Функция возвращает общее количество заявок из БД
+ * Функция возвращает общее количество подписчиков из БД
  *
- * @return int - общее количество заявок
+ * @return int - общее количество подписчиков
  */
-function getTotalApplications() {
-    return 0;
+function getTotalSubscribers() {
+    if (!function_exists('sqlGetTotalSubscribers')) {
+        require_once ABSPATH . 'api/includes/db.php';
+    }
+    return sqlGetTotalSubscribers();
 }
 ?>
 <?php
 /**
- * Функция возвращает общее количество отправленных уведомлений из БД
+ * Функция возвращает количество активированных подписчиков из БД
  *
- * @return int - общее количество отправленных уведомлений
+ * @return int - количество активированных подписчиков
  */
-function getTotalSentNotifications()
-{
-    return 0;
+function getActiveSubscribers() {
+    if (!function_exists('sqlGetTotalSubscribers')) {
+        require_once ABSPATH . 'api/includes/db.php';
+    }
+    return sqlGetActiveSubscribers();
+}
+?>
+<?php
+/**
+ * Функция возвращает общее количество подписок из БД
+ *
+ * @return int - общее количество подписок
+ */
+function getTotalSubscriptions() {
+    if (!function_exists('sqlGetTotalSubscriptions')) {
+        require_once ABSPATH . 'api/includes/db.php';
+    }
+    return sqlGetTotalSubscriptions();
 }
 ?>
 <?php
