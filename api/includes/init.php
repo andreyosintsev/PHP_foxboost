@@ -5,6 +5,7 @@ if (php_sapi_name() !== 'cli' && basename($_SERVER['SCRIPT_FILENAME']) === basen
 
 if (!defined('ABSPATH')) {
     require_once dirname(__DIR__, 2) . '/wp-load.php';
+    require_once dirname(__DIR__, 1). '/config/config-mail.php';
     require_once __DIR__. '/helpers.php';
     require_once __DIR__. '/db.php';
     require_once __DIR__. '/mail.php';

@@ -57,7 +57,7 @@
         if (!$res) sendJsonErrorAndExit('Ошибка! Не удалось зарегистрировать пользователя', $logFile);
 
         //НЕ РЕАЛИЗОВАНО
-        $res = mailSendConfirmation();
+        $res = mailSendConfirmation($name, $email, $foxboost_id);
         //
         logResult($res,
             'REGISTRATION EMAIL SUCCESSFULLY SENT',
@@ -70,6 +70,7 @@
         sendJsonSuccess('Пользователь зарегистрирован, e-mail с подтверждением отправлен', 'registration', $logFile);
         exit();
     }
+
     writeLog('USER EXISTS', $logFile);
     writelog('TRYING TO SUBSCRIBE email: '. $email. ' ON foxboost '.$foxboost_id, $logFile);
 

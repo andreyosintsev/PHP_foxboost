@@ -50,9 +50,9 @@
                             <div class="card-stats__description"><?php echo declination($subscribers_total, ['Пользователь зарегистрирован', 'Пользователя зарегистрировано', 'Пользователей зарегистрировано']);?></div>
                         </div>
                         <div class="panel-stats_card card-stats">
-                            <?php $total_applications = getTotalSubscriptions(); ?>
-                            <div class="card-stats__value"><?php echo $total_applications; ?></div>
-                            <div class="card-stats__description"><?php echo declination($total_applications, ['Подписка', 'Подписки', 'Подписок']);?> от пользователей</div>
+                            <?php $total_subscriptions = getTotalSubscriptions(); ?>
+                            <div class="card-stats__value"><?php echo $total_subscriptions; ?></div>
+                            <div class="card-stats__description"><?php echo declination($total_subscriptions, ['Подписка', 'Подписки', 'Подписок']);?> от пользователей</div>
                         </div>
                     </div>
                 </div>
@@ -71,26 +71,29 @@
 
                     <?php
                         $foxboosts_active = getFoxboostIdsByStatus('active');
+//                        var_dump($foxboosts_active);
                         $foxboosts_active_count = count($foxboosts_active);
                         if ($foxboosts_active_count > 0) { ?>
 
                             <div class="section-campaign">
                                 <div class="section-campaign__title">
                                     Сбор заявок
-                                    <span class="section-campaign__number">(<?php echo $foxboosts_active_count; ?>)</span>
+                                    <span class="section-campaign__number">
+                                        (<?php echo $foxboosts_active_count. declination($foxboosts_active_count, [' фоксбуст', ' фоксбуста', ' фоксбустов']); ?>)
+                                    </span>
                                 </div>
                                 <div class="section-campaign__content">
                                     <?php foreach($foxboosts_active as $foxboosts_active_id) {
-                                        $applications = getApplicationsByFoxboostId($foxboosts_active_id);
-                                        $applications_count = count($applications);
+                                        $subscriptions = getSubscriptionsByFoxboostId($foxboosts_active_id);
+                                        $subscriptions_count = count($subscriptions);
                                     ?>
 
-                                        <div class="campaign campaign_expanded">
+                                        <div class="campaign <?php if ($subscriptions_count > 0) echo 'campaign_expanded'; ?>">
                                             <div class="campaign__header">
                                                 <div class="campaign__title">
                                                     <?php echo getFoxboostNameById($foxboosts_active_id); ?>
-                                                    <span class="campaign__status campaign__status_active campaign__display_1200">cбор заявок (<?php echo $applications_count .' '. declination($applications_count, ['заявка', 'заявки', 'заявок'])?>)</span>
-                                                    <span class="campaign__status campaign__status_active campaign__display_600">сбор (<?php echo $applications_count .' '. declination($applications_count, ['заявка', 'заявки', 'заявок'])?>)</span>
+                                                    <span class="campaign__status campaign__status_active campaign__display_1200">cбор заявок (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок'])?>)</span>
+                                                    <span class="campaign__status campaign__status_active campaign__display_600">сбор (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок'])?>)</span>
                                                 </div>
                                                 <div class="campaign__control">
                                                     <button class="button campaign__button button_complete">
@@ -114,10 +117,12 @@
                                             <div class="campaign__content">
                                                 <div class="campaign__table">
                                                     <?php
-                                                    $applications = getApplicationsByFoxboostId(1);
-                                                    if (count($applications) < 1) echo '<div class="campaign__table-cell campaign__table-cell_no-applications">Заявок нет</div>';
+                                                        if (count($subscriptions) < 1) echo '<div class="campaign__table-cell campaign__table-cell_no-applications">Заявок нет</div>';
 
-                                                    foreach ($applications as $application) echo get_template_part('partials/row-campaign', null, $application);
+                                                        foreach ($subscriptions as $i => $subscription) {
+                                                            $subscription['number'] = $i + 1;
+                                                            echo get_template_part('partials/row-campaign', null, $subscription);
+                                                        }
                                                     ?>
                                                 </div>
                                             </div>
@@ -137,21 +142,23 @@
                         <div class="section-campaign">
                             <div class="section-campaign__title">
                                 Сбор заявок окончен
-                                <span class="section-campaign__number">(<?php echo $foxboosts_completed_count; ?>)</span>
+                                <span class="section-campaign__number">
+                                    (<?php echo $foxboosts_completed_count. declination($foxboosts_completed_count, [' фоксбуст', ' фоксбуста', ' фоксбустов']); ?>)
+                                </span>
                             </div>
                             <div class="section-campaign__content">
                             <?php foreach($foxboosts_completed as $foxboosts_completed_id) {
-                                $applications = getApplicationsByFoxboostId($foxboosts_completed_id);
-                                $applications_count = count($applications);
+                                $subscriptions = getSubscriptionsByFoxboostId($foxboosts_completed_id);
+                                $subscriptions_count = count($subscriptions);
                                 ?>
 
-                                <div class="campaign campaign_expanded">
+                                <div class="campaign <?php if ($subscriptions_count > 0) echo 'campaign_expanded'; ?>">
                                     <div class="campaign__header">
                                         <div class="campaign__title">
                                             <?php echo getFoxboostNameById($foxboosts_completed_id); ?>
                                             <span class="campaign__status campaign__status_completed campaign__display_1200">
-                                                cбор заявок окончен (<?php echo $applications_count .' '. declination($applications_count, ['заявка', 'заявки', 'заявок'])?>)</span>
-                                            <span class="campaign__status campaign__status_completed campaign__display_600">окончен (<?php echo $applications_count .' '. declination($applications_count, ['заявка', 'заявки', 'заявок'])?>)</span>
+                                                cбор заявок окончен (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок'])?>)</span>
+                                            <span class="campaign__status campaign__status_completed campaign__display_600">окончен (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок'])?>)</span>
                                         </div>
                                         <div class="campaign__control">
                                             <button class="button campaign__button button_restart">
@@ -175,10 +182,13 @@
                                     <div class="campaign__content">
                                         <div class="campaign__table">
                                             <?php
-                                            $applications = getApplicationsByFoxboostId(1);
-                                            if (count($applications) < 1) echo '<div class="campaign__table-cell campaign__table-cell_no-applications">Заявок нет</div>';
+                                                $subscriptions = getSubscriptionsByFoxboostId($foxboosts_completed_id);
+                                                if (count($subscriptions) < 1) echo '<div class="campaign__table-cell campaign__table-cell_no-applications">Заявок нет</div>';
 
-                                            foreach ($applications as $application) echo get_template_part('partials/row-campaign', null, $application);
+                                                foreach ($subscriptions as $i => $subscription) {
+                                                    $subscription['number'] = $i + 1;
+                                                    echo get_template_part('partials/row-campaign', null, $subscription);
+                                                }
                                             ?>
                                         </div>
                                     </div>
@@ -197,24 +207,25 @@
                         <div class="section-campaign">
                             <div class="section-campaign__title">
                                 Архив
-                                <span class="section-campaign__number">(<?php echo $foxboosts_archive_count; ?>)</span>
+                                <span class="section-campaign__number">
+                                    (<?php echo $foxboosts_archive_count. declination($foxboosts_archive_count, [' фоксбуст', ' фоксбуста', ' фоксбустов']); ?>)
+                                </span>
                             </div>
                             <div class="section-campaign__content">
                                 <?php foreach($foxboosts_archive as $foxboosts_archive_id) {
-                                    $applications = getApplicationsByFoxboostId($foxboosts_archive_id);
-                                    $applications_count = count($applications);
-                                    ?>
+                                    $subscriptions = getSubscriptionsByFoxboostId($foxboosts_archive_id);
+                                    $subscriptions_count = count($subscriptions);
+                                ?>
 
-
-                                <div class="campaign">
+                                <div class="campaign <?php if ($subscriptions_count > 0) echo 'campaign_expanded'; ?>">
                                     <div class="campaign__header">
                                         <div class="campaign__title">
                                             <?php echo getFoxboostNameById($foxboosts_archive_id); ?>
                                             <span class="campaign__status campaign__status_archive campaign__display_1200">
-                                                в архиве (<?php echo $applications_count .' '. declination($applications_count, ['заявка', 'заявки', 'заявок']);?>)
+                                                в архиве (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок']);?>)
                                             </span>
                                             <span class="campaign__status campaign__status_archive campaign__display_600">
-                                                в архиве (<?php echo $applications_count .' '. declination($applications_count, ['заявка', 'заявки', 'заявок']);?>)
+                                                в архиве (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок']);?>)
                                             </span>
                                         </div>
                                         <div class="campaign__control">
@@ -231,11 +242,17 @@
                                     <div class="campaign__content">
                                         <div class="campaign__table">
                                             <?php
-                                            $applications = getApplicationsByFoxboostId(1);
-                                            if (count($applications) < 1) echo '<div class="campaign__table-cell campaign__table-cell_no-applications">Заявок нет</div>';
+                                                $subscriptions = getSubscriptionsByFoxboostId($foxboosts_archive_id);
+                                                if (count($subscriptions) < 1) echo '<div class="campaign__table-cell campaign__table-cell_no-applications">Заявок нет</div>';
 
-                                            foreach ($applications as $application) echo get_template_part('partials/row-campaign', null, $application);
+                                                foreach ($subscriptions as $i => $subscription) {
+                                                    $subscription['number'] = $i + 1;
+                                                    echo get_template_part('partials/row-campaign', null, $subscription);
+                                                }
+
                                             ?>
+
+
                                         </div>
                                     </div>
                                 </div>

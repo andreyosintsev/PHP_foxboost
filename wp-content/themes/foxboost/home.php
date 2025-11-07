@@ -51,95 +51,127 @@
 </div>
 <main class="main">
     <div class="wrapper">
-        <section class="section">
-            <h2 class="title">Популярные фоксбусты</h2>
-            <div class="section-foxboost">
-                <?php
-                    $args = array(
-                        'post_type'      => 'foxboost',
-                        'posts_per_page' => 4,
-                        'meta_key'       => 'views',
-                        'orderby'        => array(
-                            'meta_value_num' => 'DESC',
-                            'date' => 'DESC'
-                        )
-                    );
+        <?php
+            $args = array(
+                'post_type'      => 'foxboost',
+                'posts_per_page' => 4,
+                'meta_key'       => 'views',
+                'orderby'        => array(
+                    'meta_value_num' => 'DESC',
+                    'date' => 'DESC'
+                )
+            );
 
-                    $query = new WP_Query($args);
+            $query = new WP_Query($args);
+
+            if ($query->have_posts()) {
+        ?>
+            <section class="section">
+                <h2 class="title">Популярные фоксбусты</h2>
+                <div class="section-foxboost">
+
+                    <?php while ($query->have_posts()) : $query->the_post();
+                        get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
+                    endwhile;
+
+                    wp_reset_postdata();
+                    ?>
+
+                </div>
+            </section>
+        <?php } ?>
+
+        <?php
+            $args = array(
+                'post_type'      => 'foxboost',
+                'posts_per_page' => 4,
+                'orderby'        => 'date',
+                'order'          => 'DESC'
+            );
+
+            $query = new WP_Query($args);
+
+            if ($query->have_posts()) {
+        ?>
+
+            <section class="section">
+                <h2 class="title">Новые фоксбусты</h2>
+                <div class="section-foxboost">
+
+                    <?php while ($query->have_posts()) : $query->the_post();
+                        get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
+                    endwhile;
+
+                    wp_reset_postdata();
+                    ?>
+
+                </div>
+            </section>
+        <?php } ?>
+
+        <?php
+            $args = array(
+                'post_type'      => 'foxboost',
+                'posts_per_page' => 4,
+                'meta_key'       => 'datetogo',
+                'meta_value'     => date('Y-m-d'),
+                'meta_compare'   => '>=',
+                'orderby'        => 'meta_value',
+                'order'          => 'ASC',
+                'meta_type'      => 'DATE'
+            );
+
+            $query = new WP_Query($args);
+
+            if ($query->have_posts()) {
+        ?>
+
+            <section class="section">
+                <h2 class="title">Скоро завершатся</h2>
+                <div class="section-foxboost">
+
+                    <?php while ($query->have_posts()) : $query->the_post();
+                        get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
+                    endwhile;
+
+                    wp_reset_postdata();
+                    ?>
+                </div>
+            </section>
+
+        <?php } ?>
+
+        <?php
+            $args = array(
+                'post_type'      => 'ambassador',
+                'posts_per_page' => -1,
+                'orderby'        => 'date',
+                'order'          => 'ASC'
+            );
+
+            $query = new WP_Query($args);
+
+            if ($query->have_posts()) {
+        ?>
+
+            <section class="section">
+                <h2 class="title">Амбассадоры и инфлюенсеры</h2>
+                <div class="section-ambassador">
+
+                <?php
+
+                    $first = true;
 
                     while ($query->have_posts()) : $query->the_post();
-                        get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
+                        get_template_part('partials/card-ambassador', null, ['post_id' => get_the_ID(), 'double' => $first]);
+                        $first = false;
                     endwhile;
                     wp_reset_postdata();
                 ?>
-            </div>
-        </section>
-        <section class="section">
-            <h2 class="title">Новые фоксбусты</h2>
-            <div class="section-foxboost">
-                <?php
-                $args = array(
-                    'post_type'      => 'foxboost',
-                    'posts_per_page' => 4,
-                    'orderby'        => 'date',
-                    'order'          => 'DESC'
-                );
+                </div>
+            </section>
+        <?php } ?>
 
-                $query = new WP_Query($args);
-
-                while ($query->have_posts()) : $query->the_post();
-                    get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
-                endwhile;
-                wp_reset_postdata();
-                ?>
-            </div>
-        </section>
-        <section class="section">
-            <h2 class="title">Скоро завершатся</h2>
-            <div class="section-foxboost">
-                <?php
-                $args = array(
-                    'post_type'      => 'foxboost',
-                    'posts_per_page' => 4,
-                    'meta_key'       => 'datetogo',
-                    'meta_value'     => date('Y-m-d'),
-                    'meta_compare'   => '>=',
-                    'orderby'        => 'meta_value',
-                    'order'          => 'ASC',
-                    'meta_type'      => 'DATE'
-                );
-
-                $query = new WP_Query($args);
-
-                while ($query->have_posts()) : $query->the_post();
-                    get_template_part('partials/card-foxboost', null, ['post_id' => get_the_ID()]);
-                endwhile;
-                wp_reset_postdata();
-                ?>
-            </div>
-        </section>
-        <section class="section">
-            <h2 class="title">Амбассадоры и инфлюенсеры</h2>
-            <div class="section-ambassador">
-                <?php
-                $args = array(
-                    'post_type'      => 'ambassador',
-                    'posts_per_page' => -1,
-                    'orderby'        => 'date',
-                    'order'          => 'ASC'
-                );
-
-                $query = new WP_Query($args);
-                $first = true;
-
-                while ($query->have_posts()) : $query->the_post();
-                    get_template_part('partials/card-ambassador', null, ['post_id' => get_the_ID(), 'double' => $first]);
-                    $first = false;
-                endwhile;
-                wp_reset_postdata();
-                ?>
-            </div>
-        </section>
         <section class="section">
             <h2 class="title">Контакты</h2>
             <div class="contacts">

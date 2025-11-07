@@ -337,3 +337,33 @@ function sqlGetTotalSubscriptions() {
 
     return (int)$count;
 }
+?>
+<?php
+/**
+ * Функция возвращает массив подписок на фоксбуст по его id из базы данных
+ *
+ * @param int|null $foxboostId int - id фоксбуста (совпадает с номером записи фоксбуста в WP)
+ *
+ * @return array[] - массив ассоциированных массивов с подписками
+ */
+function sqlGetSubscriptionsByFoxboostId(?int $foxboostId = null): array {
+    global $wpdb;
+
+    if (empty($foxboostId)) return [];
+
+    $sql = $wpdb->prepare(
+        "
+        SELECT s.id, s.name, s.email, s.promocode
+        FROM subscribers AS s
+        INNER JOIN subscriptions AS sub
+            ON s.id = sub.subscriber_id
+        WHERE sub.post_id = %d
+          AND s.active = 1
+        ",
+        $foxboostId
+    );
+
+    $results = $wpdb->get_results($sql, ARRAY_A);
+
+    return $results ?: [];
+}

@@ -1167,58 +1167,54 @@ function getTotalSubscriptions() {
 ?>
 <?php
 /**
- * Функция возвращает массив заявок из БД
+ * Функция возвращает массив подписок на фоксбуст по его id
  *
- * @param int|null $foxboostId int - номер фоксбуста (совпадает с номером записи фоксбуста в WP)
+ * @param int|null $foxboostId int - id фоксбуста (совпадает с номером записи фоксбуста в WP)
  *
  * @return array[] - массив ассоциированных массивов с заявками
  */
-function getApplicationsByFoxboostId(?int $foxboostId = null): array {
+function getSubscriptionsByFoxboostId(?int $foxboostId = null): array {
     if (empty($foxboostId)) return [];
 
-    return [
-        [
-            'email' => 'ivanov_a@mail.ru',
-            'name' => 'Иванов Андрей',
-            'promocode' => '',
-            'status' => 'sent-no'
-        ],
-        [
-            'email' => 'Solnyshko_s@yandex.ru',
-            'name' => 'Светлана С.',
-            'promocode' => '',
-            'status' => 'sent-no'
-        ],
-        [
-            'email' => 'nashSlonyara@ibm.ru',
-            'name' => 'Слоновский Эдуард Петрович',
-            'promocode' => 'Промокод на 10%',
-            'status' => 'sent-man'
-        ],
-        [
-            'email' => 'ia@mail.ru',
-            'name' => 'Петров Сергей',
-            'promocode' => '',
-            'status' => 'sent-no'
-        ]
-    ];
+    if (!function_exists('sqlGetSubscriptionsByFoxboostId')) {
+        require_once ABSPATH . 'api/includes/db.php';
+    }
+    return sqlGetSubscriptionsByFoxboostId($foxboostId);
+
+//    [
+//        'email' => 'ivanov_a@mail.ru',
+//        'name' => 'Иванов Андрей',
+//        'promocode' => '',
+//        'status' => 'sent-no'
+//    ]
 }
 ?>
 <?php
 /**
- * Функция возвращает массив фоксбустов по статусам БД
+ * Функция возвращает массив id фоксбустов по статусам БД
  *
  * @param string|null $status - статус фоксбуста:
  *      active - сбор заявок
  *      completed - сбор заявок завершен
  *      archive- в архиве
  *
- * @return int[] - массив номеров фоксбуста (совпадает с номером записи фоксбуста в WP)
+ * @return int[] - массив id фоксбустов (совпадает с id записи фоксбуста в WP)
  */
 function getFoxboostIdsByStatus(?string $status = null): array {
-    if (empty($status)) return [];
+    $allowedStatuses = ['active' => 'publish',
+                        'completed' => 'pending',
+                        'archive' => 'draft'];
 
-    return [32, 74, 79];
+    if (empty($status) || !array_key_exists($status, $allowedStatuses)) return [];
+
+    $postIds = get_posts([
+        'post_type'      => 'foxboost',
+        'post_status'    => $allowedStatuses[$status],
+        'numberposts'    => -1,       // без ограничения
+        'fields'         => 'ids',    // возвращает только ID
+    ]);
+
+    return $postIds;
 }
 ?>
 <?php
@@ -1229,17 +1225,10 @@ function getFoxboostIdsByStatus(?string $status = null): array {
 
  * @return string - название фоксбуста
  */
-function getFoxboostNameById(?int $id = null): string
-{
+function getFoxboostNameById(?int $id = null): string {
     if (empty($id)) return '';
 
-    switch ($id) {
-        case 32: return 'Кресло FoxGear NETZ model X';
-        case 74: return 'Клавиатура NuPhy Halo60 HE';
-        case 79: return 'Ноутбучный столик FoxGear NTray';
-    }
-
-    return '';
+    return get_the_title($id);
 }
 ?>
 <?php
