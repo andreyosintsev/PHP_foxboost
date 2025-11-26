@@ -31,6 +31,7 @@ function sqlIsTableExists(string $tableName = '') {
  *   - email     — e-mail подписчика
  *   - tel       — телефон подписчика
  *   - promocode — промокод подписчика (необязательный)
+ *   - token     - токен подтверждения операций
  *
  * @return bool - true - успешно зарегистрирован, false - неуспешно
  */
@@ -41,10 +42,9 @@ function sqlSubscriberRegister(string $tableName = '', array $subscriberParams =
     $email = $subscriberParams['email'];
     $tel = $subscriberParams['tel'];
     $promocode = $subscriberParams['promocode'] ?? null;
+    $token = $subscriberParams['token'];
 
     if ((empty($name) || empty($email))) return false;
-
-    $token = md5($name.$email);
 
     $result = $wpdb->insert(
         $tableName,

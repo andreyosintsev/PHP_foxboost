@@ -3,8 +3,8 @@
  * Файл настройки почтовой рассылки, адресов администратора и пр.
  */
 
-define('SITE_NAME',                     'foxboost.ru' );            //Наименование сайта для уведомлений
-define('SITE_LINK',                     'https://foxboost.ru' );    //Ссылка на сайт
+define('SITE_NAME',                     'foxboost.ru');              //Наименование сайта для уведомлений
+define('SITE_LINK',                     'https://bestweb.site/demo/foxboost');    //Ссылка на сайт
 define('SITE_EMAIL_FROM',               'info@bestweb.site');        //E-mail для поля "от"
 define('SITE_EMAIL_ADMIN',              'asosintsev@yandex.ru');     //E-mail для уведомлений администратора
 

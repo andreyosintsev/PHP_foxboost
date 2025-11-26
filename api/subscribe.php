@@ -22,6 +22,7 @@
     $product    = $_POST['product'];
     $foxboost_id   = $_POST['foxboost_id'];
     $promocode  = empty($_POST['promocode']) ? 'без промокода' : $_POST['promocode'];
+    $token      = mb_substr(md5($name.$email), 0, 8);
 
     writeLog('POST name: '. $name, $logFile);
     writeLog('POST tel: '. $tel, $logFile);
@@ -44,7 +45,8 @@
             'name' => $name,
             'email' => $email,
             'tel' => $tel,
-            'promocode' => $promocode
+            'promocode' => $promocode,
+            'token' => $token
         ];
 
         $res = sqlSubscriberRegister('subscribers', $subscriberParams);
@@ -57,7 +59,7 @@
         if (!$res) sendJsonErrorAndExit('Ошибка! Не удалось зарегистрировать пользователя', $logFile);
 
         //НЕ РЕАЛИЗОВАНО
-        $res = mailSendConfirmation($name, $email, $foxboost_id);
+        $res = mailSendRegistration($name, $email, $token, $foxboost_id);
         //
         logResult($res,
             'REGISTRATION EMAIL SUCCESSFULLY SENT',
@@ -93,7 +95,7 @@
     );
 
     if (!$isActive) {
-        $res = mailSendConfirmation();
+        $res = mailSendRegistration($name, $email, $token, $foxboost_id);
         //
         logResult($res,
             'REGISTRATION EMAIL SUCCESSFULLY SENT',

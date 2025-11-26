@@ -4,16 +4,21 @@ if (!defined('ABSPATH')) {
     require_once dirname(__DIR__, 1) . '/config/config-mail.php';
 }
 /**
- * Функция отправки письма с подтверждением e-mail с регистрации
+ * Общая универсальная функция отправки сообщений на email.
+ * Она формирует письмо на основании шаблона $template и аргументов $args
  *
- * @param string $name - имя подписчика
- * @param string $email - электронная почта для письма
- * @param string $token - токен авторизации
- * @param int $foxboost_id - ID записи фоксбуста, на который сразу же нужно подписаться после регистрации
- *
- * @return bool - успех отправки e-mail
+ * @param string $template - шаблон письма
+ * @param $args - ассоциативный массив тегов и значений
+ * subscriber_email - e-mail подписчика (и адрес получателя)
+ * subscriber_name - имя подписчика
+ * subject - тема письма
+ * site_name - наименование сайта foxboost.ru
+ * link_activate - html-ссылка для активации учетной записи
+ * link_unregister - html-ссылка для отмены регистрации учетной записи
+ * @return bool - результат отправки письма
  */
-function mailSendConfirmation($name, $email, $token, $foxboost_id) {
+function mailSend($template = '', $args = []) {
+
     mb_internal_encoding("UTF-8");
     date_default_timezone_set('Europe/Samara');
 
@@ -27,44 +32,48 @@ function mailSendConfirmation($name, $email, $token, $foxboost_id) {
 
     //Создание лог-файла поиска
     writeLog('===========MAIL==========', $logFile);
-    writeLog('MailSendConfirmation', $logFile);
+    writeLog('MailSend', $logFile);
     writeLog('Checking input data', $logFile);
-    writeLog('Name: '. $name, $logFile);
-    writeLog('Email: '. $email, $logFile);
-    writeLog('Token: '. $token, $logFile);
+    writeLog('Template: '. $template, $logFile);
+    writeLog('Args length: '. count($args), $logFile);
 
-    if (empty($name) || empty($email) || empty($token)) {
-        writeLog('ERROR: empty mail, email or token, exiting', $logFile);
+    if (empty($template) || count($args) < 1) {
+        writeLog('ERROR: empty template or args, exiting', $logFile);
         fclose($logFile);
 
         return false;
     }
 
-    writeLog('Loading template file: '. TEMPLATE_EMAIL_REGISTRATION, $logFile);
+    if (!key_exists('subscriber_email', $args) || empty($args['subscriber_email'])) {
+        writeLog('ERROR: empty e-mail address, exiting', $logFile);
+        fclose($logFile);
 
-    $template = @file_get_contents(TEMPLATE_EMAIL_DIR . TEMPLATE_EMAIL_REGISTRATION);
-    if ($template === false) {
+        return false;
+    }
+
+    if (!key_exists('subject', $args) || empty($args['subject'])) {
+        writeLog('ERROR: empty e-mail subject, exiting', $logFile);
+        fclose($logFile);
+
+        return false;
+    }
+
+    writeLog('Loading template file: '. $template, $logFile);
+
+    $templateFile = @file_get_contents(TEMPLATE_EMAIL_DIR . $template);
+    if ($templateFile === false) {
         writeLog('ERROR: cannot read template file, exiting', $logFile);
         fclose($logFile);
 
         return false;
     }
 
-    $activateUrl = SITE_LINK . '/activate?token=' . rawurlencode($token) . '&foxboost_id=' . rawurlencode($foxboost_id);
-    $unregisterUrl = SITE_LINK . '/unregister?token=' . rawurlencode($token);
-
-    $args = [
-        'site_name' => SITE_NAME,
-        'subscriber_name' => $name,
-        'link_activate'   => '<a href="' . htmlspecialchars($activateUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">'
-            . htmlspecialchars($activateUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</a>',
-        'link_unregister' => '<a href="' . htmlspecialchars($unregisterUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">Отменить регистрацию</a>'
-    ];
-
-    $templateHydrated = mailHydrate($template, $args);
+    $templateHydrated = mailHydrate($templateFile, $args);
     if (empty($templateHydrated)) {
-        writeLog('WARNING: cannot hydrate email template, using raw template, continue...', $logFile);
-        $templateHydrated = $template;
+        writeLog('ERROR: cannot hydrate email template, exiting...', $logFile);
+        fclose($logFile);
+
+        return false;
     }
 
     $plainText = strip_tags(str_replace(["\r","\n"], ' ', $templateHydrated));
@@ -74,15 +83,18 @@ function mailSendConfirmation($name, $email, $token, $foxboost_id) {
     $boundaryRelated = "=_rel_" . md5(uniqid((string)microtime(true), true));
     $boundaryAlt = "=_alt_" . md5(uniqid((string)microtime(true), true));
 
-    $subject_text = "Регистрация на сайте " . SITE_NAME;
+    $email = $args['subscriber_email'];
+    $subject = $args['subject'];
+
+    $subjectEncoded = '';
     if (function_exists('mb_encode_mimeheader')) {
-        $subject = mb_encode_mimeheader($subject_text, 'UTF-8', 'B', $eol);
+        $subjectEncoded = mb_encode_mimeheader($subject, 'UTF-8', 'B', $eol);
     } else {
-        $subject = "=?UTF-8?B?" . base64_encode($subject_text) . "?=";
+        $subjectEncoded = "=?UTF-8?B?" . base64_encode($subject) . "?=";
     }
 
-    writeLog('SUBJECT: '. $subject_text, $logFile);
-    writeLog('SUBJECT ENCODED: '. $subject, $logFile);
+    writeLog('SUBJECT: '. $subject, $logFile);
+    writeLog('SUBJECT ENCODED: '. $subjectEncoded, $logFile);
 
     $fileLogo = TEMPLATE_EMAIL_LOGO; // предполагается путь или пусто
     $hasLogo = false;
@@ -173,7 +185,7 @@ function mailSendConfirmation($name, $email, $token, $foxboost_id) {
         $params = '-f' . escapeshellarg($fromAddress);
     }
 
-    $sent = mail($email, $subject, $body, $headers, $params ?: null);
+    $sent = mail($email, $subjectEncoded, $body, $headers, $params ?: null);
     if ($sent === false) {
         writeLog('ERROR: mail() returned false, exiting...', $logFile);
         fclose($logFile);
@@ -185,6 +197,35 @@ function mailSendConfirmation($name, $email, $token, $foxboost_id) {
     fclose($logFile);
 
     return true;
+
+}
+/**
+ * Функция отправки письма с подтверждением e-mail с регистрации
+ *
+ * @param string $name - имя подписчика
+ * @param string $email - электронная почта для письма
+ * @param string $token - токен авторизации
+ * @param int $foxboost_id - ID записи фоксбуста, на который сразу же нужно подписаться после регистрации
+ *
+ * @return bool - успех отправки e-mail
+ */
+function mailSendRegistration($name, $email, $token, $foxboost_id) {
+    if (empty($name) || empty($email) || empty($token)) return false;
+
+    $activateUrl = SITE_LINK . '/activate?token=' . rawurlencode($token) . '&foxboost_id=' . rawurlencode($foxboost_id);
+    $unregisterUrl = SITE_LINK . '/unregister?token=' . rawurlencode($token);
+
+    $args = [
+        'site_name' => SITE_NAME,
+        'subscriber_name' => $name,
+        'subscriber_email' => $email,
+        'subject' => 'Регистрация на сайте '. SITE_NAME,
+        'link_activate'   => '<a href="' . htmlspecialchars($activateUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">'
+            . htmlspecialchars($activateUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</a>',
+        'link_unregister' => '<a href="' . htmlspecialchars($unregisterUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">Отменить регистрацию</a>'
+    ];
+
+    return mailSend(TEMPLATE_EMAIL_REGISTRATION, $args);
 }
 ?>
 <?php
@@ -193,6 +234,8 @@ function mailSendConfirmation($name, $email, $token, $foxboost_id) {
  *
  * @param string $template - шаблон почтового сообщения
  * @param $args - ассоциативный массив тегов и значений
+ *  subscriber_email - e-mail подписчика (и адрес получателя)
+ *  subscriber_name - имя подписчика
  *  site_name - наименование сайта foxboost.ru
  *  link_activate - html-ссылка для активации учетной записи
  *  link_unregister - html-ссылка для отмены регистрации учетной записи
@@ -206,7 +249,5 @@ function mailHydrate(string $template, $args): string {
         $template = preg_replace($pattern, $value, $template);
     }
 
-    $template = preg_replace('/{{\s*[\w\-]+\s*}}/', '', $template);
-
-    return $template;
+    return preg_replace('/{{\s*[\w\-]+\s*}}/', '', $template);
 }
