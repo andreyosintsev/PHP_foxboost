@@ -5,12 +5,15 @@
 * template-activate.php
 *
 * Template file for subscriber account activation and foxboost subscribing.
-* /panel
+* /activate
 *
 *
 * @author      Andrei Osintsev
 * @copyright   Copyright (c) 2025 asosintsev@yandex.ru
 */
+
+require_once ABSPATH . 'api/config/config-mail.php';
+require_once ABSPATH . 'api/includes/mail.php';
 
 global $wpdb;
 
@@ -33,6 +36,8 @@ if ($user) {
         ['token' => $token]
     );
 
+    $res = mailSendActivation($user->name, $user->email, $user->token);
+
     if ($foxboost_id) {
         $exists = $wpdb->get_var(
             $wpdb->prepare(
@@ -51,6 +56,8 @@ if ($user) {
                     'created_at' => current_time('mysql')
                 ]
             );
+
+            $res = mailSendSubscribe($user->name, $user->email, $user->token, $foxboost_id);
         }
     }
 

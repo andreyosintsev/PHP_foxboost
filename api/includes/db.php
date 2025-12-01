@@ -281,6 +281,27 @@ function sqlGetSubscriberIdByEmail($email = '') {
 ?>
 <?php
 /**
+ * Функция получает token подписчика по его id
+ *
+ * @param $id - id подписчика
+ * @return string|false - token подписчика или false, если подписчика с таким email нет
+ */
+function sqlGetSubscriberTokenById($id = '') {
+    if (empty($id)) return false;
+
+    global $wpdb;
+
+    $token = $wpdb->get_var(
+        $wpdb->prepare("SELECT token FROM subscribers WHERE id = %d LIMIT 1", $id)
+    );
+
+    if ($token === null) return false;
+
+    return $token;
+}
+?>
+<?php
+/**
  * Функция возвращает общее количество зарегистрировавшихся подписчиков
  *
  * @return int - количество зарегистрировавшихся подписчиков

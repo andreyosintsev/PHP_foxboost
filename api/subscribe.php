@@ -58,9 +58,8 @@
 
         if (!$res) sendJsonErrorAndExit('Ошибка! Не удалось зарегистрировать пользователя', $logFile);
 
-        //НЕ РЕАЛИЗОВАНО
         $res = mailSendRegistration($name, $email, $token, $foxboost_id);
-        //
+
         logResult($res,
             'REGISTRATION EMAIL SUCCESSFULLY SENT',
             'FAILED TO SEND REGISTRATION EMAIL',
@@ -95,8 +94,16 @@
     );
 
     if (!$isActive) {
+        $token = sqlGetSubscriberTokenById($id);
+        logResult($token,
+            'TOKEN SUCCESSFULLY GOT '. $token,
+            'FAILED TO GET TOKEN FOR USER ID '. $id,
+            $logFile
+        );
+
+        if (!$token) sendJsonErrorAndExit('Ошибка! Не удалось отправить e-mail с подтверждением', $logFile);
+
         $res = mailSendRegistration($name, $email, $token, $foxboost_id);
-        //
         logResult($res,
             'REGISTRATION EMAIL SUCCESSFULLY SENT',
             'FAILED TO SEND REGISTRATION EMAIL',
@@ -117,6 +124,13 @@
     );
 
     if ($res) {
+        $res = mailSendSubscribe($name, $email, $token, $foxboost_id);
+        logResult($res,
+            'SUBSCRIPTION EMAIL SUCCESSFULLY SENT',
+            'FAILED TO SEND SUBSCRIPTION EMAIL',
+            $logFile
+        );
+
         sendJsonSuccess('Успешно подписан на фоксбуст', 'subscribe', $logFile);
     } else {
         sendJsonErrorAndExit('Ошибка! Не удалось подписать на фоксбуст', $logFile);

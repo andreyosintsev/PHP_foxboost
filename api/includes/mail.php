@@ -213,7 +213,7 @@ function mailSendRegistration($name, $email, $token, $foxboost_id) {
     if (empty($name) || empty($email) || empty($token)) return false;
 
     $activateUrl = SITE_LINK . '/activate?token=' . rawurlencode($token) . '&foxboost_id=' . rawurlencode($foxboost_id);
-    $unregisterUrl = SITE_LINK . '/unregister?token=' . rawurlencode($token);
+    $unregisterUrl = SITE_LINK . '/deactivate?token=' . rawurlencode($token);
 
     $args = [
         'site_name' => SITE_NAME,
@@ -226,6 +226,109 @@ function mailSendRegistration($name, $email, $token, $foxboost_id) {
     ];
 
     return mailSend(TEMPLATE_EMAIL_REGISTRATION, $args);
+}
+?>
+<?php
+/**
+ * Функция отправки письма об активации учетной записи
+ *
+ * @param string $name - имя подписчика
+ * @param string $email - электронная почта получателя письма
+ * @param string $token - токен авторизации
+ *
+ * @return bool - успех отправки e-mail
+ */
+function mailSendActivation($name, $email, $token) {
+    if (empty($name) || empty($email) || empty($token)) return false;
+
+    $unregisterUrl = SITE_LINK . '/deactivate?token=' . rawurlencode($token);
+
+    $args = [
+        'site_name' => SITE_NAME,
+        'subscriber_name' => $name,
+        'subscriber_email' => $email,
+        'subject' => 'Активация учетной записи '. SITE_NAME,
+        'link_unregister' => '<a href="' . htmlspecialchars($unregisterUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">Деактивировать учетную запись</a>'
+    ];
+
+    return mailSend(TEMPLATE_EMAIL_ACTIVATION, $args);
+}
+?>
+<?php
+/**
+ * Функция отправки письма о деактивации учетной записи
+ *
+ * @param string $name - имя подписчика
+ * @param string $email - электронная почта получателя письма
+ *
+ * @return bool - успех отправки e-mail
+ */
+function mailSendDeactivation($name, $email, $token) {
+    if (empty($name) || empty($email)) return false;
+
+    $args = [
+        'site_name' => SITE_NAME,
+        'subscriber_name' => $name,
+        'subscriber_email' => $email,
+        'subject' => 'Деактивация учетной записи '. SITE_NAME,
+    ];
+
+    return mailSend(TEMPLATE_EMAIL_DEACTIVATION, $args);
+}
+?>
+<?php
+/**
+ * Функция отправки письма о подписке на фоксбуст
+ *
+ * @param string $name - имя подписчика
+ * @param string $email - электронная почта для письма
+ * @param string $token - токен авторизации
+ * @param int $foxboost_id - ID записи фоксбуста, на который сразу же нужно подписаться после регистрации
+ *
+ * @return bool - успех отправки e-mail
+ */
+function mailSendSubscribe($name, $email, $token, $foxboost_id) {
+    if (empty($name) || empty($email) || empty($token)) return false;
+
+    $unsubscribeUrl = SITE_LINK . '/unsubscribe?token=' . rawurlencode($token). '&foxboost_id=' . rawurlencode($foxboost_id);
+    $foxboost_name = get_the_title($foxboost_id);
+
+    $args = [
+        'site_name' => SITE_NAME,
+        'subscriber_name' => $name,
+        'subscriber_email' => $email,
+        'subject' => 'Подписка на фоксбуст '. SITE_NAME,
+        'foxboost_name' => $foxboost_name,
+        'link_unsubscribe' => '<a href="' . htmlspecialchars($unsubscribeUrl, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">Отписаться от фоксбуста</a>'
+    ];
+
+    return mailSend(TEMPLATE_EMAIL_SUBSCRIBE, $args);
+}
+?>
+<?php
+/**
+ * Функция отправки письма об отмене подписки на фоксбуст
+ *
+ * @param string $name - имя подписчика
+ * @param string $email - электронная почта для письма
+ * @param int $foxboost_id - ID записи фоксбуста, от которого отписался пользователь
+ *
+ * @return bool - успех отправки e-mail
+ */
+function mailSendUnsubscribe($name, $email, $foxboost_id) {
+    if (empty($name) || empty($email) || empty($foxboost_id)) return false;
+
+    $foxboost_name = get_the_title($foxboost_id);
+
+    $args = [
+        'site_name' => SITE_NAME,
+        'subscriber_name' => $name,
+        'subscriber_email' => $email,
+        'subject' => 'Отписка от фоксбуста '. SITE_NAME,
+        'foxboost_name' => $foxboost_name,
+    ];
+
+    return mailSend(TEMPLATE_EMAIL_UNSUBSCRIBE, $args);
 }
 ?>
 <?php

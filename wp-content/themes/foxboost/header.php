@@ -168,6 +168,8 @@
         <script src="<?php echo $template_url; ?>/scripts/section-foxboost.js"></script>
         <script src="<?php echo $template_url; ?>/scripts/section-ambassador.js"></script>
         <script src="<?php echo $template_url; ?>/scripts/popup-activation.js" type="module"></script>
+        <script src="<?php echo $template_url; ?>/scripts/popup-deactivation.js" type="module"></script>
+        <script src="<?php echo $template_url; ?>/scripts/popup-unsubscribe.js" type="module"></script>
     <?php } ?>
 
     <?php if (is_category() || is_archive() || is_singular() || is_search()) { ?>
