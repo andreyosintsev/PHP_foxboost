@@ -96,7 +96,7 @@
                                                     <span class="campaign__status campaign__status_active campaign__display_600">сбор (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок'])?>)</span>
                                                 </div>
                                                 <div class="campaign__control">
-                                                    <button class="button campaign__button button_complete">
+                                                    <button class="button campaign__button button_complete" data-postid="<?php echo $foxboosts_active_id; ?>" data-moveto="completed">
                                                         <span class="button__text">Завершить сбор</span>
                                                         <img
                                                                 class="button__image button__image_complete"
@@ -161,7 +161,7 @@
                                             <span class="campaign__status campaign__status_completed campaign__display_600">окончен (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок'])?>)</span>
                                         </div>
                                         <div class="campaign__control">
-                                            <button class="button campaign__button button_restart">
+                                            <button class="button campaign__button button_restart" data-postid="<?php echo $foxboosts_completed_id; ?>" data-moveto="active">
                                                 <span class="button__text">Возобновить сбор</span>
                                                 <img
                                                         class="button__image button__image_restart"
@@ -169,7 +169,7 @@
                                                         alt="Возобновить"
                                                 />
                                             </button>
-                                            <button class="button campaign__button button_archive">
+                                            <button class="button campaign__button button_archive" data-postid="<?php echo $foxboosts_completed_id; ?>" data-moveto="archive">
                                                 <span class="button__text">Отправить в архив</span>
                                                 <img
                                                         class="button__image button__image_archive"
@@ -229,7 +229,7 @@
                                             </span>
                                         </div>
                                         <div class="campaign__control">
-                                            <button class="button campaign__button button_restore">
+                                            <button class="button campaign__button button_restore" data-postid="<?php echo $foxboosts_archive_id; ?>" data-moveto="completed">
                                                 <span class="button__text">Восстановить из архива</span>
                                                 <img
                                                         class="button__image button__image_restore"

@@ -126,6 +126,10 @@
     color: var(--black, #000000);
 }
 
+.popup__message {
+    color: var(--red, #E31D23);
+}
+
 @media screen and (max-width: 1440px) {
     .popup__title {
         margin-bottom: 10px;

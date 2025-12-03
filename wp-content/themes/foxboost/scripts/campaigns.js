@@ -3,10 +3,14 @@
         const campaigns = document.querySelectorAll(".campaign");
 
         campaigns.forEach((campaign) => {
-            const campaignTitle = campaign.querySelector(".campaign__header");
-            if (!campaignTitle) return console.error('DOM: no ".campaign__header" element found');
+            const campaignHeader = campaign.querySelector(".campaign__header");
+            if (!campaignHeader) return console.error('DOM: no ".campaign__header" element found');
 
-            campaignTitle.addEventListener("click", () => campaign.classList.toggle("campaign_expanded"));
+            campaignHeader.addEventListener("click", (e) => {
+                if (e.target.closest('.campaign__control')) return;
+
+                campaign.classList.toggle("campaign_expanded")
+            });
         });
     });
 })();

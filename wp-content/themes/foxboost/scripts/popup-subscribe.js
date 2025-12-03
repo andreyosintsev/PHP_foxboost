@@ -4,6 +4,8 @@
 
 console.log("popup-subscribe.js loaded");
 
+const baseUrl = "/foxboost/";
+
 import {hideLoader, showLoader, showPopup} from "./popup.js";
 
 const placeholders = {};
@@ -12,9 +14,7 @@ const popupOrder = document.querySelector("#popup-order");
 const popupForm = popupOrder.querySelector(".popup__form");
 
 const popupRegistration = document.querySelector("#popup-registration");
-const popupActivation = document.querySelector("#popup-activation");
 const popupSubscribe = document.querySelector("#popup-subscribe");
-const popupUnsubscribe = document.querySelector("#popup-unsubscribe");
 const popupFailed = document.querySelector("#popup-failed");
 
 console.log(popupSubscribe);
@@ -54,7 +54,7 @@ popupForm.addEventListener("submit", (e) => {
 
     const popupFormData = new FormData(popupForm);
 
-    fetch("api/subscribe.php", {
+    fetch(`${baseUrl}api/subscribe.php`, {
         method: "POST",
         body: popupFormData,
     })
@@ -73,7 +73,7 @@ popupForm.addEventListener("submit", (e) => {
         .catch((error) => {
             console.error("Не удалось отправить заявку", error);
             hidePopupAndResetForm();
-            showPopup(popupFailed, data.message);
+            showPopup(popupFailed, error);
         })
         .finally(() => {
             hideLoader();

@@ -48,7 +48,10 @@ export function showPopup(popup, message) {
     popups.forEach((popup) => popup.classList.add("hidden"));
     if (!popup) return console.log(`DOM: no popup ${popup} found`)
     popup.classList.remove("hidden");
-    if (message) popup.querySelector('.popup__message')?.innerText('message');
+    if (message) {
+        const popupMessage = popup.querySelector('.popup__message');
+        if (popupMessage) popupMessage.innerText = message;
+    }
 }
 
 const disableBodyScroll = () => body && body.classList.add("noscroll");

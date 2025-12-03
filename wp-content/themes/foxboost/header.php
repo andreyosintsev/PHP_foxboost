@@ -179,6 +179,7 @@
     <?php if (is_page('panel')) { ?>
         <script src="<?php echo $template_url; ?>/scripts/campaigns.js"></script>
         <script src="<?php echo $template_url; ?>/scripts/panel-filter.js"></script>
+        <script src="<?php echo $template_url; ?>/scripts/foxboost-move.js"></script>
     <?php } ?>
     
 </head>

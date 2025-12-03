@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL & ~E_WARNING & ~E_DEPRECATED & ~E_NOTICE);
+ini_set('display_errors', 0);
+header('Content-Type: application/json; charset=utf-8');
+
 if (!defined('ABSPATH')) {
     require_once dirname(__DIR__, 2) . '/wp-load.php';
     require_once dirname(__DIR__, 1) . '/config/config-mail.php';
@@ -185,7 +189,11 @@ function mailSend($template = '', $args = []) {
         $params = '-f' . escapeshellarg($fromAddress);
     }
 
-    $sent = mail($email, $subjectEncoded, $body, $headers, $params ?: null);
+    if ($_SERVER['SERVER_NAME'] === 'localhost') {
+        return true;
+    }
+
+    $sent = mail($email, $subjectEncoded, $body, $headers, $params ?: '');
     if ($sent === false) {
         writeLog('ERROR: mail() returned false, exiting...', $logFile);
         fclose($logFile);
