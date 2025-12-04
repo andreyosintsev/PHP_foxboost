@@ -121,6 +121,7 @@
 
                                                         foreach ($subscriptions as $i => $subscription) {
                                                             $subscription['number'] = $i + 1;
+                                                            $subscription['post_id'] = $foxboosts_active_id;
                                                             echo get_template_part('partials/row-campaign', null, $subscription);
                                                         }
                                                     ?>
@@ -187,6 +188,7 @@
 
                                                 foreach ($subscriptions as $i => $subscription) {
                                                     $subscription['number'] = $i + 1;
+                                                    $subscription['post_id'] = $foxboosts_completed_id;
                                                     echo get_template_part('partials/row-campaign', null, $subscription);
                                                 }
                                             ?>

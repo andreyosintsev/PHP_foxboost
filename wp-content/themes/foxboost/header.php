@@ -67,10 +67,11 @@
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 
     <!--Favicons-->
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $site_url; ?>/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $site_url; ?>/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo $site_url; ?>/favicon-16x16.png">
-    <link rel="manifest" href="<?php echo $site_url; ?>/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo $site_url; ?>/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo $site_url; ?>/favicons//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo $site_url; ?>/favicons//favicon-16x16.png">
+    <link rel="manifest" href="<?php echo $site_url; ?>/favicons//site.webmanifest">
+    <link rel="shortcut icon" href="<?php echo $site_url; ?>/favicon.ico">
 
     <!--Общие стили-->
     <link rel="stylesheet" href="<?php echo $template_url;?>/css/common/normalize.css">
@@ -144,7 +145,6 @@
     <?php if (is_page('panel')) { ?>
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel-stats.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel.css">
-        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel-search.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/section-campaign.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/campaign.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/pages/campaigns.css">
@@ -177,9 +177,7 @@
     <?php } ?>
 
     <?php if (is_page('panel')) { ?>
-        <script src="<?php echo $template_url; ?>/scripts/campaigns.js"></script>
-        <script src="<?php echo $template_url; ?>/scripts/panel-filter.js"></script>
-        <script src="<?php echo $template_url; ?>/scripts/foxboost-move.js"></script>
+        <script src="<?php echo $template_url; ?>/scripts/panel.js"></script>
     <?php } ?>
     
 </head>

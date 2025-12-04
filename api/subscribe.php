@@ -34,7 +34,7 @@
     writeLog('POST foxboost_id: '. $foxboost_id, $logFile);
     writeLog('POST promocode: '. $promocode, $logFile);
 
-    if (empty($name) || (empty($tel) && empty($email)) || empty($product)) {
+    if (empty($name) || empty($email) || empty($product)) {
         writeLog('POST ERROR: not all data supplied', $logFile);
         sendJsonErrorAndExit('Ошибка! Не все данные переданы', $logFile);
     };

@@ -39,11 +39,16 @@
     font-weight: var(--text-weight-extrabold, 800);
 
     line-height: 26px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 1440px) {
     .card-stats__description {
         font-size: 16px;
+
+        line-height: 20px;
     }
 }
 

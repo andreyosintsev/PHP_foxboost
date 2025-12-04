@@ -4,7 +4,7 @@
 
 console.log("popup-subscribe.js loaded");
 
-const baseUrl = "/foxboost/";
+const baseUrl = 'http://localhost/foxboost';
 
 import {hideLoader, showLoader, showPopup} from "./popup.js";
 
@@ -16,8 +16,6 @@ const popupForm = popupOrder.querySelector(".popup__form");
 const popupRegistration = document.querySelector("#popup-registration");
 const popupSubscribe = document.querySelector("#popup-subscribe");
 const popupFailed = document.querySelector("#popup-failed");
-
-console.log(popupSubscribe);
 
 //Кнопки фоксбустов с надписью "Оставить заявку"
 const buttonsSubscribe = document.querySelectorAll(".button_subscribe");
@@ -54,7 +52,7 @@ popupForm.addEventListener("submit", (e) => {
 
     const popupFormData = new FormData(popupForm);
 
-    fetch(`${baseUrl}api/subscribe.php`, {
+    fetch(`${baseUrl}/api/subscribe.php`, {
         method: "POST",
         body: popupFormData,
     })
@@ -118,7 +116,6 @@ function checkFormErrors(e) {
 
     const formName = form.querySelector('input[name="name"]');
     const formEmail = form.querySelector('input[name="email"]');
-    const formTel = form.querySelector('input[name="tel"]');
 
     if (!formName?.value.trim()) {
         console.warn('Error: no input "name" or no name specified in form');
@@ -129,14 +126,11 @@ function checkFormErrors(e) {
         isFormValid = false;
     }
 
-    if (!(formTel?.value.trim() || formEmail?.value.trim())) {
-        console.warn('Error: no input "tel" or "e-mail" in form');
-        console.warn("Error: or no tel or e-mail specified in form");
+    if (!formEmail?.value.trim()) {
+        console.warn('Error: no input "e-mail" in form');
 
-        formTel.classList.add("popup__input_error");
         formEmail.classList.add("popup__input_error");
         formEmail.placeholder = "Укажите адрес e-mail";
-        formTel.placeholder = "или телефон";
 
         isFormValid = false;
     }

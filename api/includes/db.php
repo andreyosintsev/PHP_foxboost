@@ -87,10 +87,13 @@ function sqlSubscriptionsCreateTable(string $tableName = 'subscriptions'): bool 
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE IF NOT EXISTS $tableName (
+        id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         subscriber_id bigint(20) UNSIGNED NOT NULL,
         post_id bigint(20) UNSIGNED NOT NULL,
         created_at datetime DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (subscriber_id,post_id),
+        order_sent datetime DEFAULT NULL,
+        PRIMARY KEY (id),
+        UNIQUE KEY subscriber_post_unique (subscriber_id,post_id),
         FOREIGN KEY (subscriber_id) REFERENCES subscribers(id) ON DELETE CASCADE,
         FOREIGN KEY (post_id) REFERENCES wp_posts(ID) ON DELETE CASCADE
     ) $charset_collate;";
@@ -374,7 +377,13 @@ function sqlGetSubscriptionsByFoxboostId(?int $foxboostId = null): array {
 
     $sql = $wpdb->prepare(
         "
-        SELECT s.id, s.name, s.email, s.promocode
+        SELECT 
+            s.id,
+            s.name,
+            s.email,
+            s.tel,
+            s.promocode,
+            sub.order_sent
         FROM subscribers AS s
         INNER JOIN subscriptions AS sub
             ON s.id = sub.subscriber_id
