@@ -284,10 +284,52 @@ function sqlGetSubscriberIdByEmail($email = '') {
 ?>
 <?php
 /**
+ * Функция получает name подписчика по его id
+ *
+ * @param $id - id подписчика
+ * @return string|false - name подписчика или false, если подписчика с таким id нет
+ */
+function sqlGetSubscriberNameById($id = '') {
+    if (empty($id)) return false;
+
+    global $wpdb;
+
+    $name = $wpdb->get_var(
+        $wpdb->prepare("SELECT name FROM subscribers WHERE id = %d LIMIT 1", $id)
+    );
+
+    if ($name === null) return false;
+
+    return $name;
+}
+?>
+<?php
+/**
+ * Функция получает email подписчика по его id
+ *
+ * @param $id - id подписчика
+ * @return string|false - email подписчика или false, если подписчика с таким id нет
+ */
+function sqlGetSubscriberEmailById($id = '') {
+    if (empty($id)) return false;
+
+    global $wpdb;
+
+    $email = $wpdb->get_var(
+        $wpdb->prepare("SELECT email FROM subscribers WHERE id = %d LIMIT 1", $id)
+    );
+
+    if ($email === null) return false;
+
+    return $email;
+}
+?>
+<?php
+/**
  * Функция получает token подписчика по его id
  *
  * @param $id - id подписчика
- * @return string|false - token подписчика или false, если подписчика с таким email нет
+ * @return string|false - token подписчика или false, если подписчика с таким id нет
  */
 function sqlGetSubscriberTokenById($id = '') {
     if (empty($id)) return false;
@@ -383,6 +425,7 @@ function sqlGetSubscriptionsByFoxboostId(?int $foxboostId = null): array {
             s.email,
             s.tel,
             s.promocode,
+            sub.id AS subscription_id,
             sub.order_sent
         FROM subscribers AS s
         INNER JOIN subscriptions AS sub
@@ -396,4 +439,81 @@ function sqlGetSubscriptionsByFoxboostId(?int $foxboostId = null): array {
     $results = $wpdb->get_results($sql, ARRAY_A);
 
     return $results ?: [];
+}
+?>
+<?php
+/**
+ * Функция обновления таблицы подписок, что по данной подписке уведомление отправлено
+ * @param int $subscription_id - ID подписки
+ *
+ * @return bool - true - обновлено, false - не обновлено
+ */
+function sqlSetSubscriptionOrderSend($subscription_id) {
+    if ($subscription_id <= 0) {
+        return false;
+    }
+
+    global $wpdb;
+
+    $table = 'subscriptions';
+    $data = [
+        'order_sent' => current_time('mysql')
+    ];
+    $where = ['id' => $subscription_id];
+
+    $updated = $wpdb->update(
+        $table,
+        $data,
+        $where,
+        ['%s'],
+        ['%d']
+    );
+
+    return $updated > 0;
+}
+?>
+<?php
+/**
+ * Функция получает ID подписчика по ID подписки
+ * @param int $subscription_id - ID подписки
+ *
+ * @return int | bool - ID подписчика или false, если не найдено
+ */
+function sqlGetSubscriberIdBySubscriptionId($subscription_id) {
+    if ($subscription_id <= 0) {
+        return false;
+    }
+
+    global $wpdb;
+
+    $subscriber_id = $wpdb->get_var(
+        $wpdb->prepare("SELECT subscriber_id FROM subscriptions WHERE id = %d LIMIT 1", $subscription_id)
+    );
+
+    if ($subscriber_id === null) return false;
+
+    return $subscriber_id;
+}
+?>
+<?php
+/**
+ * Функция получает ID фоксбуста по ID подписки
+ * @param int $subscription_id - ID подписки
+ *
+ * @return int | bool - ID фоксбуста или false, если не найдено
+ */
+function sqlGetFoxboostIdBySubscriptionId($subscription_id) {
+    if ($subscription_id <= 0) {
+        return false;
+    }
+
+    global $wpdb;
+
+    $post_id = $wpdb->get_var(
+        $wpdb->prepare("SELECT post_id FROM subscriptions WHERE id = %d LIMIT 1", $subscription_id)
+    );
+
+    if ($post_id === null) return false;
+
+    return $post_id;
 }

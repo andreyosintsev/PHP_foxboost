@@ -1,4 +1,6 @@
-const baseUrl = 'http://localhost/foxboost';
+console.log('foxboost-views.js loaded');
+
+const baseUrl = 'https://bestweb.site/demo/foxboost';
 
 $(document).on('click', '.card-foxboost__link', function(e){
     e.preventDefault();

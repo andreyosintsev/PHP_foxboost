@@ -207,6 +207,32 @@ function mailSend($template = '', $args = []) {
     return true;
 
 }
+?>
+<?php
+/**
+ * Функция замены тегов в почтовом сообщении фактическими данными.
+ *
+ * @param string $template - шаблон почтового сообщения
+ * @param $args - ассоциативный массив тегов и значений
+ *  subscriber_email - e-mail подписчика (и адрес получателя)
+ *  subscriber_name - имя подписчика
+ *  site_name - наименование сайта foxboost.ru
+ *  link_activate - html-ссылка для активации учетной записи
+ *  link_unregister - html-ссылка для отмены регистрации учетной записи
+ *
+ * @return string - насыщенное сообщение
+ */
+function mailHydrate(string $template, $args): string {
+    foreach ($args as $key => $value) {
+        // Поддержка пробелов внутри скобок, например {{ site_name }}
+        $pattern = '/{{\s*' . preg_quote($key, '/') . '\s*}}/u';
+        $template = preg_replace($pattern, $value, $template);
+    }
+
+    return preg_replace('/{{\s*[\w\-]+\s*}}/', '', $template);
+}
+?>
+<?php
 /**
  * Функция отправки письма с подтверждением e-mail с регистрации
  *
@@ -271,7 +297,7 @@ function mailSendActivation($name, $email, $token) {
  *
  * @return bool - успех отправки e-mail
  */
-function mailSendDeactivation($name, $email, $token) {
+function mailSendDeactivation($name, $email) {
     if (empty($name) || empty($email)) return false;
 
     $args = [
@@ -341,24 +367,28 @@ function mailSendUnsubscribe($name, $email, $foxboost_id) {
 ?>
 <?php
 /**
- * Функция замены тегов в почтовом сообщении фактическими данными.
+ * Функция отправки письма о поступлении фоксбуста в продажу
  *
- * @param string $template - шаблон почтового сообщения
- * @param $args - ассоциативный массив тегов и значений
- *  subscriber_email - e-mail подписчика (и адрес получателя)
- *  subscriber_name - имя подписчика
- *  site_name - наименование сайта foxboost.ru
- *  link_activate - html-ссылка для активации учетной записи
- *  link_unregister - html-ссылка для отмены регистрации учетной записи
+ * @param string $name - имя подписчика
+ * @param string $email - электронная почта для письма
+ * @param int $foxboost_id - ID записи фоксбуста, от которого отписался пользователь
  *
- * @return string - насыщенное сообщение
+ * @return bool - успех отправки e-mail
  */
-function mailHydrate(string $template, $args): string {
-    foreach ($args as $key => $value) {
-        // Поддержка пробелов внутри скобок, например {{ site_name }}
-        $pattern = '/{{\s*' . preg_quote($key, '/') . '\s*}}/u';
-        $template = preg_replace($pattern, $value, $template);
-    }
+function mailSendOrder($name, $email, $foxboost_id) {
+    require_once dirname(__DIR__, 1). '/config/config-mail.php';
 
-    return preg_replace('/{{\s*[\w\-]+\s*}}/', '', $template);
+    if (empty($name) || empty($email) || empty($foxboost_id)) return false;
+
+    $foxboost_name = get_the_title($foxboost_id);
+
+    $args = [
+        'site_name' => SITE_NAME,
+        'subscriber_name' => $name,
+        'subscriber_email' => $email,
+        'subject' => 'Фоксбуст уже в продаже! '. SITE_NAME,
+        'foxboost_name' => $foxboost_name,
+    ];
+
+    return mailSend(TEMPLATE_EMAIL_ORDER, $args);
 }

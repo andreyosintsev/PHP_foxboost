@@ -10,7 +10,7 @@
 
 console.log('panel.js loaded');
 
-const base_url = 'http://localhost/foxboost';
+const base_url = 'https://bestweb.site/demo/foxboost';
 
 /* ============================================================
    0. Утилиты (модуль Utils)
@@ -109,17 +109,16 @@ const SubscriberModule = (() => {
             { subscriber_id: subscriberId, foxboost_id: foxboostId },
             result => {
                 Utils.log(`Подписка пользователя ${result.subscriber_id} на фоксбуст ${result.post_id} отменена`);
-                Utils.reload(`Ошибка отписки пользователя ${result.subscriber_id} на фоксбуст ${result.post_id}`);
+                Utils.reload();
             },
             result => {
-                Utils.error()
+                Utils.error(`Ошибка отписки пользователя ${result.subscriber_id} на фоксбуст ${result.post_id}`)
             }
         );
     }
 
     return { init };
 })();
-
 
 /* ============================================================
    3. Фильтр кампаний (FilterModule)
@@ -219,12 +218,45 @@ const TableModule = (() => {
     return { init };
 })();
 
+/* ============================================================
+   6. Модуль отправки уведомлений о поступлении в продажу (OrderModule)
+   ============================================================ */
+const OrderModule = (() => {
+
+    const apiUrl = `${base_url}/api/order-send.php`;
+
+    function init() {
+        $(document).on('click', '.button_send', onSendClick);
+    }
+
+    function onSendClick() {
+        const $btn = $(this);
+        const subscriptionId = $btn.data('subscriptionid');
+
+        Utils.ajaxJson(
+            apiUrl,
+            { subscription_id: subscriptionId },
+            result => {
+                Utils.log(`Пользователю ${result.subscriber_id} было направлено письмо о возможности заказа фоксбуста ${result.post_id}`);
+                Utils.reload();
+            },
+            result => {
+                Utils.error(`Ошибка отправки письма пользователю ${result.subscriber_id} о фоксбусте ${result.post_id}`)
+            }
+        );
+    }
+
+    return { init };
+})();
+
+
 
 /* ============================================================
-   5. Инициализация всех модулей
+   7. Инициализация всех модулей
    ============================================================ */
 MoveModule.init();
 SubscriberModule.init();
 FilterModule.init();
 AccordionModule.init();
 // TableModule.init();
+OrderModule.init();

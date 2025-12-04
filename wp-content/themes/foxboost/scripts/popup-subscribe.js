@@ -4,7 +4,7 @@
 
 console.log("popup-subscribe.js loaded");
 
-const baseUrl = 'http://localhost/foxboost';
+const baseUrl = 'https://bestweb.site/demo/foxboost';
 
 import {hideLoader, showLoader, showPopup} from "./popup.js";
 
