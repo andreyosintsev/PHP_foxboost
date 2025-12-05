@@ -47,7 +47,10 @@
                             <?php $subscribers_total = getTotalSubscribers(); ?>
                             <?php $subscribers_active = getActiveSubscribers(); ?>
                             <div class="card-stats__value"><?php echo $subscribers_total; ?> (<?php echo $subscribers_active; ?>)</div>
-                            <div class="card-stats__description"><?php echo declination($subscribers_total, ['Пользователь зарегистрирован', 'Пользователя зарегистрировано', 'Пользователей зарегистрировано']);?></div>
+                            <div class="card-stats__description">
+                                <?php echo declination($subscribers_total, ['Пользователь зарегистрирован', 'Пользователя зарегистрировано', 'Пользователей зарегистрировано']);?>
+                                (<?php echo declination($subscribers_active, ['активен', 'активно', 'активно']);?>)
+                            </div>
                         </div>
                         <div class="panel-stats_card card-stats">
                             <?php $total_subscriptions = getTotalSubscriptions(); ?>
@@ -97,14 +100,14 @@
                                                 </div>
                                                 <div class="campaign__control">
                                                     <button class="button campaign__button button_complete" data-postid="<?php echo $foxboosts_active_id; ?>" data-moveto="completed">
-                                                        <span class="button__text">Завершить сбор</span>
+                                                        <span class="button__text">Завершить</span>
                                                         <img
                                                                 class="button__image button__image_complete"
                                                                 src="<?php echo $template_url; ?>/images/buttons/complete.svg"
                                                                 alt="Завершить"
                                                         />
                                                     </button>
-                                                    <button class="button campaign__button button_sendall">
+                                                    <button class="button campaign__button button_sendall" data-postid="<?php echo $foxboosts_active_id; ?>">
                                                         <span class="button__text">Отправить всем</span>
                                                         <img
                                                                 class="button__image button__image_send-all"
@@ -163,15 +166,23 @@
                                         </div>
                                         <div class="campaign__control">
                                             <button class="button campaign__button button_restart" data-postid="<?php echo $foxboosts_completed_id; ?>" data-moveto="active">
-                                                <span class="button__text">Возобновить сбор</span>
+                                                <span class="button__text">Возобновить</span>
                                                 <img
                                                         class="button__image button__image_restart"
                                                         src="<?php echo $template_url; ?>/images/buttons/restart.svg"
                                                         alt="Возобновить"
                                                 />
                                             </button>
+                                            <button class="button campaign__button button_sendall" data-postid="<?php echo $foxboosts_completed_id; ?>">
+                                                <span class="button__text">Отправить всем</span>
+                                                <img
+                                                        class="button__image button__image_send-all"
+                                                        src="<?php echo $template_url; ?>/images/buttons/send.svg"
+                                                        alt="Отправить"
+                                                />
+                                            </button>
                                             <button class="button campaign__button button_archive" data-postid="<?php echo $foxboosts_completed_id; ?>" data-moveto="archive">
-                                                <span class="button__text">Отправить в архив</span>
+                                                <span class="button__text">В архив</span>
                                                 <img
                                                         class="button__image button__image_archive"
                                                         src="<?php echo $template_url; ?>/images/buttons/archive.svg"
@@ -219,7 +230,7 @@
                                     $subscriptions_count = count($subscriptions);
                                 ?>
 
-                                <div class="campaign <?php if ($subscriptions_count > 0) echo 'campaign_expanded'; ?>">
+                                <div class="campaign">
                                     <div class="campaign__header">
                                         <div class="campaign__title">
                                             <?php echo getFoxboostNameById($foxboosts_archive_id); ?>
@@ -232,7 +243,7 @@
                                         </div>
                                         <div class="campaign__control">
                                             <button class="button campaign__button button_restore" data-postid="<?php echo $foxboosts_archive_id; ?>" data-moveto="completed">
-                                                <span class="button__text">Восстановить из архива</span>
+                                                <span class="button__text">Восстановить</span>
                                                 <img
                                                         class="button__image button__image_restore"
                                                         src="<?php echo $template_url; ?>/images/buttons/restore.svg"

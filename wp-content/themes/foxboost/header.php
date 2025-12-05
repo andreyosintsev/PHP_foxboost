@@ -143,6 +143,7 @@
     <?php } ?>
 
     <?php if (is_page('panel')) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/popup.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel-stats.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/section-campaign.css">
@@ -177,7 +178,7 @@
     <?php } ?>
 
     <?php if (is_page('panel')) { ?>
-        <script src="<?php echo $template_url; ?>/scripts/panel.js"></script>
+        <script src="<?php echo $template_url; ?>/scripts/panel.js" type="module"></script>
     <?php } ?>
     
 </head>

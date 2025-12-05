@@ -517,3 +517,35 @@ function sqlGetFoxboostIdBySubscriptionId($subscription_id) {
 
     return $post_id;
 }
+?>
+<?php
+/**
+ * Функция получает IDs подписок по ID фоксбуста
+ * @param int $foxboost_id - ID фоксбуста
+ *
+ * @return array | bool - массив ID подписок для фоксбуста или false, если не найдено
+ */
+function sqlGetSubscriptionIdsByFoxboostId($foxboost_id) {
+    if ($foxboost_id <= 0) {
+        return false;
+    }
+
+    global $wpdb;
+
+    //Выбираем только те подписки, для которых во-первых еще не отправили письмо,
+    //а во-вторых у которых подписчик активен (не удалился с сайта)
+
+    $subscription_ids = $wpdb->get_col(
+        $wpdb->prepare("
+        SELECT sub.id
+        FROM subscriptions AS sub
+        INNER JOIN subscribers AS s
+            ON s.id = sub.subscriber_id
+        WHERE sub.post_id = %d
+          AND sub.order_sent IS NULL
+          AND s.active = 1
+    ", $foxboost_id)
+    );
+
+    return $subscription_ids;
+}

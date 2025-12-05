@@ -130,6 +130,33 @@
     color: var(--red, #E31D23);
 }
 
+.popup__progress-bar-container {
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+
+    background: var(--gray-light, #D9D9D9);
+
+    border-radius: 5px;
+}
+
+.popup__progress-bar {
+    width: 20%;
+    height: 100%;
+    padding: 0 20px;
+
+    background: var(--purple, #9B8FCC);
+
+    border-radius: 5px;
+}
+
+.popup__progress-text {
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
 @media screen and (max-width: 1440px) {
     .popup__title {
         margin-bottom: 10px;

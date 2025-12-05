@@ -10,6 +10,8 @@
 
 console.log('panel.js loaded');
 
+import {showPopup} from "./popup.js";
+
 const base_url = 'https://bestweb.site/demo/foxboost';
 
 /* ============================================================
@@ -250,9 +252,97 @@ const OrderModule = (() => {
 })();
 
 
+/* ============================================================
+   7. Модуль серийной отправки уведомлений о поступлении в продажу (OrderSequentiallyModule)
+   ============================================================ */
+const OrderSequentiallyModule = (() => {
+
+    const apiSubscriptionsUrl = `${base_url}/api/subscriptions-info.php`;
+    const apiUrl = `${base_url}/api/order-send.php`;
+
+    function init() {
+        $(document).on('click', '.button_sendall', onSendAllClick);
+    }
+
+    function onSendAllClick() {
+        const $btn = $(this);
+        const postId = $btn.data('postid');
+        const popup = document.getElementById('popup-sendall');
+
+        if (!postId) return console.error('Order Sequentially: postid не найден');
+
+        Utils.ajaxJson(
+            apiSubscriptionsUrl,
+            { post_id: postId },
+            result => {
+                Utils.log(`Получен список подписок для фоксбуста ${result.post_id}`);
+
+                if (result.subscription_ids.length < 1) {
+                    Utils.log(`Список пуст, выход`);
+                    return;
+                }
+
+                Utils.log(`${result.subscription_ids}`);
+                Utils.log(`Отправка рассылки для фоксбуста ${result.post_id}`);
+
+                showPopup(popup);
+
+                sendSequentially(result.subscription_ids)
+                    .then(() => {
+                        Utils.log('Все письма отправлены!');
+                        delay(5000);
+                        Utils.reload();
+                    })
+                    .catch(error => Utils.error(`Ошибка при рассылке: ${error}`));
+            },
+            result => {
+                Utils.error(`Ошибка получения списка подписок для фоксбуста ${result.post_id}`)
+            }
+        );
+    }
+
+    async function sendSequentially(subscriptions) {
+
+        const total = subscriptions.length;
+        const progressBar = document.querySelector('.popup__progress-bar');
+        const progressText = document.querySelector('.popup__progress-text');
+
+        let count = 0;
+
+        for (const subscriptionId of subscriptions) {
+            try {
+                const result = await new Promise((resolve, reject) => {
+                    Utils.ajaxJson(
+                        apiUrl,
+                        { subscription_id: subscriptionId },
+                        resolve,
+                        reject
+                    );
+                });
+                Utils.log(`Пользователю ${result.subscriber_id} было направлено письмо о возможности заказа фоксбуста ${result.post_id}`);
+            } catch (result) {
+                Utils.error(`Ошибка отправки письма пользователю ${result.subscriber_id} о фоксбусте ${result.post_id}`);
+            }
+
+            count++;
+
+            const percent = Math.round((count / total) * 100);
+            progressBar.style.width = percent + '%';
+            progressText.textContent = `${count} / ${total}`;
+
+            await delay(1000);
+        }
+    }
+
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    return { init };
+})();
 
 /* ============================================================
-   7. Инициализация всех модулей
+   8. Инициализация всех модулей
    ============================================================ */
 MoveModule.init();
 SubscriberModule.init();
@@ -260,3 +350,4 @@ FilterModule.init();
 AccordionModule.init();
 // TableModule.init();
 OrderModule.init();
+OrderSequentiallyModule.init();

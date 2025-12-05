@@ -4,6 +4,8 @@
 
 console.log("popup.js loaded");
 
+import {showPopup} from "./popup.js";
+
 const body = document.querySelector("body");
 const popups = document.querySelectorAll(".popup");
 const crossClose = document.querySelectorAll(".popup__close");

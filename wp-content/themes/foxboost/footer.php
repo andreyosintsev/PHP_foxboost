@@ -190,6 +190,19 @@
     <input class="button popup__button button_close" type="button" value="Закрыть">
     <div class="popup__close"></div>
 </div>
+<div class="popup hidden" id="popup-sendall">
+    <h2 class="title popup__title">Рассылка всем пользователям</h2>
+    <p class="popup__text">
+        Не закрывайте окно и страницу браузера!
+    </p>
+    <div class="popup__progress-bar-container">
+        <div class="popup__progress-bar"></div>
+    </div>
+    <p class="popup__progress-text">Отправлено: 0 из 0</p>
+
+    <input class="button popup__button button_close" type="button" value="Закрыть">
+    <div class="popup__close"></div>
+</div>
 <div class="overlay hidden"></div>
 <?php wp_footer(); ?>
 </body>
