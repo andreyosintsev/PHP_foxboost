@@ -143,6 +143,7 @@
     <?php } ?>
 
     <?php if (is_page('panel')) { ?>
+        <link rel="stylesheet" href="<?php echo $template_url;?>/css/utils/flatpickr.min.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/popup.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel-stats.css">
         <link rel="stylesheet" href="<?php echo $template_url;?>/css/blocks/panel.css">
@@ -178,6 +179,8 @@
     <?php } ?>
 
     <?php if (is_page('panel')) { ?>
+        <script src="<?php echo $template_url; ?>/scripts/util/flatpickr.js"></script>
+        <script src="<?php echo $template_url; ?>/scripts/util/flatpickr-ru.js"></script>
         <script src="<?php echo $template_url; ?>/scripts/panel.js" type="module"></script>
     <?php } ?>
     

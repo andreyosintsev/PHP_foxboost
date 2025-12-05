@@ -99,20 +99,22 @@
                                                     <span class="campaign__status campaign__status_active campaign__display_600">сбор (<?php echo $subscriptions_count .' '. declination($subscriptions_count, ['заявка', 'заявки', 'заявок'])?>)</span>
                                                 </div>
                                                 <div class="campaign__control">
+                                                    <button class="button campaign__button button_sendall" data-postid="<?php echo $foxboosts_active_id; ?>"
+                                                            <?php if (count($subscriptions) < 1) echo 'disabled';?>
+                                                    >
+                                                        <span class="button__text">Отправить всем</span>
+                                                        <img
+                                                                class="button__image button__image_send-all"
+                                                                src="<?php echo $template_url; ?>/images/buttons/send.svg"
+                                                                alt="Отправить"
+                                                        />
+                                                    </button>
                                                     <button class="button campaign__button button_complete" data-postid="<?php echo $foxboosts_active_id; ?>" data-moveto="completed">
                                                         <span class="button__text">Завершить</span>
                                                         <img
                                                                 class="button__image button__image_complete"
                                                                 src="<?php echo $template_url; ?>/images/buttons/complete.svg"
                                                                 alt="Завершить"
-                                                        />
-                                                    </button>
-                                                    <button class="button campaign__button button_sendall" data-postid="<?php echo $foxboosts_active_id; ?>">
-                                                        <span class="button__text">Отправить всем</span>
-                                                        <img
-                                                                class="button__image button__image_send-all"
-                                                                src="<?php echo $template_url; ?>/images/buttons/send.svg"
-                                                                alt="Отправить"
                                                         />
                                                     </button>
                                                 </div>
@@ -173,7 +175,8 @@
                                                         alt="Возобновить"
                                                 />
                                             </button>
-                                            <button class="button campaign__button button_sendall" data-postid="<?php echo $foxboosts_completed_id; ?>">
+                                            <button class="button campaign__button button_sendall" data-postid="<?php echo $foxboosts_completed_id; ?>"
+                                                <?php if (count($subscriptions) < 1) echo 'disabled';?>>
                                                 <span class="button__text">Отправить всем</span>
                                                 <img
                                                         class="button__image button__image_send-all"

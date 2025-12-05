@@ -10,9 +10,10 @@
 
 console.log('panel.js loaded');
 
-import {showPopup} from "./popup.js";
+import { showPopup } from "./popup.js";
 
-const base_url = 'https://bestweb.site/demo/foxboost';
+//const base_url = 'https://bestweb.site/demo/foxboost';
+const base_url = '/foxboost';
 
 /* ============================================================
    0. Утилиты (модуль Utils)
@@ -60,22 +61,107 @@ const Utils = (() => {
 const MoveModule = (() => {
 
     const apiUrl = `${base_url}/api/foxboost-move.php`;
+    const DATE_FORMAT_SEND = "d.m.Y";
+
+    let selectedPostId = null;
+    let selectedMoveTo = null;
+    let fp = null;
+    let selectedDate = null;
 
     function init() {
         $(document).on('click',
-            '.button_complete, .button_restart, .button_archive, .button_restore',
-            onMoveClick
+            '.button_complete, .button_archive, .button_restore',
+            onInstantMoveClick
         );
+
+        $(document).on('click',
+            '.button_restart',
+            onMoveWithDateClick
+        );
+
+        // Кнопки модального окна
+        $('#popup-datepicker .button_ok').on('click', onModalOk);
+
+        // Календарь
+        fp = flatpickr(".popup__datepicker", {
+            inline: true,
+            locale: "ru",
+            dateFormat: "d-m-Y",
+            "minDate": new Date(),
+            onChange(selectedDates) {
+                selectedDate = selectedDates[0] || null;
+            }
+        });
     }
 
-    function onMoveClick(e) {
+    function onInstantMoveClick() {
         const $btn = $(this);
-        const postId = $btn.data('postid');
-        const moveTo = $btn.data('moveto');
+
+        selectedPostId = $btn.data('postid');
+        selectedMoveTo = $btn.data('moveto');
+        selectedDate = null; // тут дату не отправляем
+
+        sendMoveRequest();
+    }
+
+    /**
+     * Кнопка, которая требует дату (button_restart)
+     */
+    function onMoveWithDateClick() {
+        const $btn = $(this);
+
+        selectedPostId = $btn.data('postid');
+        selectedMoveTo = $btn.data('moveto');
+
+        // Для всех кроме active дата не нужна
+        if (selectedMoveTo !== 'active') {
+            sendMoveRequest();
+            return;
+        }
+
+        // Для active — показываем календарь
+        const nextMonth = new Date();
+        nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+        fp.setDate(nextMonth, true);
+        selectedDate = nextMonth;
+
+        showPopup(document.getElementById('popup-datepicker'));
+    }
+
+    /**
+     * Кнопка OK в модалке
+     */
+    function onModalOk() {
+
+        if (!selectedDate) {
+            Utils.warn('Дата не выбрана');
+            return;
+        }
+
+        sendMoveRequest();
+    }
+
+    function sendMoveRequest() {
+        if (!selectedPostId || !selectedMoveTo) {
+            Utils.error('Некорректные параметры движения записи');
+            return;
+        }
+
+        let dateStr = null;
+
+        // Дату отправляем ТОЛЬКО если нужно
+        if (selectedMoveTo === 'active' && selectedDate) {
+            dateStr = fp.formatDate(selectedDate, DATE_FORMAT_SEND);
+        }
 
         Utils.ajaxJson(
             apiUrl,
-            { post_id: postId, move_to: moveTo },
+            {
+                post_id: selectedPostId,
+                move_to: selectedMoveTo,
+                date: dateStr
+            },
             result => {
                 Utils.log(`Фоксбуст ${result.post_id} перемещен в статус ${result.move_to}`);
                 Utils.reload();
@@ -328,7 +414,7 @@ const OrderSequentiallyModule = (() => {
 
             const percent = Math.round((count / total) * 100);
             progressBar.style.width = percent + '%';
-            progressText.textContent = `${count} / ${total}`;
+            progressText.textContent = `Отправлено: ${count} из ${total}`;
 
             await delay(1000);
         }
@@ -342,6 +428,30 @@ const OrderSequentiallyModule = (() => {
 })();
 
 /* ============================================================
+   9. Модуль инициализации календаря DatepickerModure
+   ============================================================ */
+const DatepickerModule = (() => {
+    function init() {
+
+        console.log('Datepicker Module Init');
+        const initDate = new Date();
+        const nextDate = new Date();
+        nextDate.setMonth(nextDate.getMonth() + 1);
+
+
+        $(".popup__datepicker").flatpickr({
+            "inline": true,
+            "locale": "ru",
+            "defaultDate": nextDate,
+            "minDate": initDate
+        })
+    }
+
+    return { init };
+})();
+
+
+/* ============================================================
    8. Инициализация всех модулей
    ============================================================ */
 MoveModule.init();
@@ -351,3 +461,4 @@ AccordionModule.init();
 // TableModule.init();
 OrderModule.init();
 OrderSequentiallyModule.init();
+//DatepickerModule.init();

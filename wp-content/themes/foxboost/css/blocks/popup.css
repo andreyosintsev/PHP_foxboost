@@ -157,6 +157,12 @@
     text-align: center;
 }
 
+.flatpickr-calendar {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 30px;
+}
+
 @media screen and (max-width: 1440px) {
     .popup__title {
         margin-bottom: 10px;

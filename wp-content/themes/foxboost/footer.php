@@ -203,6 +203,15 @@
     <input class="button popup__button button_close" type="button" value="Закрыть">
     <div class="popup__close"></div>
 </div>
+<div class="popup hidden" id="popup-datepicker">
+    <h2 class="title popup__title">Возобновление сбора</h2>
+    <p class="popup__text">
+        Выберите дату окончания сбора заявок
+    </p>
+    <div class="popup__datepicker"></div>
+    <input class="button popup__button button_ok" type="button" value="Возобновить">
+    <div class="popup__close"></div>
+</div>
 <div class="overlay hidden"></div>
 <?php wp_footer(); ?>
 </body>
