@@ -10,7 +10,7 @@
 
 console.log('panel.js loaded');
 
-import {hideLoader, showPopup} from "./popup.js";
+import {showLoader, hideLoader, showPopup} from "./popup.js";
 
 //const base_url = 'https://bestweb.site/demo/foxboost';
 const base_url = '/foxboost';
@@ -21,6 +21,8 @@ const base_url = '/foxboost';
 const Utils = (() => {
 
     function ajaxJson(url, data, onSuccess, onFail) {
+        showLoader();
+
         $.getJSON(url, data)
             .done(result => {
                 if (result.success) onSuccess(result);
@@ -28,10 +30,12 @@ const Utils = (() => {
                     console.error('Ошибка AJAX-результата:', result);
                     if (onFail) onFail(result);
                 }
+                hideLoader();
             })
             .fail((jqXHR, textStatus, errorThrown) => {
                 console.error('Ошибка AJAX-запроса:', textStatus, errorThrown);
                 if (onFail) onFail({ textStatus, errorThrown });
+                hideLoader();
             });
     }
 

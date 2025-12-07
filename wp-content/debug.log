@@ -61,3 +61,19 @@ Stack trace:
 [07-Dec-2025 23:40:28 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Андрей Осинцевский', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
 [07-Dec-2025 23:41:30 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Осинцев Андрей Сергеевич', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
 [07-Dec-2025 23:41:48 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Осинцев Андрей Сергеевич', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
+[07-Dec-2025 19:47:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function sqlGetSubscriptionIdsByFoxboostId() in D:\xampp\htdocs\foxboost\api\subscriptions-info.php:16
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\foxboost\api\subscriptions-info.php on line 16
+[07-Dec-2025 19:47:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function sqlGetSubscriptionIdsByFoxboostId() in D:\xampp\htdocs\foxboost\api\subscriptions-info.php:16
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\foxboost\api\subscriptions-info.php on line 16
+[07-Dec-2025 19:47:41 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function sqlGetSubscriptionIdsByFoxboostId() in D:\xampp\htdocs\foxboost\api\subscriptions-info.php:16
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\foxboost\api\subscriptions-info.php on line 16
+[07-Dec-2025 19:47:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function sqlGetSubscriptionIdsByFoxboostId() in D:\xampp\htdocs\foxboost\api\subscriptions-info.php:16
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\foxboost\api\subscriptions-info.php on line 16
