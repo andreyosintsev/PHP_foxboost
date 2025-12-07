@@ -56,26 +56,26 @@ popupForm.addEventListener("submit", (e) => {
         method: "POST",
         body: popupFormData,
     })
-        .then(checkFetchResponse)
-        .then((data) => {
-            hidePopupAndResetForm();
-            if (data.type === 'subscribe') {
-                console.log("Пользователь подписался на фоксбуст", data.message);
-                showPopup(popupSubscribe);
-            }
-            if (data.type === 'registration') {
-                console.log("Пользователь зарегистрировался", data.message);
-                showPopup(popupRegistration);
-            }
-        })
-        .catch((error) => {
-            console.error("Не удалось отправить заявку", error);
-            hidePopupAndResetForm();
-            showPopup(popupFailed, error);
-        })
-        .finally(() => {
-            hideLoader();
-        });
+    .then(checkFetchResponse)
+    .then((data) => {
+        hidePopupAndResetForm();
+        if (data.type === 'subscribe') {
+            console.log("Пользователь подписался на фоксбуст", data.message);
+            showPopup(popupSubscribe);
+        }
+        if (data.type === 'registration') {
+            console.log("Пользователь зарегистрировался", data.message);
+            showPopup(popupRegistration);
+        }
+    })
+    .catch((error) => {
+        console.error("Не удалось отправить заявку", error);
+        hidePopupAndResetForm();
+        showPopup(popupFailed, error);
+    })
+    .finally(() => {
+        hideLoader();
+    });
 
     function checkFetchResponse(res) {
         return res.ok ? res.json() : Promise.reject(`Ошибка Fetch: ${res.status}`);

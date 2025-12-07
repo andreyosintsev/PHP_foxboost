@@ -24,9 +24,11 @@
             <?php if (!( is_user_logged_in() && current_user_can('administrator') )) { ?>
                 <div class="access-denied">
                     <h2>Доступ запрещён</h2>
-                    <p>Для входа в панель управления необходимо авторизоваться как администратор,<br>
+                    <p>Для входа в панель управления необходимо авторизоваться как администратор по кнопке ниже,<br>
                      а затем вновь вернуться на эту страницу</p>
-                    <div><a class="button access-denied__link" href="<?php echo esc_url(wp_login_url()); ?>">Войти</a></div>
+                    <div>
+                        <a class="button access-denied__link" href="<?php echo esc_url(wp_login_url()); ?>">Войти</a>
+                    </div>
                 </div>
             <?php
                 return;

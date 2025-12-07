@@ -10,3 +10,54 @@
 [05-Dec-2025 15:46:01 UTC]   Automatic plugin updates starting...
 [05-Dec-2025 15:46:01 UTC]   Automatic plugin updates complete.
 [05-Dec-2025 15:46:02 UTC] Automatic updates complete.
+[07-Dec-2025 13:15:48 UTC] PHP Warning:  mysqli_real_connect(): (HY000/2002): Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение in D:\xampp\htdocs\foxboost\wp-includes\class-wpdb.php on line 1988
+[07-Dec-2025 13:16:01 UTC] Automatic updates starting...
+[07-Dec-2025 13:16:02 UTC]   Automatic plugin updates starting...
+[07-Dec-2025 13:16:02 UTC]   Automatic plugin updates complete.
+[07-Dec-2025 13:16:03 UTC] Automatic updates complete.
+[07-Dec-2025 14:13:40 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in D:\xampp\htdocs\foxboost\api\subscriber-info.php:21
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\foxboost\api\subscriber-info.php on line 21
+[07-Dec-2025 14:16:22 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in D:\xampp\htdocs\foxboost\api\subscriber-info.php:21
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\foxboost\api\subscriber-info.php on line 21
+[07-Dec-2025 14:16:36 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in D:\xampp\htdocs\foxboost\api\subscriber-info.php:21
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\foxboost\api\subscriber-info.php on line 21
+[07-Dec-2025 14:17:05 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in D:\xampp\htdocs\foxboost\api\subscriber-info.php:22
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\foxboost\api\subscriber-info.php on line 22
+[07-Dec-2025 14:20:46 UTC] Automatic updates starting...
+[07-Dec-2025 14:20:46 UTC]   Automatic plugin updates starting...
+[07-Dec-2025 14:20:46 UTC]   Automatic plugin updates complete.
+[07-Dec-2025 14:20:46 UTC] Automatic updates complete.
+[07-Dec-2025 23:26:10 Europe/Samara] PHP Warning:  Undefined array key "subscriber_id" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 7
+[07-Dec-2025 23:26:10 Europe/Samara] PHP Warning:  Undefined array key "name" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 8
+[07-Dec-2025 23:26:10 Europe/Samara] PHP Warning:  Undefined array key "email" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 9
+[07-Dec-2025 23:26:25 Europe/Samara] PHP Warning:  Undefined array key "subscriber_id" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 7
+[07-Dec-2025 23:26:25 Europe/Samara] PHP Warning:  Undefined array key "name" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 8
+[07-Dec-2025 23:26:25 Europe/Samara] PHP Warning:  Undefined array key "email" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 9
+[07-Dec-2025 23:26:41 Europe/Samara] PHP Warning:  Undefined array key "subscriber_id" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 7
+[07-Dec-2025 23:26:41 Europe/Samara] PHP Warning:  Undefined array key "name" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 8
+[07-Dec-2025 23:26:41 Europe/Samara] PHP Warning:  Undefined array key "email" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 9
+[07-Dec-2025 23:27:24 Europe/Samara] PHP Warning:  Undefined array key "subscriber_id" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 7
+[07-Dec-2025 23:27:24 Europe/Samara] PHP Warning:  Undefined array key "name" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 8
+[07-Dec-2025 23:27:24 Europe/Samara] PHP Warning:  Undefined array key "email" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 9
+[07-Dec-2025 23:28:21 Europe/Samara] PHP Warning:  Undefined array key "subscriber_id" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 7
+[07-Dec-2025 23:28:21 Europe/Samara] PHP Warning:  Undefined array key "name" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 8
+[07-Dec-2025 23:28:21 Europe/Samara] PHP Warning:  Undefined array key "email" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 9
+[07-Dec-2025 23:28:28 Europe/Samara] PHP Warning:  Undefined array key "subscriber_id" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 7
+[07-Dec-2025 23:28:28 Europe/Samara] PHP Warning:  Undefined array key "name" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 8
+[07-Dec-2025 23:28:28 Europe/Samara] PHP Warning:  Undefined array key "email" in D:\xampp\htdocs\foxboost\api\subscriber-edit.php on line 9
+[07-Dec-2025 23:33:08 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Осинцев Андрей Сергеевич', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667761', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
+[07-Dec-2025 23:33:22 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Осинцев Андрей Сергеевич', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667761', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
+[07-Dec-2025 23:35:46 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Андрей Осинцевский', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
+[07-Dec-2025 23:38:55 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Осинцев Андрей Сергеевич', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
+[07-Dec-2025 23:39:43 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Андрей Осинцевский', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
+[07-Dec-2025 23:40:28 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Андрей Осинцевский', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
+[07-Dec-2025 23:41:30 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Осинцев Андрей Сергеевич', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo
+[07-Dec-2025 23:41:48 Europe/Samara] WordPress database error Duplicate entry 'kintaro_oe@inbox.ru' for key 'email' for query UPDATE `subscribers` SET `name` = 'Осинцев Андрей Сергеевич', `email` = 'kintaro_oe@inbox.ru', `tel` = '89272667763', `promocode` = 'без промокода' WHERE `id` = 8 made by sqlSetSubscriberInfo

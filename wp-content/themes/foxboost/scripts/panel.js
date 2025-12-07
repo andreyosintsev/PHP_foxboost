@@ -10,7 +10,7 @@
 
 console.log('panel.js loaded');
 
-import { showPopup } from "./popup.js";
+import {hideLoader, showPopup} from "./popup.js";
 
 //const base_url = 'https://bestweb.site/demo/foxboost';
 const base_url = '/foxboost';
@@ -179,7 +179,7 @@ const MoveModule = (() => {
 /* ============================================================
    2. Модуль удаления подписчиков (SubscriberModule)
    ============================================================ */
-const SubscriberModule = (() => {
+const SubscriberDeleteModule = (() => {
 
     const apiUrl = `${base_url}/api/subscriber-delete.php`;
 
@@ -428,23 +428,103 @@ const OrderSequentiallyModule = (() => {
 })();
 
 /* ============================================================
-   9. Модуль инициализации календаря DatepickerModure
+   8. Модуль редактирования подписчика
    ============================================================ */
-const DatepickerModule = (() => {
+const SubscriberEditModule = (() => {
+    const apiUrlInfo = `${base_url}/api/subscriber-info.php`;
+    const apiUrlEdit = `${base_url}/api/subscriber-edit.php`;
+    const popup = document.getElementById('popup-edit');
+    let subscriberId;
+
     function init() {
+        $(document).on('click', '.button_edit', onEditClick);
+        $(document).on('submit', '.form_edit', onEditSubmitClick);
+    }
 
-        console.log('Datepicker Module Init');
-        const initDate = new Date();
-        const nextDate = new Date();
-        nextDate.setMonth(nextDate.getMonth() + 1);
+    function onEditClick() {
+        const $btn = $(this);
+        subscriberId = $btn.data('subscriberid');
+
+        if (!subscriberId) return console.error('Subscriber Edit: subscriberid не найден');
+
+        Utils.ajaxJson(
+            apiUrlInfo,
+            {subscriber_id: subscriberId},
+            result => {
+                Utils.log(`Получены данные подписчика ${result.subscriber_id}`);
+
+                popup.querySelector('[name="name"]').value = result.name;
+                popup.querySelector('[name="email"]').value = result.email;
+                popup.querySelector('[name="tel"]').value = result.tel;
+                popup.querySelector('[name="promocode"]').value = result.promocode;
+
+                showPopup(popup);
+            },
+            result => {
+                Utils.error(`Ошибка получения данных подписчика ${result.subscriber_id}`)
+            }
+        );
+    }
+
+    function checkFormErrors(e) {
+        let isFormValid = true;
+
+        const form = e.currentTarget;
+
+        const formName = form.querySelector('input[name="name"]');
+        const formEmail = form.querySelector('input[name="email"]');
+
+        if (!formName?.value.trim()) {
+            console.warn('Error: no input "name" or no name specified in form');
+
+            formName.classList.add("popup__input_error");
+            formName.placeholder = "Укажите имя";
+
+            isFormValid = false;
+        }
+
+        if (!formEmail?.value.trim()) {
+            console.warn('Error: no input "e-mail" in form');
+
+            formEmail.classList.add("popup__input_error");
+            formEmail.placeholder = "Укажите адрес e-mail";
+
+            isFormValid = false;
+        }
+
+        return isFormValid;
+    }
+
+    function onEditSubmitClick(e) {
+        e.preventDefault();
+        console.log('Edit form submit');
+
+        console.log(e.target);
+
+        if (!checkFormErrors(e)) return;
 
 
-        $(".popup__datepicker").flatpickr({
-            "inline": true,
-            "locale": "ru",
-            "defaultDate": nextDate,
-            "minDate": initDate
-        })
+        const popupFormData = new FormData(e.target);
+        const formData = Object.fromEntries(popupFormData.entries());
+        formData.subscriber_id = subscriberId;
+
+        console.log(formData);
+
+        Utils.ajaxJson(
+            apiUrlEdit,
+            formData,
+            result => {
+                Utils.log(`Данные подписчика ${result.subscriber_id} отредактированы`);
+
+                Utils.reload();
+            },
+            result => {
+                const errorMessage = document.querySelector('#popup-edit .popup__message');
+                console.log(errorMessage);
+                if (errorMessage) errorMessage.textContent = 'Ошибка, пользователь с таким email уже существует';
+                Utils.error(`Ошибка редактирования данных подписчика ${result.subscriber_id}`)
+            }
+        );
     }
 
     return { init };
@@ -452,13 +532,12 @@ const DatepickerModule = (() => {
 
 
 /* ============================================================
-   8. Инициализация всех модулей
+   9. Инициализация всех модулей
    ============================================================ */
 MoveModule.init();
-SubscriberModule.init();
+SubscriberDeleteModule.init();
 FilterModule.init();
 AccordionModule.init();
-// TableModule.init();
 OrderModule.init();
 OrderSequentiallyModule.init();
-//DatepickerModule.init();
+SubscriberEditModule.init();

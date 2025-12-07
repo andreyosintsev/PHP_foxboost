@@ -212,6 +212,26 @@
     <input class="button popup__button button_ok" type="button" value="Возобновить">
     <div class="popup__close"></div>
 </div>
+<div class="popup hidden" id="popup-edit">
+    <h2 class="title popup__title">Редактирование подписчика</h2>
+    <p class="popup__text">
+        Отредактируйте подписчика. Рассылка будет производиться по указанному адресу e-mail с указанным именем подписчика.
+    </p>
+    <form class="form popup__form form_edit">
+        <input class="input popup__input" name="name" placeholder="Имя">
+        <input class="input popup__input"
+               name="email"
+               placeholder="E-mail"
+               type="email"
+               pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+               title="Введите корректный email">
+        <input class="input popup__input" name="tel" placeholder="Телефон">
+        <input class="input popup__input" name="promocode" placeholder="Промокод">
+        <input class="button popup__button" type="submit" value="Сохранить">
+    </form>
+    <p class="popup__message"></p>
+    <div class="popup__close"></div>
+</div>
 <div class="overlay hidden"></div>
 <?php wp_footer(); ?>
 </body>

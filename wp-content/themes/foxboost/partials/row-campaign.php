@@ -67,7 +67,7 @@
                 title="Отправить вручную"
         >
     </button>
-    <button class="button campaign__button button_edit">
+    <button class="button campaign__button button_edit" data-subscriberid="<?php echo $subscriber_id; ?>">
         <img
                 class="button__image button__image_edit"
                 src="<?php echo $template_url; ?>/images/buttons/edit.svg"

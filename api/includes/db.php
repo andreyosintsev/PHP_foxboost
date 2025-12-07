@@ -520,32 +520,60 @@ function sqlGetFoxboostIdBySubscriptionId($subscription_id) {
 ?>
 <?php
 /**
- * Функция получает IDs подписок по ID фоксбуста
- * @param int $foxboost_id - ID фоксбуста
+ * Функция получает данные подписчика по ID подписчика
+ * @param int $subscriber_id - ID подписчика
  *
- * @return array | bool - массив ID подписок для фоксбуста или false, если не найдено
+ * @return array | bool - массив данных подписчика или false, если не найдено
  */
-function sqlGetSubscriptionIdsByFoxboostId($foxboost_id) {
-    if ($foxboost_id <= 0) {
+function sqlGetSubscriberInfo($subscriber_id) {
+    if ($subscriber_id <= 0) {
         return false;
     }
 
     global $wpdb;
 
-    //Выбираем только те подписки, для которых во-первых еще не отправили письмо,
-    //а во-вторых у которых подписчик активен (не удалился с сайта)
-
-    $subscription_ids = $wpdb->get_col(
-        $wpdb->prepare("
-        SELECT sub.id
-        FROM subscriptions AS sub
-        INNER JOIN subscribers AS s
-            ON s.id = sub.subscriber_id
-        WHERE sub.post_id = %d
-          AND sub.order_sent IS NULL
-          AND s.active = 1
-    ", $foxboost_id)
+    $res = $wpdb->get_row(
+        $wpdb->prepare("SELECT name, email, tel, promocode FROM subscribers WHERE id = %d LIMIT 1", $subscriber_id)
     );
 
-    return $subscription_ids;
+    if ($res === null) return false;
+
+    return $res;
+}
+?>
+<?php
+/**
+ * Функция задает данные подписчика по ID подписчика
+ * @param int $subscriber_id - ID подписчика
+ *
+ * @return array | bool - массив данных подписчика или false, если не найдено
+ */
+function sqlSetSubscriberInfo($subscriber_id, $name, $email, $tel, $promocode) {
+    if ($subscriber_id <= 0) {
+        return false;
+    }
+
+    if ((empty($name) || empty($email))) return false;
+
+    global $wpdb;
+
+    $table = 'subscribers';
+    $data = [
+        'name' => $name,
+        'email' => $email,
+        'tel' => $tel ?? '',
+        'promocode' => $promocode ?? 'без промокода'
+    ];
+
+    $where = ['id' => $subscriber_id];
+
+    $updated = $wpdb->update(
+        $table,
+        $data,
+        $where,
+        ['%s'],
+        ['%d']
+    );
+
+    return $updated > 0;
 }
